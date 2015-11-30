@@ -7,24 +7,34 @@
 //: ### About
 //: Bubble Sort, a.k.a. Sinking Sort, is a sorting algorithm that repeatedly steps through an array to be sorted, compares each pair of adjacent elements and swaps them if they are in the wrong order. The pass through the array is repeated until swaps are no longer needed, meaning the array is then sorted. Interestingly, this algorithm gets its name from the way elements eventually _bubble up_ to their proper position, untimately rendering the array sorted.
 //:
+//:
 //: ### Pseudocode
 //:
 //:    take in an array that is considered unsorted
 //:
-//:    if n <= 1, array is already sorted, so return it
+//:    if array is empty or constains 1 element, it's then already sorted, so return it
 //:
 //:    repeat
 //:
-//:      for j = 1 to n
+//:      for i = 0 to n - 1
 //:
-//:        if array[j - 1] > array[j]
+//:        if array[i] > array[i + 1]
 //:
-//:          swap array[j - 1] and array[j]
+//:          swap array[i] and array[i + 1]
+//:
 //:          mark that a swap ocurred
 //:
 //:    until no more swaps
 //:
 //:    return sorted array
+//:
+//:
+//: ### Optimizations
+//:
+//: - First, the number of passes through the array is equal the number of its elements minus one.
+//: - Second, at each pass we keep track of whether or not an element was swapped. If not, it's safe to assume the array is sorted.
+//: - Finally, at the end of the i-th pass, the last i elements are already sorted, so there's no need to consider them on subsequent passes.
+//:
 //:
 //: ### Properties
 //:
@@ -46,26 +56,21 @@ func bubbleSort_theClassic(var array: [Int]) -> [Int] {
         return array
     }
     
-    var swapped: Bool
-    var endIndex = array.count
-    
     for var i = 0; i < array.count - 1; ++i {
         
-        swapped = false
-        
-        for var j = 1; j < endIndex; ++j {
+        var swapped = false
+
+        for var j = 0; j < array.count - i - 1; ++j {
             
-            if array[j - 1] > array[j] {
+            if array[j] > array[j + 1] {
                 
                 let temporary = array[j]
-                array[j] = array[j - 1]
-                array[j - 1] = temporary
+                array[j] = array[j + 1]
+                array[j + 1] = temporary
                 
                 swapped = true
             }
         }
-        
-        --endIndex
         
         if !swapped {
             break
@@ -86,7 +91,7 @@ assert(bubbleSort_theClassic([1, 2, 1, 3, 5, 13, 8]).isSorted())
 // Reversed
 assert(bubbleSort_theClassic([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
 
-// Random
+// Shuffled
 assert(bubbleSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 
 
@@ -105,18 +110,15 @@ func bubbleSort_theSwiftish(var array: [Int]) -> [Int] {
         return array
     }
     
-    var swapped: Bool
-    var endIndex = array.count
-    
-    for _ in 0..<array.count - 1 {
+    for i in 0..<array.count - 1 {
         
-        swapped = false
+        var swapped = false
         
-        for j in 1..<endIndex {
+        for j in 0..<array.count - i - 1 {
             
-            if array[j - 1] > array[j] {
+            if array[j] > array[j + 1] {
                 
-                swap(&array[j], &array[j - 1])
+                swap(&array[j], &array[j + 1])
                 swapped = true
             }
         }
@@ -125,7 +127,6 @@ func bubbleSort_theSwiftish(var array: [Int]) -> [Int] {
             break
         }
         
-        --endIndex
     }
     
     return array
@@ -142,7 +143,7 @@ assert(bubbleSort_theSwiftish([1, 2, 1, 3, 5, 13, 8]).isSorted())
 // Reversed
 assert(bubbleSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
 
-// Random
+// Shuffled
 assert(bubbleSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 
 
@@ -169,9 +170,9 @@ func bubbleSort_theSwiftest(var array: [Int]) -> [Int] {
         
         swapped = false
         
-        for j in 1..<endIndex where array[j - 1] > array[j] {
+        for i in 0..<endIndex - 1 where array[i] > array[i + 1] {
             
-            (array[j - 1], array[j]) = (array[j], array[j - 1])
+            (array[i], array[i + 1]) = (array[i + 1], array[i])
             swapped = true
         }
         
@@ -193,9 +194,8 @@ assert(bubbleSort_theSwiftest([1, 2, 1, 3, 5, 13, 8]).isSorted())
 // Reversed
 assert(bubbleSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
 
-// Random
+// Shuffled
 assert(bubbleSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
-
 
 /// The Generic Algorithm
 ///
@@ -219,9 +219,9 @@ func bubbleSort_theGeneric<T: Comparable>(var array: [T]) -> [T] {
         
         swapped = false
         
-        for j in 1..<endIndex where array[j - 1] > array[j] {
+        for i in 0..<endIndex - 1 where array[i] > array[i + 1] {
             
-            (array[j - 1], array[j]) = (array[j], array[j - 1])
+            (array[i], array[i + 1]) = (array[i + 1], array[i])
             swapped = true
         }
         
@@ -233,6 +233,7 @@ func bubbleSort_theGeneric<T: Comparable>(var array: [T]) -> [T] {
 }
 
 // Already Sorted
+
 assert(bubbleSort_theGeneric([Int]()).isSorted())
 assert(bubbleSort_theGeneric([7]).isSorted())
 assert(bubbleSort_theGeneric([1, 1, 2, 3, 5, 8, 13]).isSorted())
@@ -242,14 +243,14 @@ assert(bubbleSort_theGeneric(["a"]).isSorted())
 assert(bubbleSort_theGeneric(["a", "a", "b", "c", "d", "e"]).isSorted())
 
 // Nearly Sorted
-assert(bubbleSort_theGeneric([1, 2, 1, 3, 5, 13, 8]).isSorted())
+assert(bubbleSort_theSwiftish([1, 2, 1, 3, 5, 13, 8]).isSorted())
 assert(bubbleSort_theGeneric(["a", "b", "a", "c", "e", "d"]).isSorted())
 
 // Reversed
 assert(bubbleSort_theGeneric([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
 assert(bubbleSort_theGeneric(["a", "a", "b", "c", "d", "e"].reverse()).isSorted())
 
-// Random
+// Shuffled
 assert(bubbleSort_theGeneric([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 assert(bubbleSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffle()).isSorted())
 
