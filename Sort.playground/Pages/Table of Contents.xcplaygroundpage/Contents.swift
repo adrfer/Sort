@@ -25,7 +25,7 @@
 //: - Insertion Sort
 //: - Merge Sort
 //: - Quick Sort
-//: - Selection Sort
+//: - Selection Sort(Selection%20Sort)
 //:
 //: > Feel free to check [this repo](https://github.com/adrfer/Sort) at GitHub, and/or [ping me](https://twitter.com/_adrfer) on Twitter.
 //:
