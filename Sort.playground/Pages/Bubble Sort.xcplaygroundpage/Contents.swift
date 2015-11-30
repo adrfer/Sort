@@ -243,7 +243,7 @@ assert(bubbleSort_theGeneric(["a"]).isSorted())
 assert(bubbleSort_theGeneric(["a", "a", "b", "c", "d", "e"]).isSorted())
 
 // Nearly Sorted
-assert(bubbleSort_theSwiftish([1, 2, 1, 3, 5, 13, 8]).isSorted())
+assert(bubbleSort_theGeneric([1, 2, 1, 3, 5, 13, 8]).isSorted())
 assert(bubbleSort_theGeneric(["a", "b", "a", "c", "e", "d"]).isSorted())
 
 // Reversed
