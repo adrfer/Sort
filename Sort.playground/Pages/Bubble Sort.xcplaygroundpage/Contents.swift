@@ -14,13 +14,13 @@
 //:
 //:    if array is empty or constains 1 element, it's then already sorted, so return it
 //:
-//:    repeat
+//:    for i = 0 to n - 1
 //:
-//:      for i = 0 to n - 1
+//:      for j = 0 to n - i - 1
 //:
-//:        if array[i] > array[i + 1]
+//:        if array[j] > array[j + 1]
 //:
-//:          swap array[i] and array[i + 1]
+//:          swap array[j] and array[j + 1]
 //:
 //:          mark that a swap ocurred
 //:
