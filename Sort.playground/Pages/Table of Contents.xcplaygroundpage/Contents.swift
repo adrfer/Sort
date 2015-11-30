@@ -15,6 +15,13 @@
 //: - The Swiftest, a highly creative approach that attempts to tap into the most powerful features yet
 //: - The Generic, a play on the swiftest version, but elevated to a type-agnostic nirvana status
 //:
+//: As a bonus, I added a few test cases covering these initial conditions:
+//:
+//: - Sorted, which also includes empty and single-element arrays
+//: - Nearly Sorted
+//: - Reversed
+//: - Shuffled
+//:
 //: I know, I know, talk is cheap, show me the code, right?
 //:
 //: Ok then, ready? Let's dive in!
