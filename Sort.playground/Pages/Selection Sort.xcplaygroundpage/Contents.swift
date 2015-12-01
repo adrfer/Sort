@@ -5,25 +5,37 @@
 //: ----
 //:
 //: ### About
-//: The basic idea behind it is to divide the array into two portions, the sorted portion and the unsorted portion. At the beginning, the sorted portion is empty, while the unsorted one contains all the values. At every step, the algorithm finds the minimum element in the unsorted portion and moves it to the end of the sorted portion of the array. Eventually, the unsorted portion becomes empty and the entire array is sorted in ascending order.
+//: The basic idea behind it is to divide the array into two portions, the sorted portion and the unsorted portion. At the beginning, the sorted portion is empty, while the unsorted one contains all the values. At every step, the algorithm finds the smallest element in the unsorted portion and moves it to the end of the sorted portion of the array. Eventually, the unsorted portion becomes empty and the entire array is then sorted.
+//:
 //:
 //: ### Pseudocode
 //:
 //:    take in an array that is considered unsorted
 //:
-//:    if n <= 1, array is already sorted, so return it
+//:    if array is empty or contains 1 element, it's then already sorted, so return it
 //:
 //:    for i = 1 to n - 1
-//:      consider the min = i
+//:
+//:      consider index of the smallest element, min = i
 //:
 //:      for j = i + 1 to n
-//:        if array[j] < array[min]
-//:          update the min = j
 //:
-//:      if i ! min
+//:        if array[j] < array[min]
+//:
+//:          update min element index = j
+//:
+//:      if i != min
+//:
 //:        swap array[i] and array[min]
 //:
 //:    return sorted array
+//:
+//:
+//: ### Optimizations
+//:
+//: - First, the number of passes through the array is equal the number of its elements minus one since the largest value
+//: - Second, only the element is not in its correct location already is swapped
+//:
 //:
 //: ### Properties
 //:
@@ -33,14 +45,20 @@
 /// The Classic Algorithm
 ///
 /// A die-hard style, rooted in tradition, in all its imperative glory,
-/// using traditional `for`, and manual swapping
+/// using conventional `for`, `if` early exit, and manual swapping
 ///
 /// - parameter array: The `array` to be sorted in-place
 ///
 /// - returns: The `array` with elements sorted in ascending order
 
-func selectionSort_theClassic(var array: [Int]) -> [Int] {
-    
+func selectionSort_theClassic(array: [Int]) -> [Int] {
+
+    var array = array
+
+    if array.count <= 1 {
+        return array
+    }
+
     for var i = 0; i < array.count - 1; ++i {
         
         var minIndex = i
@@ -73,14 +91,14 @@ assert(selectionSort_theClassic([1, 2, 1, 3, 5, 13, 8]).isSorted())
 // Reversed
 assert(selectionSort_theClassic([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
 
-// Random
+// Shuffled
 assert(selectionSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 
 
 /// The Swift-ish Algorithm
 ///
-/// A nifty take on the classic, but strives to use more modern
-/// laguage constructs, now using `guard`, `for-in`, and `swap`
+/// A nifty take on the classic, but strives to use more modern language
+/// constructs, such as `var` argument, `guard`, `for-in`, and `swap`
 ///
 /// - parameter array: The `array` to be sorted in-place
 ///
@@ -125,15 +143,15 @@ assert(selectionSort_theSwiftish([1, 2, 1, 3, 5, 13, 8]).isSorted())
 // Reversed
 assert(selectionSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
 
-// Random
+// Shuffled
 assert(selectionSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 
 
 /// The Swiftest Algorithm
 ///
 /// A highly creative approach that attempts to tap into the most powerful
-/// features yet, now using `guard`, `for-in-where`, nested function, and
-/// tuple swapping
+/// features yet, such as `var` argument, `guard`, `for-in-where`, nested
+/// function, and tuple swapping
 ///
 /// - parameter array: The `array` to be sorted in-place
 ///
@@ -144,7 +162,7 @@ func selectionSort_theSwiftest(var array: [Int]) -> [Int] {
     guard array.count > 1 else {
         return array
     }
-    
+
     func findMinIndex(startIndex: Int) -> Int {
         var minIndex = startIndex
         
@@ -179,14 +197,15 @@ assert(selectionSort_theSwiftest([1, 2, 1, 3, 5, 13, 8]).isSorted())
 // Reversed
 assert(selectionSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
 
-// Random
+// Shuffled
 assert(selectionSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 
 
 /// The Generic Algorithm
 ///
 /// A play on the swiftest version, but elevated to a type-agnostic nirvana status,
-/// now using `guard`, `for-in-where`, nested function, tuple swapping, and Generics
+/// such as `var` argument, `guard`, `for-in-where`, nested function, tuple swapping,
+/// and generics
 ///
 /// - parameter array: The `array` to be sorted in-place
 ///
@@ -238,7 +257,7 @@ assert(selectionSort_theGeneric(["a", "b", "a", "c", "e", "d"]).isSorted())
 assert(selectionSort_theGeneric([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
 assert(selectionSort_theGeneric(["a", "a", "b", "c", "d", "e"].reverse()).isSorted())
 
-// Random
+// Shuffled
 assert(selectionSort_theGeneric([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 assert(selectionSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffle()).isSorted())
 

@@ -12,7 +12,7 @@
 //:
 //:    take in an array that is considered unsorted
 //:
-//:    if array is empty or constains 1 element, it's then already sorted, so return it
+//:    if array is empty or contains 1 element, it's then already sorted, so return it
 //:
 //:    for i = 0 to n - 1
 //:
@@ -235,7 +235,6 @@ func bubbleSort_theGeneric<T: Comparable>(var array: [T]) -> [T] {
 }
 
 // Already Sorted
-
 assert(bubbleSort_theGeneric([Int]()).isSorted())
 assert(bubbleSort_theGeneric([7]).isSorted())
 assert(bubbleSort_theGeneric([1, 1, 2, 3, 5, 8, 13]).isSorted())
