@@ -5,14 +5,18 @@
 //: ----
 //:
 //: ### About
-//: Bubble Sort, a.k.a. Sinking Sort, is a sorting algorithm that repeatedly steps through an array to be sorted, compares each pair of adjacent elements and swaps them if they are in the wrong order. The pass through the array is repeated until swaps are no longer needed, meaning the array is then sorted. Interestingly, this algorithm gets its name from the way elements eventually _bubble up_ to their proper position, untimately rendering the array sorted.
+//:
+//: - Also known as Sinking Sort
+//: - Passes through the array are repeated until swaps are no longer needed
+//: - Compares each pair of adjacent elements and swaps them if they are in the wrong order
+//: - Eventually, all unsorted elements bubble up to their appropiated positions, then array is the sorted in-place
 //:
 //:
 //: ### Pseudocode
 //:
 //:    take in an array that is considered unsorted
 //:
-//:    if array is empty or contains 1 element, it's then already sorted, so return it
+//:    return the array if empty or contains a single element
 //:
 //:    for i = 0 to n - 1
 //:
@@ -31,49 +35,63 @@
 //:
 //: ### Optimizations
 //:
-//: - First, the number of passes through the array is equal the number of its elements minus one
-//: - Second, at each pass we keep track of whether an element was swapped and, if not, it's safe to assume the array is sorted
-//: - Finally, at the end of the i-th pass, the last i elements are already sorted, so there's no need to consider them on subsequent passes
+//: - The number of passes through the array needed is the same as to the maximum number of swaps required
+//: - At each pass the algorithm keeps track of whether a swap ocurred and, if not, it indicates the array is sorted
+//: - At the end of the i-th pass, the last i elements are already sorted, so they are not considered on subsequent passes
 //:
 //:
 //: ### Properties
 //:
-//: - Worst case runtime is of complexity _O(n²)_
-//: - Best case runtime is of complexity _Ω(n²)_
+//: - Simple, both concept and implementation are relatively easily understood
+//: - Adaptative, as it benefits from the presortedness in the input array
+//: - Stable, as it preserves the relative order of elements of the input array
+//: - The best and worst case runtime are respectively of complexity _Ω(n²)_ and _O(n²)_
 
 /// The Classic Algorithm
 ///
-/// A die-hard style, rooted in tradition, in all its imperative glory,
-/// using conventional `for`, `if` early exit, and manual swapping
+/// A die-hard style, rooted in tradition, in all its imperative glory
+///
+/// This version showcases `if` early exit, old-fashioned `for`, and
+/// manual swapping
 ///
 /// - parameter array: The `array` to be sorted in-place
 ///
 /// - returns: The `array` with elements sorted in ascending order
+///
+/// - todo: Remove code annotations
 
 func bubbleSort_theClassic(array: [Int]) -> [Int] {
 
+    // takes in an array that is considered unsorted and makes it mutable so it can be sorted in-place
     var array = array
 
+    // returns the array if it is empty or contains a single element, for it is sorted
     if array.count <= 1 {
         return array
     }
 
+    // passes through the array, but it needs only so many passes due to the number of swaps required
     for var i = 0; i < array.count - 1; ++i {
 
         var swapped = false
 
+        // compares each pair of adjacent elements, but do not compare to sorted elements on subsequent passes
         for var j = 0; j < array.count - i - 1; ++j {
 
+            // check is elements are in the wrong order
             if array[j] > array[j + 1] {
 
+                // performs a manual swap
                 let temporary = array[j]
                 array[j] = array[j + 1]
                 array[j + 1] = temporary
 
+                // flags that the array is not properly sorted yet
                 swapped = true
             }
         }
 
+        // checks if a swap ocurred, if not, the array is then sorted
         if !swapped {
             break
         }
@@ -99,8 +117,9 @@ assert(bubbleSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 
 /// The Swift-ish Algorithm
 ///
-/// A nifty take on the classic, but strives to use more modern language
-/// constructs, such as `var` argument, `guard`, `for-in`, and `swap`
+/// A sligthly more modern take on the classic, but still not quite quaint enough
+///
+/// This version showcases `var` argument, `guard`, `for-in`, and `swap`
 ///
 /// - parameter array: The `array` to be sorted in-place
 ///
@@ -151,8 +170,10 @@ assert(bubbleSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 
 /// The Swiftest Algorithm
 ///
-/// A highly creative approach that attempts to tap into the most powerful features yet,
-/// such as `var` argument, `guard`, `for-in-where`, `repeat-while`, and tuple swapping
+/// A nifty approach that attempts to tap into the most powerful language features yet
+///
+/// This version showcases `var` argument, `guard`, `for-in-where`, `repeat-while`,
+/// tuple swapping, and generics
 ///
 /// - parameter array: The `array` to be sorted in-place
 ///
@@ -198,11 +219,13 @@ assert(bubbleSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
 // Shuffled
 assert(bubbleSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 
+
 /// The Generic Algorithm
 ///
-/// A play on the swiftest version, but elevated to a type-agnostic nirvana status,
-/// such as `var` argument, `guard`, `for-in-where`, `repeat-while`, tuple swapping,
-/// and generics
+/// A play on the swiftest version, but elevated to a type-agnostic nirvana status
+///
+/// This version showcases `var` argument, `guard`, `for-in-where`, `repeat-while`,
+/// tuple swapping, and generics
 ///
 /// - parameter array: The `array` to be sorted in-place
 ///
