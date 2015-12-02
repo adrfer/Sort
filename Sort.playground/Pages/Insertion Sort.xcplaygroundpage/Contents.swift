@@ -73,14 +73,14 @@ func insertionSort_theClassic(array: [Int]) -> [Int] {
         return array
     }
 
-    // iterates throught the elements of the unsorted portion of the array, except the first, which is considered sorted
+    // iterates through the elements of the unsorted portion of the array, except the first, which is considered sorted
     for var i = 1; i < array.count; ++i {
 
         // keeps track of the unsorted element
         let element = array[i]
         var j = i
 
-        // iterates throught the sorted portion of the array to find the appropriate position to insert the unsorted element
+        // iterates through the sorted portion of the array to find the appropriate position to insert the unsorted element
         while j > 0 && element < array [j - 1] {
 
             // shifts each sorted element to make room for the unsorted element
