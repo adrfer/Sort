@@ -30,6 +30,7 @@
 //:
 //: - [Bubble Sort](Bubble%20Sort)
 //: - [Insertion Sort](Insertion%20Sort)
+//: - [Merge Sort](Merge%20Sort)
 //: - [Selection Sort](Selection%20Sort)
 //:
 //: > Hey, feel free to check [this repo](https://github.com/adrfer/Sort) at GitHub, and/or [ping me](https://twitter.com/_adrfer) on Twitter.

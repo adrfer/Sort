@@ -4,6 +4,7 @@
         <page name='Table of Contents'/>
         <page name='Bubble Sort'/>
         <page name='Insertion Sort'/>
+        <page name='Merge Sort'/>
         <page name='Selection Sort'/>
     </pages>
 </playground>
