@@ -32,6 +32,7 @@ Okey-dokey, so let's dive in!
 
 - Bubble Sort
 - Insertion Sort
+- Merge Sort
 - Selection Sort
 
 Feel free to [ping me](https://twitter.com/_adrfer) on Twitter.
