@@ -256,12 +256,12 @@ func mergerSort_theSwiftest(array: [Int]) -> [Int] {
         }
 
         if leftArray[0] < rightArray[0] {
-            let raminingLeftArray = Array(leftArray[1..<leftArray.count])
-            return [leftArray[0]] + merge(raminingLeftArray, rightArray)
+            let remainingLeftArray = Array(leftArray[1..<leftArray.count])
+            return [leftArray[0]] + merge(remainingLeftArray, rightArray)
         }
         else {
-            let raminingRightArray = Array(rightArray[1..<rightArray.count])
-            return [rightArray[0]] + merge(leftArray, raminingRightArray)
+            let remainingRightArray = Array(rightArray[1..<rightArray.count])
+            return [rightArray[0]] + merge(leftArray, remainingRightArray)
         }
     }
 
@@ -325,12 +325,12 @@ func mergeSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
         }
 
         if leftArray[0] < rightArray[0] {
-            let raminingLeftArray = Array(leftArray[1..<leftArray.count])
-            return [leftArray[0]] + merge(raminingLeftArray, rightArray)
+            let remainingLeftArray = Array(leftArray[1..<leftArray.count])
+            return [leftArray[0]] + merge(remainingLeftArray, rightArray)
         }
         else {
-            let raminingRightArray = Array(rightArray[1..<rightArray.count])
-            return [rightArray[0]] + merge(leftArray, raminingRightArray)
+            let remainingRightArray = Array(rightArray[1..<rightArray.count])
+            return [rightArray[0]] + merge(leftArray, remainingRightArray)
         }
     }
 
