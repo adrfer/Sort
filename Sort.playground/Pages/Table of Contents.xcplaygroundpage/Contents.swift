@@ -36,6 +36,8 @@
 //: - [Quick Sort](Quick%20Sort)
 //: - [Selection Sort](Selection%20Sort)
 //:
+//: Check [What's Next](What's%Next) for more details on the evolution of this playground.
+//:
 //: > Hey, feel free to check [this repo](https://github.com/adrfer/Sort) at GitHub, and/or [ping me](https://twitter.com/_adrfer) on Twitter.
 //:
 //: [Next](@next)
