@@ -5,7 +5,6 @@ The code was tested on _Xcode 7.2_ and _Swift 2.1_.
 
 **Important:**
 This is a preliminary document of sorting algorithms writen in the [Swift Programming Language](https://developer.apple.com/swift/).
-This is a preliminary document of sorting algorithms writen in the [Swift Programming Language](https://developer.apple.com/swift/).
 
 Welcome to the Sort Playground!
 
