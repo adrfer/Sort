@@ -2,7 +2,9 @@ import Foundation
 
 public extension CollectionType {
 
-    /// Shuffles the elements of `self`
+    // MARK: - Instance Methods
+
+    /// Shuffle the elements of `self`
     ///
     /// - returns: A copy of `self` with its elements shuffled
 
@@ -15,7 +17,9 @@ public extension CollectionType {
 
 public extension MutableCollectionType where Index == Int {
 
-    /// Shuffles the elements of `self` in-place using Fisher-Yeates algorithm
+    // MARK: - Instance Methods
+
+    /// Shuffle the elements of `self` in-place using Fisher-Yeates algorithm
 
     mutating func shuffleInPlace() {
 
@@ -24,13 +28,14 @@ public extension MutableCollectionType where Index == Int {
         }
 
         for i in 0..<count - 1 {
-            let j = i + Int(arc4random_uniform(UInt32(count - i)))
+            // let j = i + Int(arc4random_uniform(UInt32(count - i)))
+            let j = Int.random(min: i, max: self.count - 1)
 
             guard i != j else {
                 continue
             }
 
-            swap(&self[i], &self[j])
+            (self[i], self[j]) = (self[j], self[i])
         }
     }
 }
