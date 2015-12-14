@@ -38,4 +38,18 @@ public extension MutableCollectionType where Index == Int {
             (self[i], self[j]) = (self[j], self[i])
         }
     }
+
+    /// Choose a random element from self
+    ///
+    /// - returns: An optional random element from `self` or `nil` if `self` is empty
+
+    func sample() -> Generator.Element? {
+
+        guard !isEmpty else {
+            return nil
+        }
+
+        let index = Int.random(max: self.count - 1)
+        return self[index]
+    }
 }
