@@ -8,7 +8,7 @@ This is a preliminary document of sorting algorithms writen in the [Swift Progra
 
 Welcome to the Sort Playground!
 
-The idea here is to have fun while learning and exploring alternative implementations of different sorting techniques written in Swift, a modern and very exciting programming language. So, to better experience how to move from disarray to order when managing collections of data, some variations of these sorting algorithms are provided, starting with a classic implementation that is forged over and over until it becomes more Swift-y.
+The idea here is to have fun while learning and exploring alternative implementations of different sorting techniques written in Swift, a modern and very exciting programming language. Keep in mind that the implementations provided are not supposed to win any performance tests out there. So, to better experience how to move from disarray to order when managing collections of data, some variations of these sorting algorithms are provided, starting with a classic implementation that is forged over and over until it becomes more Swift-y.
 
 Now, you're about to indulge yourself with the following takes:
 
@@ -33,6 +33,7 @@ Okey-dokey, so let's dive in!
 - Bubble Sort
 - Insertion Sort
 - Merge Sort
+- Quick Sort
 - Selection Sort
 
 Feel free to [ping me](https://twitter.com/_adrfer) on Twitter.
