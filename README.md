@@ -1,11 +1,12 @@
 # Sort
 Esoteric experiments with sorting algorithms in Swift.
 
-The code was tested on _Xcode 7.2_ and _Swift 2.1_.
+The code was tested on `Xcode 7.2` and `Swift 2.1`.
 
 **Important:**
 This is a preliminary document of sorting algorithms writen in the [Swift Programming Language](https://developer.apple.com/swift/).
 
+--
 Welcome to the Sort Playground!
 
 The idea here is to have fun while exploring alternative implementations of different sorting techniques written in Swift, a modern and very exciting programming language. So, to better experience how to move from disarray to order when managing collections of data, some variations of these sorting algorithms are provided, starting with a classic implementation that is then forged over and over until it becomes more idiomatic, or simply, more Swift-y.
@@ -32,10 +33,11 @@ Okey-dokey, so let's dive in and enjoy the ride!
 
 ### Table of Contents
 
-- Bubble Sort
-- Insertion Sort
-- Merge Sort
-- Quick Sort
-- Selection Sort
+- [Bubble Sort](https://github.com/adrfer/Sort/blob/master/Sort.playground/Pages/Bubble%20Sort.xcplaygroundpage/Contents.swift)
+- [Insertion Sort](https://github.com/adrfer/Sort/blob/master/Sort.playground/Pages/Insertion%20Sort.xcplaygroundpage/Contents.swift)
+- [Merge Sort](https://github.com/adrfer/Sort/blob/master/Sort.playground/Pages/Merge%20Sort.xcplaygroundpage/Contents.swift)
+- [Quick Sort](https://github.com/adrfer/Sort/blob/master/Sort.playground/Pages/Quick%20Sort.xcplaygroundpage/Contents.swift)
+- [Selection Sort](https://github.com/adrfer/Sort/blob/master/Sort.playground/Pages/Selection%20Sort.xcplaygroundpage/Contents.swift)
 
+--
 Feel free to [ping me](https://twitter.com/_adrfer) on Twitter.
