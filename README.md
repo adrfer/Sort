@@ -1,5 +1,5 @@
 # Sort
-Esoteric experiments with sorting algorithms in Swift.
+Alluring experiments with sorting algorithms in Swift, sort of.
 
 The code was tested on `Xcode 7.2` and `Swift 2.1`.
 
