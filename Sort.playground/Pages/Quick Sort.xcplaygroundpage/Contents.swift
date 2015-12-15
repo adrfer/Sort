@@ -7,7 +7,7 @@
 //: ### About
 //:
 //: - Choose the pivot element of the array and rearrange all elements into three differente partitions
-//: - Elements less than the pivot go the first partition, elements equal to the pivot go the second, and elements greater go the third
+//: - Elements less than the pivot go to the first partition, elements equal go to the second, and elements greater go to the third
 //: - Recursively sort each partition, except the partition where elements ara equal to the pivot
 //: - Finally, join the first partition, the second, and the third partitions
 //:
@@ -40,7 +40,7 @@
 //: ### Optimizations
 //:
 //: - Not choose the pivot as the leftmost element of the partition, since it would cause worst-case behavior on already sorted arrays
-//: - With repeated elements, values equal to the pivot are considered already sorted, so only the less-than and greater-than partitions need to be recursively sorted
+//: - With repeated elements, values equal to the pivot are considered already sorted, so only the less-than and greater-than partitions are recursively sorted
 //:
 //:
 //: ### Properties
@@ -65,18 +65,15 @@
 
 func quickSort_theClassic(array: [Int]) -> [Int] {
 
-    // takes in an array that is considered unsorted and makes it mutable so it can be sorted in-place
-    var array = array
-
-    // returns the array if it is empty or contains a single element, for it is sorted
+    // return the array if it is empty or contains a single element, for it is sorted
     if array.count <= 1 {
         return array
     }
 
-    // picks the pivot element
-    let pivot = array[0]
+    // pick the pivot element randomly
+    let pivot = array.sample()
 
-    // partitions the array, indices move towards each other, until an inversion is detect
+    // partition the array
     var lessThan = [Int](), equal = [Int](), greaterThan = [Int]()
 
     for var i = 0; i < array.count - 1; i += 1 {
@@ -90,6 +87,7 @@ func quickSort_theClassic(array: [Int]) -> [Int] {
         }
     }
 
+    // recursively sort and join the partittions
     return quickSort_theClassic(lessThan) + equal + quickSort_theClassic(greaterThan)
 }
 
@@ -124,8 +122,7 @@ func quickSort_theSwiftish(array: [Int]) -> [Int] {
         return array
     }
 
-    let pivot = array[0]
-
+    let pivot = array.sample()
     var lessThan = [Int](), equal = [Int](), greaterThan = [Int]()
 
     for element in array {
@@ -163,7 +160,7 @@ assert(quickSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 /// A nifty approach that attempts to tap into the most powerful language features yet
 ///
 /// This version showcases `guard`, native methods from the standard library such
-/// as `filter`, `+`, and `dropFirst`, and tuple decomposition
+/// as `filter`, `+`, `first`, `dropFirst`, and tuple decomposition
 ///
 /// - parameter array: The `array` to be sorted
 ///
@@ -208,7 +205,7 @@ assert(quickSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 /// A play on the swiftest version, but elevated to a type-agnostic nirvana status
 ///
 /// This version showcases `guard`, native methods from the standard library such
-/// as `filter`, `+`, and `dropFirst`, tuple decomposition, and generics
+/// as `filter`, `+`, `first`, `dropFirst`, tuple decomposition, and generics
 ///
 /// - parameter array: The `array` to be sorted
 ///
