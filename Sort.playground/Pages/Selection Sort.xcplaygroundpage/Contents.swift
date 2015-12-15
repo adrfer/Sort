@@ -73,13 +73,13 @@ func selectionSort_theClassic(array: [Int]) -> [Int] {
     }
 
     // iterates through the elements of the unsorted portion of the array, except the last, which is considered sorted
-    for var i = 0; i < array.count - 1; ++i {
+    for var i = 0; i < array.count - 1; i += 1 {
         
         // considers the first element of the unsorted portion to be the smallest
         var indexOfTheSmallestElement = i
 
         // iterates thorugh the unsorted portion to find the smallest unsorted element
-        for var j = i + 1; j < array.count; ++j {
+        for var j = i + 1; j < array.count; j += 1 {
 
             // compares the current element with the considered smallest element
             if array[j] < array[indexOfTheSmallestElement] {
