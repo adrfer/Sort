@@ -74,7 +74,7 @@ func insertionSort_theClassic(array: [Int]) -> [Int] {
     }
 
     // iterates through the elements of the unsorted portion of the array, except the first, which is considered sorted
-    for var i = 1; i < array.count; ++i {
+    for var i = 1; i < array.count; i += 1 {
 
         // keeps track of the unsorted element
         let element = array[i]
@@ -87,7 +87,7 @@ func insertionSort_theClassic(array: [Int]) -> [Int] {
             array[j] = array[j - 1]
 
             // updates the index where the unsorted element will be inserted
-            --j
+            j -= 1
         }
 
         // inserts the unsorted element into the sorted portion of the array
@@ -133,7 +133,7 @@ func insertionSort_theSwiftish(var array: [Int]) -> [Int] {
 
         while j > 0 && array[j] < array[j - 1] {
             swap(&array[j], &array[j - 1])
-            --j
+            j -= 1
         }
     }
     
@@ -178,7 +178,7 @@ func insertionSort_theSwiftest(var array: [Int]) -> [Int] {
         var j = i
 
         while j > 0 && element < array[j - 1] {
-            --j
+            j -= 1
         }
 
         array.insert(element, atIndex: j)
@@ -225,7 +225,7 @@ func insertionSort_theGeneric<T: Comparable>(var array: [T]) -> [T] {
         var j = i
 
         while j > 0 && element < array[j - 1] {
-            --j
+            j -= 1
         }
 
         array.insert(element, atIndex: j)
