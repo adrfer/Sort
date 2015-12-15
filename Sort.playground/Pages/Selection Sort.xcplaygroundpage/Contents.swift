@@ -121,13 +121,15 @@ assert(selectionSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// A sligthly more modern take on the classic, but still not quite quaint enough
 ///
-/// This version showcases `var` argument, `guard`, `for-in`, and `swap`
+/// This version showcases `guard`, `for-in`, and `swap`
 ///
 /// - parameter array: The `array` to be sorted in-place
 ///
 /// - returns: The `array` with elements sorted in ascending order
 
-func selectionSort_theSwiftish(var array: [Int]) -> [Int] {
+func selectionSort_theSwiftish(array: [Int]) -> [Int] {
+
+    var array = array
     
     guard array.count > 1 else {
         return array
@@ -174,15 +176,16 @@ assert(selectionSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// A nifty approach that attempts to tap into the most powerful language features yet
 ///
-/// This version showcases `var` argument, `guard`, `for-in-where`, nested function,
-/// and tuple swapping
+/// This version showcases `guard`, `for-in-where`, nested function, and tuple swapping
 ///
 /// - parameter array: The `array` to be sorted in-place
 ///
 /// - returns: The `array` with elements sorted in ascending order
 
-func selectionSort_theSwiftest(var array: [Int]) -> [Int] {
-    
+func selectionSort_theSwiftest(array: [Int]) -> [Int] {
+
+    var array = array
+
     guard array.count > 1 else {
         return array
     }
@@ -231,15 +234,17 @@ assert(selectionSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// A play on the swiftest version, but elevated to a type-agnostic nirvana status
 ///
-/// This version showcases `var` argument, `guard`, `for-in-where`, nested function,
-/// tuple swapping, and generics
+/// This version showcases `guard`, `for-in-where`, nested function, tuple swapping,
+/// and generics
 ///
 /// - parameter array: The `array` to be sorted in-place
 ///
 /// - returns: The `array` with elements sorted in ascending order
 
-func selectionSort_theGeneric<T: Comparable>(var array: [T]) -> [T] {
-    
+func selectionSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
+
+    var array = array
+
     guard array.count > 1 else {
         return array
     }
