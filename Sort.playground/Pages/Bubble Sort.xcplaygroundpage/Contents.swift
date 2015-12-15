@@ -6,7 +6,6 @@
 //:
 //: ### About
 //:
-//: - Also known as Sinking Sort
 //: - Passes through the array are repeated until swaps are no longer needed
 //: - Compares each pair of adjacent elements and swaps them if they are in the wrong order
 //: - Eventually, all unsorted elements bubble up to their appropiated positions, then array is the sorted in-place
@@ -71,12 +70,12 @@ func bubbleSort_theClassic(array: [Int]) -> [Int] {
     }
 
     // passes through the array, but it needs only so many passes due to the number of swaps required
-    for var i = 0; i < array.count - 1; ++i {
+    for var i = 0; i < array.count - 1; i += 1  {
 
         var swapped = false
 
         // compares each pair of adjacent elements, but do not compare to sorted elements on subsequent passes
-        for var j = 0; j < array.count - i - 1; ++j {
+        for var j = 0; j < array.count - i - 1; j += 1 {
 
             // check is elements are in the wrong order
             if array[j] > array[j + 1] {
@@ -198,7 +197,7 @@ func bubbleSort_theSwiftest(var array: [Int]) -> [Int] {
             swapped = true
         }
 
-        --endIndex
+        endIndex -= 1
 
     } while swapped
 
@@ -250,7 +249,7 @@ func bubbleSort_theGeneric<T: Comparable>(var array: [T]) -> [T] {
             swapped = true
         }
 
-        --endIndex
+        endIndex -= 1
 
     } while swapped
 
