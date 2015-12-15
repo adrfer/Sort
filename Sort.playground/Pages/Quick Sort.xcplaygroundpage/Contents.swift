@@ -79,7 +79,7 @@ func quickSort_theClassic(array: [Int]) -> [Int] {
     // partitions the array, indices move towards each other, until an inversion is detect
     var lessThan = [Int](), equal = [Int](), greaterThan = [Int]()
 
-    for var i = 0; i < array.count - 1; ++i {
+    for var i = 0; i < array.count - 1; i += 1 {
 
         if array[i] < pivot {
             lessThan.append(array[i])
