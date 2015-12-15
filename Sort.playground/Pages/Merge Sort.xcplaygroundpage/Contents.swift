@@ -87,7 +87,7 @@ func mergeSort_theClassic(array: [Int]) -> [Int] {
     // creates the left half of the array
     var leftArray = [Int]()
 
-    for var i = 0; i < pivot; ++i {
+    for var i = 0; i < pivot; i += 1 {
 
         // it's not possible to use subscript to append a new item to the end of an array,
         // i.e. leftArray[i] = array[i], since modifying a value for an index that is out
@@ -98,7 +98,7 @@ func mergeSort_theClassic(array: [Int]) -> [Int] {
     // creates the right half of the array
     var rightArray = [Int]()
 
-    for var j = pivot; j < array.count; ++j {
+    for var j = pivot; j < array.count; j += 1 {
         rightArray.append(array[j])
     }
 
