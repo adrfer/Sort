@@ -6,9 +6,9 @@
 //:
 //: ### About
 //:
-//: - Choose the pivot element of the array and rearrange all elements into three differente partitions
-//: - Elements less than the pivot go to the first partition, elements equal go to the second, and elements greater go to the third
-//: - Recursively sort each partition, except the partition where elements ara equal to the pivot
+//: - Choose the pivot element of the array and rearrange all elements into three different partitions
+//: - Elements less than the pivot go to the first partition, elements equal go to the second, and elements greater than go to the third
+//: - Recursively sort each partition, except the partition where elements are equal to the pivot
 //: - Finally, join the first partition, the second, and the third partitions
 //:
 //:
@@ -20,17 +20,17 @@
 //:
 //:    pivot = pick any element of the array
 //:
-//:    lessThan, equal, greaterThan = empty partitions
+//:    less-than, equal, greater-than = empty partitions
 //:
 //:    for each element in array
 //:
-//:      if element < pivot then add element to lessThan
+//:      if element < pivot then add element to less-than
 //:
-//:      else if element > pivot then add element to greaterThan
+//:      else if element > pivot then add element to greater-than
 //:
 //:      else add element to equal
 //:
-//:    recursively sort both lessThan and greaterThan
+//:    recursively sort both less-than and greater-than
 //:
 //:    join all partitions
 //:
@@ -123,6 +123,7 @@ func quickSort_theSwiftish(array: [Int]) -> [Int] {
     }
 
     let pivot = array.sample()
+    
     var lessThan = [Int](), equal = [Int](), greaterThan = [Int]()
 
     for element in array {
