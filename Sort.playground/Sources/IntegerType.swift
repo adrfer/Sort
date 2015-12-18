@@ -1,6 +1,6 @@
 import Foundation
 
-public extension Int {
+public extension IntegerType {
 
     // MARK: - Type Methods
 
