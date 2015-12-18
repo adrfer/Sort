@@ -28,7 +28,7 @@ public extension MutableCollectionType where Index == Int {
         }
 
         for i in 0..<count - 1 {
-            // let j = i + Int(arc4random_uniform(UInt32(count - i)))
+
             let j = Int.random(min: i, max: self.count - 1)
 
             guard i != j else {
