@@ -173,7 +173,7 @@ func quickSort_theSwiftest(array: [Int]) -> [Int] {
         return array
     }
 
-    let (pivot, rest) = (array.first!, array.dropFirst())
+    let (pivot, rest) = (array[0], array.dropFirst())
 
     let lessThanOrEqual = rest.filter {
         $0 <= pivot
@@ -218,7 +218,7 @@ func quickSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
         return array
     }
 
-    let (pivot, rest) = (array.first!, array.dropFirst())
+    let (pivot, rest) = (array[0], array.dropFirst())
 
     let lessThanOrEqual = rest.filter {
         $0 <= pivot
