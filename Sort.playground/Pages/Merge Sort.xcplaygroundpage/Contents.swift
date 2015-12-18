@@ -1,14 +1,14 @@
 //: [Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)
 //:
 //: ----
-//: # Insertion Sort
+//: # Merge Sort
 //: ----
 //:
 //: ### About
 //:
-//: - Recursively divides input array in two halves, by calling itself for both halves
-//: - Sorts the elements of both halves of the array
-//: - Merges the two sorted halves until the entire array is sorted
+//: - Recursively split the input array in two halves
+//: - Sort the elements of both halves of the array
+//: - Merge the two sorted halves
 //:
 //:
 //: ### Pseudocode
@@ -17,33 +17,15 @@
 //:
 //:    return the array if empty or contains a single element
 //:
-//:    find the pivot point = n / 2
+//:    pivot = mid point of the array
 //:
-//:    left array = from 0 to pivot
+//:    left array = from first element to pivot, non inclusive
 //:
-//:    right array = from pivot to n
+//:    right array = from pivot to last element
 //:
-//:    call sort on the both halves
+//:    sort recursively both halves
 //:
-//:    while both halves still have elements
-//:
-//:      if left array[0] > rigth array[0]
-//:
-//:        append left array[0] to the sorted array
-//:
-//:     else
-//:
-//:        append right array[0] to the sorted array
-//:
-//:    while left half still has elements
-//:
-//:      add itd first element to the end of c
-//:
-//:    while right half still has elements
-//:
-//:      add itd first element to the end of c
-//:
-//:      remove a[0] from a
+//:    merge both halves when sorted
 //:
 //:    return sorted array
 //:
@@ -63,10 +45,10 @@
 
 /// The Classic Algorithm
 ///
-/// A die-hard style, rooted in tradition, in all its imperative glory... Well, not
-/// quite, due to some Swift safety features when using the set subscription syntax
+/// A die-hard style, rooted in tradition, in all its imperative glory
 ///
-/// This version showcases `if` early exit, old-fashioned `for` and `while` loops
+/// This version showcases `if` early exit, `for-in` and `while` loops,
+/// and native methods from the standard library such as `count` and `append
 ///
 /// - parameter array: The `array` to be sorted
 ///
@@ -76,69 +58,64 @@
 
 func mergeSort_theClassic(array: [Int]) -> [Int] {
 
-    // returns the array if it is empty or contains a single element, for it is sorted
+    // return the array if it is empty or contains a single element, for it is sorted
     if array.count <= 1 {
         return array
     }
 
-    // finds the mid point in order to split the input array into two halves
+    // find the mid point in order to split the input array into two halves
     let pivot = array.count / 2
 
-    // creates the left half of the array
-    var leftArray = [Int]()
+    // create the left half of the array
+    var left = [Int]()
 
-    for var i = 0; i < pivot; i += 1 {
-
-        // it's not possible to use subscript to append a new item to the end of an array,
-        // i.e. leftArray[i] = array[i], since modifying a value for an index that is out
-        // of an array’s existing bounds is not allowed, therefore `append` has to be used
-        leftArray.append(array[i])
+    for element in 0..<pivot {
+        left.append(element)
     }
 
-    // creates the right half of the array
-    var rightArray = [Int]()
+    // create the right half of the array
+    var right = [Int]()
 
-    for var j = pivot; j < array.count; j += 1 {
-        rightArray.append(array[j])
+    for element in pivot..<array.count {
+        right.append(element)
     }
 
-    // sorts the both halves of the array
-    leftArray = mergeSort_theClassic(leftArray)
-    rightArray = mergeSort_theClassic(rightArray)
+    // sort the both halves of the array recursively
+    left = mergeSort_theClassic(left)
+    right = mergeSort_theClassic(right)
 
-    // creates a temporary array to serves as the result of the merge
-    var mergedArray = [Int]()
+    // create a temporary array to serves as the result of the merge
+    var merged = [Int]()
 
-    // starts by comparing the first element of each half
+    // start by comparing the first element of each half
     var leftIndex = 0, rightIndex = 0
 
-    // sorts and merges the two halves while there are elements in both of them
-    while leftArray.count > leftIndex && rightArray.count > rightIndex {
+    // sort and merge the two halves while there are elements in both of them
+    while left.count > leftIndex && right.count > rightIndex {
 
-        // compares elements of both halves and merges the smaller element of the respective half
-        if leftArray[leftIndex] < rightArray[rightIndex] {
-
-            // again, it's not possible to use subscript to append a new item to the end of an
-            // array, i.e. mergedArray[mergedIndex++] = leftArray[leftIndex++], since modifying
-            // a value for an index that is out of an array’s existing bounds is not allowed
-            mergedArray.append(leftArray[leftIndex++])
-
+        // compare elements of both halves and merge the smaller element of the respective half
+        if left[leftIndex] < right[rightIndex] {
+            merged.append(left[leftIndex])
+            leftIndex += 1
         } else {
-            mergedArray.append(rightArray[rightIndex++])
+            merged.append(right[rightIndex])
+            rightIndex += 1
         }
     }
 
-    // merges the remaining elements of the left half, if any
-    while leftArray.count > leftIndex {
-        mergedArray.append(leftArray[leftIndex++])
+    // merge remaining elements of the left half, if any
+    while left.count > leftIndex {
+        merged.append(left[leftIndex])
+        leftIndex += 1
     }
 
-    // merges the remaining elements of the right half, if any
-    while rightArray.count > rightIndex {
-        mergedArray.append(rightArray[rightIndex++])
+    // merge remaining elements of the right half, if any
+    while right.count > rightIndex {
+        merged.append(right[rightIndex])
+        rightIndex += 1
     }
 
-    return mergedArray
+    return merged
 }
 
 // Already Sorted
@@ -161,7 +138,7 @@ assert(mergeSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 /// A sligthly more modern take on the classic, but still not quite quaint enough
 ///
 /// This version showcases `guard`, native methods from the standard library such
-/// as `append` and `removeFirst`, and array slicing
+/// as `count` and `removeFirst`, and array slicing
 ///
 /// - parameter array: The `array` to be sorted
 ///
@@ -174,34 +151,29 @@ func mergeSort_theSwiftish(array: [Int]) -> [Int] {
     }
 
     let pivot = array.count / 2
+    var left = mergeSort_theSwiftish(Array(array[0..<pivot]))
+    var right = mergeSort_theSwiftish(Array(array[pivot..<array.count]))
 
-    var leftArray = Array(array[0..<pivot])
-    var rightArray = Array(array[pivot..<array.count])
+    var merged = [Int]()
 
-    leftArray = mergeSort_theSwiftish(leftArray)
-    rightArray = mergeSort_theSwiftish(rightArray)
+    while left.count > 0 && right.count > 0 {
 
-    var mergedArray = [Int]()
-
-    while leftArray.count > 0 && rightArray.count > 0 {
-
-        if leftArray.first < rightArray.first {
-            mergedArray.append(leftArray.removeFirst())
-
+        if left[0] < right[0] {
+            merged.append(left.removeFirst())
         } else {
-            mergedArray.append(rightArray.removeFirst())
+            merged.append(right.removeFirst())
         }
     }
 
-    while leftArray.count > 0 {
-        mergedArray.append(leftArray.removeFirst())
+    while left.count > 0 {
+        merged.append(left.removeFirst())
     }
 
-    while rightArray.count > 0 {
-        mergedArray.append(rightArray.removeFirst())
+    while right.count > 0 {
+        merged.append(right.removeFirst())
     }
     
-    return mergedArray
+    return merged
 }
 
 // Already Sorted
@@ -224,7 +196,7 @@ assert(mergeSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 /// A nifty approach that attempts to tap into the most powerful language features yet
 ///
 /// This version showcases `guard`, native methods from the standard library such
-/// as `append`, array slicing, tuple decomposition, and nested functions
+/// as `count`, `+`, and `isEmpty`, array slicing, and nested functions
 ///
 /// - parameter array: The `array` to be sorted
 ///
@@ -236,41 +208,28 @@ func mergerSort_theSwiftest(array: [Int]) -> [Int] {
         return array
     }
 
-    func split(array: [Int]) -> ([Int], [Int]) {
+    func merge(left: [Int], _ right: [Int]) -> [Int] {
 
-        let pivot = array.count / 2
-        let leftArray = Array(array[0..<pivot])
-        let rightArray = Array(array[pivot..<array.count])
-
-        return (leftArray, rightArray)
-    }
-
-    func merge(leftArray: [Int], _ rightArray: [Int]) -> [Int] {
-
-        guard !leftArray.isEmpty else {
-            return rightArray
+        guard !left.isEmpty else {
+            return right
         }
 
-        guard !rightArray.isEmpty else {
-            return leftArray
+        guard !right.isEmpty else {
+            return left
         }
 
-        if leftArray[0] < rightArray[0] {
-            let remainingLeftArray = Array(leftArray[1..<leftArray.count])
-            return [leftArray[0]] + merge(remainingLeftArray, rightArray)
-        }
-        else {
-            let remainingRightArray = Array(rightArray[1..<rightArray.count])
-            return [rightArray[0]] + merge(leftArray, remainingRightArray)
+        if left[0] < right[0] {
+            return [left[0]] + merge(Array(left[1..<left.count]), right)
+        } else {
+            return [right[0]] + merge(left, Array(right[1..<right.count]))
         }
     }
 
-    var (leftArray, rightArray) = split(array)
+    let pivot = array.count / 2
+    let left = mergerSort_theSwiftest(Array(array[0..<pivot]))
+    let right = mergerSort_theSwiftest(Array(array[pivot..<array.count]))
 
-    leftArray = mergerSort_theSwiftest(leftArray)
-    rightArray = mergerSort_theSwiftest(rightArray)
-
-    return merge(leftArray, rightArray)
+    return merge(left, right)
 }
 
 // Already Sorted
@@ -293,7 +252,7 @@ assert(mergerSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 /// A play on the swiftest version, but elevated to a type-agnostic nirvana status
 ///
 /// This version showcases `guard`, native methods from the standard library such
-/// as `append`, array slicing, tuple decomposition, nested functions, and generics
+/// as `count`, `+`, and `isEmpty`, array slicing, nested functions, and generics
 ///
 /// - parameter array: The `array` to be sorted
 ///
@@ -305,41 +264,28 @@ func mergeSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
         return array
     }
 
-    func split(array: [T]) -> ([T], [T]) {
+    func merge(left: [T], _ right: [T]) -> [T] {
 
-        let pivot = array.count / 2
-        let leftArray = Array(array[0..<pivot])
-        let rightArray = Array(array[pivot..<array.count])
-
-        return (leftArray, rightArray)
-    }
-
-    func merge(leftArray: [T], _ rightArray: [T]) -> [T] {
-
-        guard !leftArray.isEmpty else {
-            return rightArray
+        guard !left.isEmpty else {
+            return right
         }
 
-        guard !rightArray.isEmpty else {
-            return leftArray
+        guard !right.isEmpty else {
+            return left
         }
 
-        if leftArray[0] < rightArray[0] {
-            let remainingLeftArray = Array(leftArray[1..<leftArray.count])
-            return [leftArray[0]] + merge(remainingLeftArray, rightArray)
-        }
-        else {
-            let remainingRightArray = Array(rightArray[1..<rightArray.count])
-            return [rightArray[0]] + merge(leftArray, remainingRightArray)
+        if left[0] < right[0] {
+            return [left[0]] + merge(Array(left[1..<left.count]), right)
+        } else {
+            return [right[0]] + merge(left, Array(right[1..<right.count]))
         }
     }
 
-    var (leftArray, rightArray) = split(array)
+    let pivot = array.count / 2
+    let left = mergeSort_theGeneric(Array(array[0..<pivot]))
+    let right = mergeSort_theGeneric(Array(array[pivot..<array.count]))
 
-    leftArray = mergeSort_theGeneric(leftArray)
-    rightArray = mergeSort_theGeneric(rightArray)
-    
-    return merge(leftArray, rightArray)
+    return merge(left, right)
 }
 
 // Already Sorted
