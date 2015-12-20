@@ -32,13 +32,13 @@
 
 func bubbleSort_theClassic(array: [Int]) -> [Int] {
 
+    // take in an array that is considered unsorted and make a copy of it
+    var array = array
+
     // return the array if it is empty or contains a single element, for it is sorted
     if array.count <= 1 {
         return array
     }
-
-    // take in an array that is considered unsorted and make a copy of it, but only after the base case above
-    var array = array
 
     // pass through the array, but it needs only as many passes as the number of swaps required
     for i in 0..<array.count - 1 {
@@ -99,11 +99,11 @@ assert(bubbleSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 
 func bubbleSort_theSwiftish(array: [Int]) -> [Int] {
 
+    var array = array
+
     guard array.count > 1 else {
         return array
     }
-
-    var array = array
 
     var hasSwapped: Bool
     var count = array.count
@@ -153,11 +153,11 @@ assert(bubbleSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 
 func bubbleSort_theSwiftest(array: [Int]) -> [Int] {
 
+    var array = array
+
     guard array.count > 1 else {
         return array
     }
-
-    var array = array
 
     var hasSwapped = false
 
@@ -198,11 +198,11 @@ assert(bubbleSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 
 func bubbleSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
 
+    var array = array
+    
     guard array.count > 1 else {
         return array
     }
-
-    var array = array
 
     var hasSwapped = false
 
