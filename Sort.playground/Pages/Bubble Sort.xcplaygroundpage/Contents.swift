@@ -4,39 +4,11 @@
 //: # Bubble Sort
 //: ----
 //:
-//: ### About
+//: ### Idea
 //:
-//: - Passes through the array are repeated until swaps are no longer needed
-//: - Compares each pair of adjacent elements and swaps them if they are in the wrong order
-//: - Eventually, all unsorted elements bubble up to their appropiated positions, then array is the sorted in-place
-//:
-//:
-//: ### Pseudocode
-//:
-//:    take in an array that is considered unsorted
-//:
-//:    return the array if empty or contains a single element
-//:
-//:    for i = 0 to n - 1
-//:
-//:      for j = 0 to n - i - 1
-//:
-//:        if array[j] > array[j + 1]
-//:
-//:          swap array[j] and array[j + 1]
-//:
-//:          mark that a swap ocurred
-//:
-//:    until no more swaps
-//:
-//:    return sorted array
-//:
-//:
-//: ### Optimizations
-//:
-//: - The number of passes through the array needed is the same as to the maximum number of swaps required
-//: - At each pass the algorithm keeps track of whether a swap ocurred and, if not, it indicates the array is sorted
-//: - At the end of the i-th pass, the last i elements are already sorted, so they are not considered on subsequent passes
+//: - Pass through the array repeatedly comparing each pair of adjacent elements
+//: - At each pass, swap these elements if they happen to be in the wrong order
+//: - Wnen there are no more swaps, unsorted elements will have bubbled up to their appropiated positions
 //:
 //:
 //: ### Properties
@@ -50,54 +22,55 @@
 ///
 /// A die-hard style, rooted in tradition, in all its imperative glory
 ///
-/// This version showcases `if` early exit, old-fashioned `for`, and
-/// manual swapping
+/// This version showcases early exit `if`, `for-in` loop, `break`, tuple swapping, and native standard library method `count`
 ///
-/// - parameter array: The `array` to be sorted in-place
+/// - parameter array: The `array` to be sorted
 ///
-/// - returns: The `array` with elements sorted in ascending order
+/// - returns: A new array with elements sorted in ascending order
 ///
 /// - todo: Remove code annotations
 
 func bubbleSort_theClassic(array: [Int]) -> [Int] {
 
-    // takes in an array that is considered unsorted and makes it mutable so it can be sorted in-place
-    var array = array
-
-    // returns the array if it is empty or contains a single element, for it is sorted
+    // return the array if it is empty or contains a single element, for it is sorted
     if array.count <= 1 {
         return array
     }
 
-    // passes through the array, but it needs only so many passes due to the number of swaps required
-    for var i = 0; i < array.count - 1; i += 1  {
+    // take in an array that is considered unsorted and make a copy of it, but only after the base case above
+    var array = array
 
-        var swapped = false
+    // pass through the array, but it needs only as many passes as the number of swaps required
+    for i in 0..<array.count - 1 {
 
-        // compares each pair of adjacent elements, but do not compare to sorted elements on subsequent passes
-        for var j = 0; j < array.count - i - 1; j += 1 {
+        // define a flag keep track if the array is already sorted
+        var hasSwapped = false
+
+        // compare each pair of adjacent elements, except to already sorted elements on subsequent passes
+        for j in 0..<array.count - i - 1 {
 
             // check is elements are in the wrong order
             if array[j] > array[j + 1] {
 
-                // performs a manual swap
-                let temporary = array[j]
-                array[j] = array[j + 1]
-                array[j + 1] = temporary
+                // perform a swap
+                (array[j], array[j + 1]) = (array[j + 1], array[j])
 
-                // flags that the array is not properly sorted yet
-                swapped = true
+                // flag if array is not properly sorted yet
+                hasSwapped = true
             }
         }
 
-        // checks if a swap ocurred, if not, the array is then sorted
-        if !swapped {
+        // check if a swap ocurred, if not, the array is then sorted
+        if !hasSwapped {
             break
         }
     }
 
+    // return sorted array
     return array
 }
+
+// Tests
 
 // Already Sorted
 assert(bubbleSort_theClassic([Int]()).isSorted())
@@ -118,41 +91,40 @@ assert(bubbleSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// A sligthly more modern take on the classic, but still not quite quaint enough
 ///
-/// This version showcases `guard`, `for-in`, and `swap`
+/// This version showcases `guard`, `for-in-where`, `repeat-while`, tuple swapping, and native standard library method `count`
 ///
-/// - parameter array: The `array` to be sorted in-place
+/// - parameter array: The `array` to be sorted
 ///
-/// - returns: The `array` with elements sorted in ascending order
+/// - returns: A new array with elements sorted in ascending order
 
 func bubbleSort_theSwiftish(array: [Int]) -> [Int] {
-
-    var array = array
 
     guard array.count > 1 else {
         return array
     }
 
-    for i in 0..<array.count - 1 {
+    var array = array
 
-        var swapped = false
+    var hasSwapped: Bool
+    var count = array.count
 
-        for j in 0..<array.count - i - 1 {
+    repeat {
 
-            if array[j] > array[j + 1] {
+        hasSwapped = false
 
-                swap(&array[j], &array[j + 1])
-                swapped = true
-            }
+        for i in 0..<count - 1 where array[i] > array[i + 1] {
+            (array[i], array[i + 1]) = (array[i + 1], array[i])
+            hasSwapped = true
         }
 
-        guard swapped else {
-            break
-        }
-
-    }
+        count -= 1
+        
+    } while hasSwapped
 
     return array
 }
+
+// Tests
 
 // Already Sorted
 assert(bubbleSort_theSwiftish([Int]()).isSorted())
@@ -173,39 +145,31 @@ assert(bubbleSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// A nifty approach that attempts to tap into the most powerful language features yet
 ///
-/// This version showcases `guard`, `for-in-where`, `repeat-while`, and tuple swapping
+/// This version showcases `guard`, `for-in-where`, and native standard library methods such as `count`, `swap`, and `dropFirst`
 ///
-/// - parameter array: The `array` to be sorted in-place
+/// - parameter array: The `array` to be sorted
 ///
-/// - returns: The `array` with elements sorted in ascending order
+/// - returns: A new array with elements sorted in ascending order
 
 func bubbleSort_theSwiftest(array: [Int]) -> [Int] {
-
-    var array = array
 
     guard array.count > 1 else {
         return array
     }
 
-    var swapped: Bool
-    var endIndex = array.count
+    var array = array
 
-    repeat {
+    var hasSwapped = false
 
-        swapped = false
+    for i in 0..<array.count - 1 where array[i] > array[i + 1] {
+        swap(&array[i], &array[i + 1])
+        hasSwapped = true
+    }
 
-        for i in 0..<endIndex - 1 where array[i] > array[i + 1] {
-
-            (array[i], array[i + 1]) = (array[i + 1], array[i])
-            swapped = true
-        }
-
-        endIndex -= 1
-
-    } while swapped
-
-    return array
+    return !hasSwapped ? array : bubbleSort_theSwiftest(Array(array.dropFirst()))
 }
+
+// Tests
 
 // Already Sorted
 assert(bubbleSort_theSwiftest([Int]()).isSorted())
@@ -226,40 +190,31 @@ assert(bubbleSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// A play on the swiftest version, but elevated to a type-agnostic nirvana status
 ///
-/// This version showcases `guard`, `for-in-where`, `repeat-while`, tuple swapping,
-/// and generics
+/// This version showcases `guard`, `for-in-where`, and native standard library methods such as `count`, `swap`, and `dropFirst`, and generics
 ///
-/// - parameter array: The `array` to be sorted in-place
+/// - parameter array: The `array` to be sorted
 ///
-/// - returns: The `array` with elements sorted in ascending order
+/// - returns: A new array with elements sorted in ascending order
 
 func bubbleSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
-
-    var array = array
 
     guard array.count > 1 else {
         return array
     }
 
-    var swapped: Bool
-    var endIndex = array.count
+    var array = array
 
-    repeat {
+    var hasSwapped = false
 
-        swapped = false
+    for i in 0..<array.count - 1 where array[i] > array[i + 1] {
+        swap(&array[i], &array[i + 1])
+        hasSwapped = true
+    }
 
-        for i in 0..<endIndex - 1 where array[i] > array[i + 1] {
-
-            (array[i], array[i + 1]) = (array[i + 1], array[i])
-            swapped = true
-        }
-
-        endIndex -= 1
-
-    } while swapped
-
-    return array
+    return !hasSwapped ? array : bubbleSort_theGeneric(Array(array.dropFirst()))
 }
+
+// Tests
 
 // Already Sorted
 assert(bubbleSort_theGeneric([Int]()).isSorted())
