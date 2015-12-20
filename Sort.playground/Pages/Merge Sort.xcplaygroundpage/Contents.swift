@@ -4,40 +4,16 @@
 //: # Merge Sort
 //: ----
 //:
-//: ### About
+//: ### Idea
 //:
 //: - Recursively split the input array in two halves
 //: - Sort the elements of both halves of the array
 //: - Merge the two sorted halves
 //:
 //:
-//: ### Pseudocode
-//:
-//:    take in an array that is considered unsorted
-//:
-//:    return the array if empty or contains a single element
-//:
-//:    pivot = mid point of the array
-//:
-//:    left array = from first element to pivot, non inclusive
-//:
-//:    right array = from pivot to last element
-//:
-//:    sort recursively both halves
-//:
-//:    merge both halves when sorted
-//:
-//:    return sorted array
-//:
-//:
-//: ### Optimizations
-//:
-//: - Early return in case the input array is empty or contains a single element, for it is sorted
-//:
-//:
 //: ### Properties
 //:
-//: - It is a divide and conquer technique, so computation can parallelized
+//: - Is a divide and conquer algorithm, so computation can parallelized
 //: - Not Simple, both concept and implementation are relatively complex
 //: - Not Adaptative, as it does not benefit from the presortedness in the input array
 //: - Stable, as it preserves the relative order of elements of the input array
@@ -47,12 +23,11 @@
 ///
 /// A die-hard style, rooted in tradition, in all its imperative glory
 ///
-/// This version showcases `if` early exit, `for-in` and `while` loops,
-/// and native methods from the standard library such as `count` and `append
+/// This version showcases early exit `if`, `while` loop, and native standard library methods sucha as `count` and `append`
 ///
 /// - parameter array: The `array` to be sorted
 ///
-/// - returns: The `array` with elements sorted in ascending order
+/// - returns: A new array with elements sorted in ascending order
 ///
 /// - todo: Remove code annotations
 
@@ -66,28 +41,28 @@ func mergeSort_theClassic(array: [Int]) -> [Int] {
     // find the mid point in order to split the input array into two halves
     let pivot = array.count / 2
 
-    // create the left half of the array
-    var left = [Int]()
+    // set the left half of the array
+    var left: [Int] = []
 
     for element in 0..<pivot {
         left.append(element)
     }
 
-    // create the right half of the array
-    var right = [Int]()
+    // set the right half of the array
+    var right: [Int] = []
 
     for element in pivot..<array.count {
         right.append(element)
     }
 
-    // sort the both halves of the array recursively
+    // sort both halves recursively
     left = mergeSort_theClassic(left)
     right = mergeSort_theClassic(right)
 
-    // create a temporary array to serves as the result of the merge
-    var merged = [Int]()
+    // create an array to be populated with sorted elements
+    var sorted: [Int] = []
 
-    // start by comparing the first element of each half
+    // set initial indidces, start by comparing the first element of each half
     var leftIndex = 0, rightIndex = 0
 
     // sort and merge the two halves while there are elements in both of them
@@ -95,28 +70,30 @@ func mergeSort_theClassic(array: [Int]) -> [Int] {
 
         // compare elements of both halves and merge the smaller element of the respective half
         if left[leftIndex] < right[rightIndex] {
-            merged.append(left[leftIndex])
+            sorted.append(left[leftIndex])
             leftIndex += 1
         } else {
-            merged.append(right[rightIndex])
+            sorted.append(right[rightIndex])
             rightIndex += 1
         }
     }
 
     // merge remaining elements of the left half, if any
     while left.count > leftIndex {
-        merged.append(left[leftIndex])
+        sorted.append(left[leftIndex])
         leftIndex += 1
     }
 
     // merge remaining elements of the right half, if any
     while right.count > rightIndex {
-        merged.append(right[rightIndex])
+        sorted.append(right[rightIndex])
         rightIndex += 1
     }
 
-    return merged
+    return sorted
 }
+
+// Tests
 
 // Already Sorted
 assert(mergeSort_theClassic([Int]()).isSorted())
@@ -137,12 +114,11 @@ assert(mergeSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// A sligthly more modern take on the classic, but still not quite quaint enough
 ///
-/// This version showcases `guard`, native methods from the standard library such
-/// as `count` and `removeFirst`, and array slicing
+/// This version showcases `guard`, `while` loop, native methods from the standard library such as `count`, `empty`, `append`, and `removeFirst`, and array slicing
 ///
 /// - parameter array: The `array` to be sorted
 ///
-/// - returns: The `array` with elements sorted in ascending order
+/// - returns: A new array with elements sorted in ascending order
 
 func mergeSort_theSwiftish(array: [Int]) -> [Int] {
 
@@ -151,30 +127,33 @@ func mergeSort_theSwiftish(array: [Int]) -> [Int] {
     }
 
     let pivot = array.count / 2
+
     var left = mergeSort_theSwiftish(Array(array[0..<pivot]))
     var right = mergeSort_theSwiftish(Array(array[pivot..<array.count]))
 
-    var merged = [Int]()
+    var sorted: [Int] = []
 
-    while left.count > 0 && right.count > 0 {
+    while !left.isEmpty && !right.isEmpty {
 
         if left[0] < right[0] {
-            merged.append(left.removeFirst())
+            sorted.append(left.removeFirst())
         } else {
-            merged.append(right.removeFirst())
+            sorted.append(right.removeFirst())
         }
     }
 
-    while left.count > 0 {
-        merged.append(left.removeFirst())
+    while !left.isEmpty {
+        sorted.append(left.removeFirst())
     }
 
-    while right.count > 0 {
-        merged.append(right.removeFirst())
+    while !right.isEmpty {
+        sorted.append(right.removeFirst())
     }
     
-    return merged
+    return sorted
 }
+
+// Tests
 
 // Already Sorted
 assert(mergeSort_theSwiftish([Int]()).isSorted())
@@ -195,12 +174,11 @@ assert(mergeSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// A nifty approach that attempts to tap into the most powerful language features yet
 ///
-/// This version showcases `guard`, native methods from the standard library such
-/// as `count`, `+`, and `isEmpty`, array slicing, and nested functions
+/// This version showcases `guard`, `while` loop, native methods from the standard library such as `count`, `isEmpty`, `removeFirst`, operator `+=`, array slicing, and nested functions
 ///
 /// - parameter array: The `array` to be sorted
 ///
-/// - returns: The `array` with elements sorted in ascending order
+/// - returns: A new array with elements sorted in ascending order
 
 func mergerSort_theSwiftest(array: [Int]) -> [Int] {
 
@@ -210,27 +188,40 @@ func mergerSort_theSwiftest(array: [Int]) -> [Int] {
 
     func merge(left: [Int], _ right: [Int]) -> [Int] {
 
-        guard !left.isEmpty else {
-            return right
+        var left = left
+        var right = right
+
+        var merged: [Int] = []
+
+        while !left.isEmpty && !right.isEmpty {
+
+            if left[0] < right[0] {
+                merged += [left.removeFirst()]
+            } else {
+                merged += [right.removeFirst()]
+            }
         }
 
-        guard !right.isEmpty else {
-            return left
+        if !left.isEmpty {
+            merged += left
         }
 
-        if left[0] < right[0] {
-            return [left[0]] + merge(Array(left[1..<left.count]), right)
-        } else {
-            return [right[0]] + merge(left, Array(right[1..<right.count]))
+        if !right.isEmpty {
+            merged += right
         }
+
+        return merged
     }
 
     let pivot = array.count / 2
+
     let left = mergerSort_theSwiftest(Array(array[0..<pivot]))
     let right = mergerSort_theSwiftest(Array(array[pivot..<array.count]))
 
     return merge(left, right)
 }
+
+// Tests
 
 // Already Sorted
 assert(mergerSort_theSwiftest([Int]()).isSorted())
@@ -251,12 +242,11 @@ assert(mergerSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// A play on the swiftest version, but elevated to a type-agnostic nirvana status
 ///
-/// This version showcases `guard`, native methods from the standard library such
-/// as `count`, `+`, and `isEmpty`, array slicing, nested functions, and generics
+/// This version showcases `guard`, `while` loop, native methods from the standard library such as `count`, `isEmpty`, `removeFirst`, operator `+=`, array slicing, nested functions, and generics
 ///
 /// - parameter array: The `array` to be sorted
 ///
-/// - returns: The `array` with elements sorted in ascending order
+/// - returns: A new array with elements sorted in ascending order
 
 func mergeSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
 
@@ -266,27 +256,40 @@ func mergeSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
 
     func merge(left: [T], _ right: [T]) -> [T] {
 
-        guard !left.isEmpty else {
-            return right
+        var left = left
+        var right = right
+
+        var merged: [T] = []
+
+        while !left.isEmpty && !right.isEmpty {
+
+            if left[0] < right[0] {
+                merged += [left.removeFirst()]
+            } else {
+                merged += [right.removeFirst()]
+            }
         }
 
-        guard !right.isEmpty else {
-            return left
+        if !left.isEmpty {
+            merged += left
         }
 
-        if left[0] < right[0] {
-            return [left[0]] + merge(Array(left[1..<left.count]), right)
-        } else {
-            return [right[0]] + merge(left, Array(right[1..<right.count]))
+        if !right.isEmpty {
+            merged += right
         }
+
+        return merged
     }
 
     let pivot = array.count / 2
+
     let left = mergeSort_theGeneric(Array(array[0..<pivot]))
     let right = mergeSort_theGeneric(Array(array[pivot..<array.count]))
-
+    
     return merge(left, right)
 }
+
+// Tests
 
 // Already Sorted
 assert(mergeSort_theGeneric([Int]()).isSorted())
