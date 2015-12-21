@@ -22,7 +22,7 @@
 ///
 /// A die-hard style, rooted in tradition, in all its imperative glory
 ///
-/// This version showcases early exit `if`, `for-in` loop, `break`, tuple swapping, and native standard library method `count`
+/// This version showcases early exit `if`, `count`, `for-in`, `..<`, subcripting, tuple swapping, and `break`
 ///
 /// - parameter array: The `array` to be sorted
 ///
@@ -91,7 +91,7 @@ assert(bubbleSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// A sligthly more modern take on the classic, but still not quite quaint enough
 ///
-/// This version showcases `guard`, `for-in-where`, `repeat-while`, tuple swapping, and native standard library method `count`
+/// This version showcases `guard`, `count`, `repeat-while`, `for-in-where`, subcripting, `..<`, and tuple swapping
 ///
 /// - parameter array: The `array` to be sorted
 ///
@@ -145,7 +145,7 @@ assert(bubbleSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// A nifty approach that attempts to tap into the most powerful language features yet
 ///
-/// This version showcases `guard`, `for-in-where`, and native standard library methods such as `count`, `swap`, and `dropFirst`
+/// This version showcases `guard`, `count`, `for-in-where`, `..<`, subcripting, `swap`, `?:`, and `dropFirst`
 ///
 /// - parameter array: The `array` to be sorted
 ///
@@ -190,7 +190,7 @@ assert(bubbleSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// A play on the swiftest version, but elevated to a type-agnostic nirvana status
 ///
-/// This version showcases `guard`, `for-in-where`, and native standard library methods such as `count`, `swap`, and `dropFirst`, and generics
+/// This version showcases `guard`, `count`, `for-in-where`, `..<`, subcripting, `swap`, `?:`, `dropFirst`, and generics
 ///
 /// - parameter array: The `array` to be sorted
 ///
