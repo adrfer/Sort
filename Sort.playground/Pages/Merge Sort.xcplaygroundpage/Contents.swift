@@ -23,7 +23,7 @@
 ///
 /// A die-hard style, rooted in tradition, in all its imperative glory
 ///
-/// This version showcases early exit `if`, `while` loop, and native standard library methods sucha as `count` and `append`
+/// This version showcases early exit `if`, `count`, `while`, subcripting, `+=`, and `append`
 ///
 /// - parameter array: The `array` to be sorted
 ///
@@ -114,7 +114,7 @@ assert(mergeSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// A sligthly more modern take on the classic, but still not quite quaint enough
 ///
-/// This version showcases `guard`, `while` loop, native methods from the standard library such as `count`, `empty`, `append`, and `removeFirst`, and array slicing
+/// This version showcases `guard`, `count`, subcripting, `..<`, `while`, `isEmpty`, and `removeFirst`
 ///
 /// - parameter array: The `array` to be sorted
 ///
@@ -174,7 +174,7 @@ assert(mergeSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// A nifty approach that attempts to tap into the most powerful language features yet
 ///
-/// This version showcases `guard`, `while` loop, native methods from the standard library such as `count`, `isEmpty`, `removeFirst`, operator `+=`, array slicing, and nested functions
+/// This version showcases `guard`, `count`, nested function, `while`, `isEmpty`, subcripting, `+=`, and `removeFirst`
 ///
 /// - parameter array: The `array` to be sorted
 ///
@@ -242,7 +242,7 @@ assert(mergerSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// A play on the swiftest version, but elevated to a type-agnostic nirvana status
 ///
-/// This version showcases `guard`, `while` loop, native methods from the standard library such as `count`, `isEmpty`, `removeFirst`, operator `+=`, array slicing, nested functions, and generics
+/// This version showcases `guard`, `count`, nested function, `while`, `isEmpty`, subcripting, `+=`, `removeFirst`, and generics
 ///
 /// - parameter array: The `array` to be sorted
 ///
