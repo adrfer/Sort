@@ -144,7 +144,7 @@ assert(selectionSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// A nifty approach that attempts to tap into the most powerful language features yet
 ///
-/// This version showcases `guard`, `count`, `for-in`, `..<`, array slicing, subcripting, `minElement`, `indexOf`, `removeAtIndex`, and `append`
+/// This version showcases `guard`, `count`, `for-in`, subcripting, `..<`, `minElement`, `indexOf`, `removeAtIndex`, and `append`
 ///
 /// - parameter array: The `array` to be sorted
 ///
@@ -193,7 +193,7 @@ assert(selectionSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// A play on the swiftest version, but elevated to a type-agnostic nirvana status
 ///
-/// This version showcases `guard`, `count`, `for-in`, `..<`, array slicing, subcripting, `minElement`, `indexOf`, `removeAtIndex`, `append`, and generics
+/// This version showcases `guard`, `count`, `for-in`, subcripting, `..<`, `minElement`, `indexOf`, `removeAtIndex`, `append`, and generics
 ///
 /// - parameter array: The `array` to be sorted
 ///
