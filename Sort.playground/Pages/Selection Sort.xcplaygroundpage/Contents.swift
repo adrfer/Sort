@@ -4,42 +4,12 @@
 //: # Selection Sort
 //: ----
 //:
-//: ### About
+//: ### Idea
 //:
-//: - Based on the idea that the input array is divided into two portions, one sorted and on unsorted
-//: - Initially, the sorted portion is empty, while the unsorted portion contains all the elements
-//: - Finds the smallest element in the unsorted portion and moves it to the end of the sorted portion of the array
-//: - Eventually, the unsorted portion becomes empty and the array sorted in-place
-//:
-//:
-//: ### Pseudocode
-//:
-//:    take in an array that is considered unsorted
-//:
-//:    return the array if empty or contains a single element
-//:
-//:    for i = 0 to n - 1
-//:
-//:      index of the smallest element = i
-//:
-//:      for j = i + 1 to n
-//:
-//:        if array[j] < array[index]
-//:
-//:          update index of the smallest element = j
-//:
-//:      if i != index
-//:
-//:        swap array[i] and array[index]
-//:
-//:    return sorted array
-//:
-//:
-//: ### Optimizations
-//:
-//: - Early return in case the input array is empty or contains a single element, for it is sorted
-//: - The number of passes through the array needed is the same as to the maximum number of swaps required
-//: - Swap only takes place when the smallest element is not already in its correct location
+//: - Split the input array in two portions, one sorted and one unsorted
+//: - Initially, the sorted portion is empty, while the unsorted one contains all the elements
+//: - Find the smallest element in the unsorted portion and move it to the end of the sorted portion
+//: - Eventually, the unsorted portion becomes empty and the array sorted
 //:
 //:
 //: ### Properties
@@ -53,54 +23,54 @@
 ///
 /// A die-hard style, rooted in tradition, in all its imperative glory
 ///
-/// This version showcases `if` early exit, old-fashioned `for`, and
-/// manual swapping
+/// This version showcases early exit `if`, `count`, `for-in`, `..<`, subcripting, and tuple swapping
 ///
-/// - parameter array: The `array` to be sorted in-place
+/// - parameter array: The `array` to be sorted
 ///
-/// - returns: The `array` with elements sorted in ascending order
+/// - returns: A new array with elements sorted in ascending order
 ///
 /// - todo: Remove code annotations
 
 func selectionSort_theClassic(array: [Int]) -> [Int] {
 
-    // takes in an array that is considered unsorted and makes it mutable so it can be sorted in-place
+    // take in an array that is considered unsorted and make a copy of it
     var array = array
 
-    // returns the array if it is empty or contains a single element, for it is sorted
+    // return the array if it is empty or contains a single element, for it is sorted
     if array.count <= 1 {
         return array
     }
 
-    // iterates through the elements of the unsorted portion of the array, except the last, which is considered sorted
-    for var i = 0; i < array.count - 1; i += 1 {
+    // pass through the array, but it needs only as many passes as the number of swaps required
+    for i in 0..<array.count - 1 {
         
-        // considers the first element of the unsorted portion to be the smallest
+        // consider the first element of the unsorted portion to be the smallest
         var indexOfTheSmallestElement = i
 
-        // iterates thorugh the unsorted portion to find the smallest unsorted element
-        for var j = i + 1; j < array.count; j += 1 {
+        // pass thorugh the unsorted portion to find the smallest unsorted element
+        for j in (indexOfTheSmallestElement + 1)..<array.count {
 
-            // compares the current element with the considered smallest element
+            // compare the current element to the considered smallest element
             if array[j] < array[indexOfTheSmallestElement] {
 
-                // remembers the current element as the new smallest one
+                // remember the current element as the new smallest one
                 indexOfTheSmallestElement = j
             }
         }
 
-        // checks if the smallest element is already in its correct location
+        // check if the smallest element is not already in its correct location
         if i != indexOfTheSmallestElement {
-            
-            // swaps the smallest element with the first unsorted element, thereby appending to the sorted portion
-            let temporary = array[indexOfTheSmallestElement]
-            array[indexOfTheSmallestElement] = array[i]
-            array[i] = temporary
+
+            // swap the smallest element with the first unsorted element, appending it to the sorted portion
+            (array[i], array[indexOfTheSmallestElement]) = (array[indexOfTheSmallestElement], array[i])
         }
     }
-    
+
+    // return sorted array
     return array
 }
+
+// Tests
 
 // Already Sorted
 assert(selectionSort_theClassic([Int]()).isSorted())
@@ -121,41 +91,39 @@ assert(selectionSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// A sligthly more modern take on the classic, but still not quite quaint enough
 ///
-/// This version showcases `guard`, `for-in`, and `swap`
+/// This version showcases `guard`, `count`, `for-in-where`, `..<`, subcripting,`continue`, and `swap`
 ///
-/// - parameter array: The `array` to be sorted in-place
+/// - parameter array: The `array` to be sorted
 ///
-/// - returns: The `array` with elements sorted in ascending order
+/// - returns: A new array with elements sorted in ascending order
 
 func selectionSort_theSwiftish(array: [Int]) -> [Int] {
 
     var array = array
-    
+
     guard array.count > 1 else {
         return array
     }
-    
+
     for i in 0..<array.count - 1 {
-        
-        var indexOfTheSmallestElement = i
-        
-        for j in (indexOfTheSmallestElement + 1)..<array.count {
-            
-            if array[j] < array[indexOfTheSmallestElement] {
-                indexOfTheSmallestElement = j
-            }
+
+        var indexOfMinElement = i
+
+        for j in (indexOfMinElement + 1)..<array.count where array[j] < array[indexOfMinElement] {
+            indexOfMinElement = j
         }
-        
-        guard i != indexOfTheSmallestElement else {
+
+        if i == indexOfMinElement {
             continue
         }
-        
-        swap(&array[i], &array[indexOfTheSmallestElement])
-        
+
+        swap(&array[i], &array[indexOfMinElement])
     }
     
     return array
 }
+
+// Tests
 
 // Already Sorted
 assert(selectionSort_theSwiftish([Int]()).isSorted())
@@ -176,11 +144,11 @@ assert(selectionSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// A nifty approach that attempts to tap into the most powerful language features yet
 ///
-/// This version showcases `guard`, `for-in-where`, nested function, and tuple swapping
+/// This version showcases `guard`, `count`, `for-in`, `..<`, array slicing, subcripting, `minElement`, `indexOf`, `removeAtIndex`, and `append`
 ///
-/// - parameter array: The `array` to be sorted in-place
+/// - parameter array: The `array` to be sorted
 ///
-/// - returns: The `array` with elements sorted in ascending order
+/// - returns: A new array with elements sorted in ascending order
 
 func selectionSort_theSwiftest(array: [Int]) -> [Int] {
 
@@ -190,30 +158,21 @@ func selectionSort_theSwiftest(array: [Int]) -> [Int] {
         return array
     }
 
-    func indexOfTheSmallestElement(startIndex index: Int) -> Int {
+    for index in 0..<array.count {
 
-        var indexOfTheSmallestElement = index
-        
-        for j in (indexOfTheSmallestElement + 1)..<array.count where array[j] < array[indexOfTheSmallestElement] {
-            indexOfTheSmallestElement = j
+        let newArray = array[0..<array.count - index]
+
+        if let minElement = newArray.minElement(), indexOfMinElement = newArray.indexOf(minElement) {
+
+            array.removeAtIndex(indexOfMinElement)
+            array.append(minElement)
         }
-
-        return indexOfTheSmallestElement
     }
     
-    for i in 0..<array.count - 1 {
-
-        let indexOfTheSmallestElement = indexOfTheSmallestElement(startIndex: i)
-        
-        guard i != indexOfTheSmallestElement else {
-            continue
-        }
-        
-        (array[i], array[indexOfTheSmallestElement]) = (array[indexOfTheSmallestElement], array[i])
-    }
-
     return array
 }
+
+// Tests
 
 // Already Sorted
 assert(selectionSort_theSwiftest([Int]()).isSorted())
@@ -234,12 +193,11 @@ assert(selectionSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// A play on the swiftest version, but elevated to a type-agnostic nirvana status
 ///
-/// This version showcases `guard`, `for-in-where`, nested function, tuple swapping,
-/// and generics
+/// This version showcases `guard`, `count`, `for-in`, `..<`, array slicing, subcripting, `minElement`, `indexOf`, `removeAtIndex`, `append`, and generics
 ///
-/// - parameter array: The `array` to be sorted in-place
+/// - parameter array: The `array` to be sorted
 ///
-/// - returns: The `array` with elements sorted in ascending order
+/// - returns: A new array with elements sorted in ascending order
 
 func selectionSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
 
@@ -248,31 +206,22 @@ func selectionSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
     guard array.count > 1 else {
         return array
     }
-    
-    func indexOfTheSmallestElement(startIndex index: Int) -> Int {
 
-        var indexOfTheSmallestElement = index
+    for index in 0..<array.count {
 
-        for j in (indexOfTheSmallestElement + 1)..<array.count where array[j] < array[indexOfTheSmallestElement] {
-            indexOfTheSmallestElement = j
+        let newArray = array[0..<array.count - index]
+
+        if let minElement = newArray.minElement(), indexOfMinElement = newArray.indexOf(minElement) {
+
+            array.removeAtIndex(indexOfMinElement)
+            array.append(minElement)
         }
-
-        return indexOfTheSmallestElement
-    }
-
-    for i in 0..<array.count - 1 {
-
-        let indexOfTheSmallestElement = indexOfTheSmallestElement(startIndex: i)
-
-        guard i != indexOfTheSmallestElement else {
-            continue
-        }
-
-        (array[i], array[indexOfTheSmallestElement]) = (array[indexOfTheSmallestElement], array[i])
     }
 
     return array
 }
+
+// Tests
 
 // Already Sorted
 assert(selectionSort_theGeneric([Int]()).isSorted())
