@@ -4,42 +4,13 @@
 //: # Insertion Sort
 //: ----
 //:
-//: ### About
+//: ### Idea
 //:
-//: - Based on the idea that the input array is divided into two portions, one sorted and on unsorted
-//: - Initially, the sorted portion is empty, while the unsorted portion contains all the elements
-//: - Each element from the unsorted portion is compared to sorted elements, until an insertion location is determined
-//: - Already sorted elements are shifted as necessary to make room for the unsorted element
-//: - One by one, unsorted elements are inserted into their appropriate positions in the sorted portion of the array
-//: - Eventually, the unsorted portion becomes empty and the array sorted in-place
-//:
-//:
-//: ### Pseudocode
-//:
-//:    take in an array that is considered unsorted
-//:
-//:    return the array if empty or contains a single element
-//:
-//:    for i = 1 to n
-//:
-//:      unsorted element = array[i]
-//:
-//:      insertion position j = i
-//:
-//:      while j > 0 and element < array[j - 1]
-//:
-//:        array[j] = array[j - 1]
-//:
-//:        j = j - 1
-//:
-//:      array[j] = element
-//:
-//:    return sorted array
-//:
-//:
-//: ### Optimizations
-//:
-//: - Early return in case the input array is empty or contains a single element, for it is sorted
+//: - Split the input array in two portions, one sorted and one unsorted
+//: - Initially, the sorted portion is empty, while the unsorted one contains all the elements
+//: - Find the apropriate insert position by comparing each element of the unsorted portion to sorted elements
+//: - Shift already sorted elements as necessary to make room for the next sorted element
+//: - Eventually, the unsorted portion becomes empty and the array sorted
 //:
 //:
 //: ### Properties
@@ -50,52 +21,54 @@
 //: - Online, as it can be used to sort an input array as it receives it
 //: - The best and worst case runtime are respectively of complexity _Ω(n)_ and _O(n²)_
 
-
 /// The Classic Algorithm
 ///
 /// A die-hard style, rooted in tradition, in all its imperative glory
 ///
-/// This version showcases `if` early exit, and old-fashioned `for` and `while` loops
+/// This version showcases early exit `if`, `count`, `for-in`, `..<`, `-=`, and subcripting
 ///
-/// - parameter array: The `array` to be sorted in-place
+/// - parameter array: The `array` to be sorted
 ///
-/// - returns: The `array` with elements sorted in ascending order
+/// - returns: A new array with elements sorted in ascending order
 ///
 /// - todo: Remove code annotations
 
 func insertionSort_theClassic(array: [Int]) -> [Int] {
 
-    // takes in an array that is considered unsorted and makes it mutable so it can be sorted in-place
+    // take in an array that is considered unsorted and make a copy of it
     var array = array
 
-    // returns the array if it is empty or contains a single element, for it is sorted
+    // return the array if it is empty or contains a single element, for it is sorted
     if array.count <= 1 {
         return array
     }
 
-    // iterates through the elements of the unsorted portion of the array, except the first, which is considered sorted
-    for var i = 1; i < array.count; i += 1 {
+    // pass through the elements of the unsorted portion, except the first which is considered sorted
+    for i in 1..<array.count {
 
-        // keeps track of the unsorted element
+        // keep track of the unsorted element
         let element = array[i]
         var j = i
 
-        // iterates through the sorted portion of the array to find the appropriate position to insert the unsorted element
+        // pass through the elements of the sorted portion to find the appropriate insert position
         while j > 0 && element < array [j - 1] {
 
-            // shifts each sorted element to make room for the unsorted element
+            // shift each sorted element to make room for the unsorted one
             array[j] = array[j - 1]
 
-            // updates the index where the unsorted element will be inserted
+            // update the index where the unsorted element will be inserted
             j -= 1
         }
 
-        // inserts the unsorted element into the sorted portion of the array
+        // insert the unsorted element into the sorted portion of the array
         array[j] = element
     }
 
+    // return sorted array
     return array
 }
+
+// Tests
 
 // Already Sorted
 assert(insertionSort_theClassic([Int]()).isSorted())
@@ -116,11 +89,11 @@ assert(insertionSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// A sligthly more modern take on the classic, but still not quite quaint enough
 ///
-/// This version showcases `guard`, `for-in`, and `swap`
+/// This version showcases `guard`, `count`, `for-in`, `..<`, `while`, `-=`, subcripting, and `swap`
 ///
-/// - parameter array: The `array` to be sorted in-place
+/// - parameter array: The `array` to be sorted
 ///
-/// - returns: The `array` with elements sorted in ascending order
+/// - returns: A new array with elements sorted in ascending order
 
 func insertionSort_theSwiftish(array: [Int]) -> [Int] {
 
@@ -131,9 +104,11 @@ func insertionSort_theSwiftish(array: [Int]) -> [Int] {
     }
 
     for i in 1..<array.count {
+
         var j = i
 
         while j > 0 && array[j] < array[j - 1] {
+
             swap(&array[j], &array[j - 1])
             j -= 1
         }
@@ -141,6 +116,8 @@ func insertionSort_theSwiftish(array: [Int]) -> [Int] {
     
     return array
 }
+
+// Tests
 
 // Already Sorted
 assert(insertionSort_theSwiftish([Int]()).isSorted())
@@ -161,12 +138,11 @@ assert(insertionSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// A nifty approach that attempts to tap into the most powerful language features yet
 ///
-/// This version showcases `guard`, `for-in`, and native methods from the standard
-/// library such as `removeAtIndex` and `insert`
+/// This version showcases `guard`, `count`, `for-in`, `..<`, `removeAtIndex`, subcripting, and `insert`
 ///
-/// - parameter array: The `array` to be sorted in-place
+/// - parameter array: The `array` to be sorted
 ///
-/// - returns: The `array` with elements sorted in ascending order
+/// - returns: A new array with elements sorted in ascending order
 
 func insertionSort_theSwiftest(array: [Int]) -> [Int] {
 
@@ -191,6 +167,8 @@ func insertionSort_theSwiftest(array: [Int]) -> [Int] {
     return array
 }
 
+// Tests
+
 // Already Sorted
 assert(insertionSort_theSwiftest([Int]()).isSorted())
 assert(insertionSort_theSwiftest([7]).isSorted())
@@ -210,12 +188,11 @@ assert(insertionSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// A play on the swiftest version, but elevated to a type-agnostic nirvana status
 ///
-/// This version showcases `guard`, `for-in`, native methods from the standard
-/// library such as `removeAtIndex` and `insert`, and generics
+/// This version showcases `guard`, `count`, `for-in`, `..<`, `removeAtIndex`, subcripting, `insert`, and generics
 ///
-/// - parameter array: The `array` to be sorted in-place
+/// - parameter array: The `array` to be sorted
 ///
-/// - returns: The `array` with elements sorted in ascending order
+/// - returns: A new array with elements sorted in ascending order
 
 func insertionSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
 
@@ -236,9 +213,11 @@ func insertionSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
 
         array.insert(element, atIndex: j)
     }
-
+    
     return array
 }
+
+// Tests
 
 // Already Sorted
 assert(insertionSort_theGeneric([Int]()).isSorted())
