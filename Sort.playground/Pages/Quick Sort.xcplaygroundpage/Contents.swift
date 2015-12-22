@@ -238,4 +238,51 @@ assert(quickSort_theGeneric(["a", "a", "b", "c", "d", "e"].reverse()).isSorted()
 assert(quickSort_theGeneric([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 assert(quickSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffle()).isSorted())
 
+
+/// The Functional Algorithm
+///
+/// A nifty approach that attempts to tap into the most powerful language features yet
+///
+/// This version showcases `guard`, `count`, tuple decomposition, `dropFirst`, `filter, and `+`
+///
+/// - parameter array: The `array` to be sorted
+///
+/// - returns: A new array with elements sorted in ascending order
+
+func quickSort_theFunctional(array: [Int]) -> [Int] {
+
+    guard array.count > 1 else {
+        return array
+    }
+
+    let (pivot, rest) = (array[0], array.dropFirst())
+
+    let lessThan = rest.filter {
+        $0 < pivot
+    }
+
+    let greaterThanOrEqual = rest.filter {
+        $0 >= pivot
+    }
+
+    return quickSort_theFunctional(lessThan) + [pivot] + quickSort_theFunctional(greaterThanOrEqual)
+}
+
+// Tests
+
+// Already Sorted
+assert(quickSort_theFunctional([Int]()).isSorted())
+assert(quickSort_theFunctional([7]).isSorted())
+assert(quickSort_theFunctional([1, 1, 2, 3, 5, 8, 13]).isSorted())
+
+// Nearly Sorted
+assert(quickSort_theFunctional([1, 2, 1, 3, 5, 13, 8]).isSorted())
+
+// Reversed
+assert(quickSort_theFunctional([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
+
+// Shuffled
+assert(quickSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
+
+
 //: [Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)
