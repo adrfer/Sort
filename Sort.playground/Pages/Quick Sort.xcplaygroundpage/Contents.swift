@@ -6,46 +6,15 @@
 //:
 //: ### About
 //:
-//: - Choose the pivot element of the array and rearrange all elements into three different partitions
-//: - Elements less than the pivot go to the first partition, elements equal go to the second, and elements greater than go to the third
-//: - Recursively sort each partition, except the partition where elements are equal to the pivot
-//: - Finally, join the first partition, the second, and the third partitions
-//:
-//:
-//: ### Pseudocode
-//:
-//:    take in an array that is considered unsorted
-//:
-//:    return the array if empty or contains a single element
-//:
-//:    pivot = pick any element of the array
-//:
-//:    less-than, equal, greater-than = empty partitions
-//:
-//:    for each element in array
-//:
-//:      if element < pivot then add element to less-than
-//:
-//:      else if element > pivot then add element to greater-than
-//:
-//:      else add element to equal
-//:
-//:    recursively sort both less-than and greater-than
-//:
-//:    join all partitions
-//:
-//:    return sorted array
-//:
-//:
-//: ### Optimizations
-//:
-//: - Not choose the pivot as the leftmost element of the partition, since it would cause worst-case behavior on already sorted arrays
-//: - With repeated elements, values equal to the pivot are considered already sorted, so only the less-than and greater-than partitions are recursively sorted
+//: - Rearrange all elements of the array in three partitions by choosing a pivot element
+//: - Elements less than the pivot go into the first partition, elements equal into the second, and elements greater than into the third
+//: - Sort each partition recursively, except the one where elements are equal to the pivot
+//: - Join all partitions, the first partition, the second, and the third respectively
 //:
 //:
 //: ### Properties
 //:
-//: - It is a divide and conquer technique, so computation can parallelized
+//: - Is a divide and conquer algorithm, so computation can parallelized
 //: - Not simple, both concept and implementation are relatively complex
 //: - Not adaptative, as it does not benefit from the presortedness in the input array
 //: - Not stable, as it doe not preserve the relative order of elements of the input array
@@ -55,11 +24,11 @@
 ///
 /// A die-hard style, rooted in tradition, in all its imperative glory
 ///
-/// This version showcases `if` early exit, and old-fashioned `for`
+/// This version showcases early exit `if`, `count`, `pick`, `for-in`, `..<`, subcripting, `append`tuple swapping, and `break`
 ///
 /// - parameter array: The `array` to be sorted
 ///
-/// - returns: The `array` with elements sorted in ascending order
+/// - returns: A new array with elements sorted in ascending order
 ///
 /// - todo: Remove code annotations
 
@@ -71,25 +40,36 @@ func quickSort_theClassic(array: [Int]) -> [Int] {
     }
 
     // pick the pivot element randomly
-    let pivot = array.sample()
+    let pivot = array.pick()
 
-    // partition the array
-    var lessThan = [Int](), equal = [Int](), greaterThan = [Int]()
+    // define the partitions soon to be populated
+    var lessThan: [Int] = [], equal: [Int] = [], greaterThan: [Int] = []
 
-    for var i = 0; i < array.count - 1; i += 1 {
+    // pass through the array rearranging all elements into their corresponding partitions
+    for i in 0..<array.count {
 
+        // append to the less-than partition elements smaller than the pivot
         if array[i] < pivot {
+
             lessThan.append(array[i])
+
+        // append to the greater-than partition elements larger than the pivot
         } else if array[i] > pivot {
+
             greaterThan.append(array[i])
+
+        // append to the equal partition elements equal to the pivot
         } else {
+
             equal.append(array[i])
         }
     }
 
-    // recursively sort and join the partittions
+    // sort recursively all partitions but the equal one, and join all of them in the end
     return quickSort_theClassic(lessThan) + equal + quickSort_theClassic(greaterThan)
 }
+
+// Tests
 
 // Already Sorted
 assert(quickSort_theClassic([Int]()).isSorted())
@@ -110,11 +90,11 @@ assert(quickSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// A sligthly more modern take on the classic, but still not quite quaint enough
 ///
-/// This version showcases `guard`, `for-in`, and `switch`
+/// This version showcases `guard`, `count`, `pick`, `for-in`, `switch`, `+=`, and `+`
 ///
 /// - parameter array: The `array` to be sorted
 ///
-/// - returns: The `array` with elements sorted in ascending order
+/// - returns: A new array with elements sorted in ascending order
 
 func quickSort_theSwiftish(array: [Int]) -> [Int] {
 
@@ -122,24 +102,24 @@ func quickSort_theSwiftish(array: [Int]) -> [Int] {
         return array
     }
 
-    let pivot = array.sample()
+    let pivot = array.pick()
     
-    var lessThan = [Int](), equal = [Int](), greaterThan = [Int]()
+    var lessThan: [Int] = [], equal: [Int] = [], greaterThan: [Int] = []
 
     for element in array {
 
         switch element {
-        case let element where element < pivot:
-            lessThan.append(element)
-        case let element where element > pivot:
-            greaterThan.append(element)
-        default:
-            equal.append(element)
+        case let element where element < pivot: lessThan += [element]
+        case let element where element > pivot: greaterThan += [element]
+        default: equal += [element]
+
         }
     }
 
     return quickSort_theSwiftish(lessThan) + equal + quickSort_theSwiftish(greaterThan)
 }
+
+// Tests
 
 // Already Sorted
 assert(quickSort_theSwiftish([Int]()).isSorted())
@@ -160,31 +140,34 @@ assert(quickSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// A nifty approach that attempts to tap into the most powerful language features yet
 ///
-/// This version showcases `guard`, native methods from the standard library such
-/// as `filter`, `+`, `first`, `dropFirst`, and tuple decomposition
+/// This version showcases `guard`, `count`, `removeFirst`, `filter, and `+`
 ///
 /// - parameter array: The `array` to be sorted
 ///
-/// - returns: The `array` with elements sorted in ascending order
+/// - returns: A new array with elements sorted in ascending order
 
 func quickSort_theSwiftest(array: [Int]) -> [Int] {
+
+    var array = array
 
     guard array.count > 1 else {
         return array
     }
 
-    let (pivot, rest) = (array[0], array.dropFirst())
+    let pivot = array.removeFirst()
 
-    let lessThanOrEqual = rest.filter {
-        $0 <= pivot
+    let lessThan = array.filter {
+        $0 < pivot
     }
 
-    let greaterThan = rest.filter {
-        $0 > pivot
+    let greaterThanOrEqual = array.filter {
+        $0 >= pivot
     }
 
-    return quickSort_theSwiftest(lessThanOrEqual) + [pivot] + quickSort_theSwiftest(greaterThan)
+    return quickSort_theSwiftest(lessThan) + [pivot] + quickSort_theSwiftest(greaterThanOrEqual)
 }
+
+// Tests
 
 // Already Sorted
 assert(quickSort_theSwiftest([Int]()).isSorted())
@@ -205,31 +188,34 @@ assert(quickSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// A play on the swiftest version, but elevated to a type-agnostic nirvana status
 ///
-/// This version showcases `guard`, native methods from the standard library such
-/// as `filter`, `+`, `first`, `dropFirst`, tuple decomposition, and generics
+/// This version showcases `guard`, `count`, `removeFirst`, `filter, and `+`, and generics
 ///
 /// - parameter array: The `array` to be sorted
 ///
-/// - returns: The `array` with elements sorted in ascending order
+/// - returns: A new array with elements sorted in ascending order
 
 func quickSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
+
+    var array = array
 
     guard array.count > 1 else {
         return array
     }
 
-    let (pivot, rest) = (array[0], array.dropFirst())
+    let pivot = array.removeFirst()
 
-    let lessThanOrEqual = rest.filter {
-        $0 <= pivot
+    let lessThan = array.filter {
+        $0 < pivot
     }
 
-    let greaterThan = rest.filter {
-        $0 > pivot
+    let greaterThanOrEqual = array.filter {
+        $0 >= pivot
     }
 
-    return quickSort_theGeneric(lessThanOrEqual) + [pivot] + quickSort_theGeneric(greaterThan)
+    return quickSort_theGeneric(lessThan) + [pivot] + quickSort_theGeneric(greaterThanOrEqual)
 }
+
+// Tests
 
 // Already Sorted
 assert(quickSort_theGeneric([Int]()).isSorted())
