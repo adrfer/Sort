@@ -237,4 +237,58 @@ assert(bubbleSort_theGeneric(["a", "a", "b", "c", "d", "e"].reverse()).isSorted(
 assert(bubbleSort_theGeneric([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 assert(bubbleSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffle()).isSorted())
 
+
+/// The Functional Algorithm
+///
+/// A quirky take that unleashes some of the neat declarative aspects of the language
+///
+/// This version showcases `guard`, `count`, nested function, tuple decomposition, subscripting, `dropFirst`, `min`, `max`, and `?:`
+///
+/// - parameter array: The `array` to be sorted
+///
+/// - returns: A new array with elements sorted in ascending order
+
+func bubbleSort_theFunctional(array: [Int]) -> [Int] {
+
+    func isSorted(array: [Int]) -> Bool {
+
+        guard array.count > 1 else {
+            return true
+        }
+
+        let (first, second, rest) = (array[0], array[1], array.dropFirst())
+
+        return first <= second ? isSorted(Array(rest)) : false
+    }
+
+    func bubble(array: [Int]) -> [Int] {
+
+        guard array.count > 1 else {
+            return array
+        }
+
+        let (first, second, rest) = (array[0], array[1], Array(array.dropFirst(2)))
+
+        return [min(first, second)] + bubble([max(first, second)] + rest)
+    }
+
+    return isSorted(array) ? array : bubbleSort_theFunctional(bubble(array))
+}
+
+// Tests
+
+// Already Sorted
+assert(bubbleSort_theFunctional([Int]()).isSorted())
+assert(bubbleSort_theFunctional([7]).isSorted())
+assert(bubbleSort_theFunctional([1, 1, 2, 3, 5, 8, 13]).isSorted())
+
+// Nearly Sorted
+assert(bubbleSort_theFunctional([1, 2, 1, 3, 5, 13, 8]).isSorted())
+
+// Reversed
+assert(bubbleSort_theFunctional([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
+
+// Shuffled
+assert(bubbleSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
+
 //: [Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)
