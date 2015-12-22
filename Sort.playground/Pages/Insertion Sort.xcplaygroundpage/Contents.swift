@@ -240,4 +240,53 @@ assert(insertionSort_theGeneric(["a", "a", "b", "c", "d", "e"].reverse()).isSort
 assert(insertionSort_theGeneric([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 assert(insertionSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffle()).isSorted())
 
+
+/// The Functional Algorithm
+///
+/// A quirky take that unleashes some of the neat declarative aspects of the language
+///
+/// This version showcases `guard`, `count`, nested function, tuple decomposition, `isEmpty`, `dropFirst`, `+`, and `?:`
+///
+/// - parameter array: The `array` to be sorted
+///
+/// - returns: A new array with elements sorted in ascending order
+
+func insertionSort_theFunctional(array: [Int]) -> [Int] {
+
+    guard array.count > 1 else {
+        return array
+    }
+
+    func insert(first: Int, _ rest: [Int]) -> [Int] {
+
+        guard !rest.isEmpty else {
+            return [first]
+        }
+
+        let (newFirst, newRest) = (rest[0], Array(rest.dropFirst()))
+
+        return first < newFirst ? [first, newFirst] + newRest : [newFirst] + insert(first, newRest)
+    }
+
+    let (first, rest) = (array[0], Array(array.dropFirst()))
+
+    return insert(first, insertionSort_theFunctional(rest))
+}
+
+// Tests
+
+// Already Sorted
+assert(insertionSort_theFunctional([Int]()).isSorted())
+assert(insertionSort_theFunctional([7]).isSorted())
+assert(insertionSort_theFunctional([1, 1, 2, 3, 5, 8, 13]).isSorted())
+
+// Nearly Sorted
+assert(insertionSort_theFunctional([1, 2, 1, 3, 5, 13, 8]).isSorted())
+
+// Reversed
+assert(insertionSort_theFunctional([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
+
+// Shuffled
+assert(insertionSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
+
 //: [Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)
