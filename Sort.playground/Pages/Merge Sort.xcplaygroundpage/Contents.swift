@@ -312,4 +312,62 @@ assert(mergeSort_theGeneric(["a", "a", "b", "c", "d", "e"].reverse()).isSorted()
 assert(mergeSort_theGeneric([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 assert(mergeSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffle()).isSorted())
 
+
+/// The Functional Algorithm
+///
+/// A quirky take that unleashes some of the neat declarative aspects of the language
+///
+/// This version showcases `guard`, `count`, nested function, `isEmpty`, `..<`, subscripting, and `+`
+///
+/// - parameter array: The `array` to be sorted
+///
+/// - returns: A new array with elements sorted in ascending order
+
+func mergerSort_theFunctional(array: [Int]) -> [Int] {
+
+    guard array.count > 1 else {
+        return array
+    }
+
+    func merge(left: [Int], _ right: [Int]) -> [Int] {
+
+        guard !left.isEmpty else {
+            return right
+        }
+
+        guard !right.isEmpty else {
+            return left
+        }
+
+        if left[0] < right[0] {
+            return [left[0]] + merge(Array(left[1..<left.count]), right)
+        } else {
+            return [right[0]] + merge(left, Array(right[1..<right.count]))
+        }
+    }
+
+    let pivot = array.count / 2
+
+    let left = mergerSort_theSwiftest(Array(array[0..<pivot]))
+    let right = mergerSort_theSwiftest(Array(array[pivot..<array.count]))
+
+    return merge(left, right)
+}
+
+// Tests
+
+// Already Sorted
+assert(mergerSort_theFunctional([Int]()).isSorted())
+assert(mergerSort_theFunctional([7]).isSorted())
+assert(mergerSort_theFunctional([1, 1, 2, 3, 5, 8, 13]).isSorted())
+
+// Nearly Sorted
+assert(mergerSort_theFunctional([1, 2, 1, 3, 5, 13, 8]).isSorted())
+
+// Reversed
+assert(mergerSort_theFunctional([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
+
+// Shuffled
+assert(mergerSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
+
 //: [Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)
