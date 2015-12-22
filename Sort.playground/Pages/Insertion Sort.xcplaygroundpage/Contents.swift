@@ -4,7 +4,7 @@
 //: # Insertion Sort
 //: ----
 //:
-//: ### Idea
+//: ### About
 //:
 //: - Split the input array in two portions, one sorted and one unsorted
 //: - Initially, the sorted portion is empty, while the unsorted one contains all the elements

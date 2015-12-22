@@ -4,7 +4,7 @@
 //: # Bubble Sort
 //: ----
 //:
-//: ### Idea
+//: ### About
 //:
 //: - Pass through the array repeatedly comparing each pair of adjacent elements
 //: - At each pass, swap these elements if they happen to be in the wrong order

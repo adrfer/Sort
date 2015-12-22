@@ -4,7 +4,7 @@
 //: # Merge Sort
 //: ----
 //:
-//: ### Idea
+//: ### About
 //:
 //: - Recursively split the input array in two halves
 //: - Sort the elements of both halves of the array
