@@ -244,4 +244,46 @@ assert(selectionSort_theGeneric(["a", "a", "b", "c", "d", "e"].reverse()).isSort
 assert(selectionSort_theGeneric([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 assert(selectionSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffle()).isSorted())
 
+
+/// The Functional Algorithm
+///
+/// A quirky take that unleashes some of the neat declarative aspects of the language
+///
+/// This version showcases `guard`, `count`, `minElement`, `indexOf`, `filter`, and `+`
+///
+/// - parameter array: The `array` to be sorted
+///
+/// - returns: A new array with elements sorted in ascending order
+
+func selectionSort_theFunctional(array: [Int]) -> [Int] {
+
+    guard array.count > 1, let minElement = array.minElement() else {
+        return array
+    }
+
+    let indexOfMinElement = array.indexOf(minElement)
+
+    let rest = array.filter { element in
+        indexOfMinElement != array.indexOf(element)
+    }
+
+    return [minElement] + selectionSort_theFunctional(rest)
+}
+
+// Tests
+
+// Already Sorted
+assert(selectionSort_theFunctional([Int]()).isSorted())
+assert(selectionSort_theFunctional([7]).isSorted())
+assert(selectionSort_theFunctional([1, 1, 2, 3, 5, 8, 13]).isSorted())
+
+// Nearly Sorted
+assert(selectionSort_theFunctional([1, 2, 1, 3, 5, 13, 8]).isSorted())
+
+// Reversed
+assert(selectionSort_theFunctional([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
+
+// Shuffled
+assert(selectionSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
+
 //: [Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)
