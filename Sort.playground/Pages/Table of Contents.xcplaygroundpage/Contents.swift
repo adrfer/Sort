@@ -16,6 +16,7 @@
 //: - The Swift-ish, a sligthly more modern take on the classic, but still not quite quaint enough
 //: - The Swiftest, a nifty approach that attempts to tap into the most powerful language features yet
 //: - The Generic, a play on the swiftest version, but elevated to a type-agnostic nirvana status
+//: - The Functional, a quirky take that unleashes some of the neat declarative aspects of the language
 //:
 //: Also, a few test cases covering some initial conditions were added:
 //:
