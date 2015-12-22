@@ -241,7 +241,7 @@ assert(quickSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffle()).isSorted()
 
 /// The Functional Algorithm
 ///
-/// A nifty approach that attempts to tap into the most powerful language features yet
+/// A quirky take that unleashes some of the neat declarative aspects of the language
 ///
 /// This version showcases `guard`, `count`, tuple decomposition, `dropFirst`, `filter, and `+`
 ///
