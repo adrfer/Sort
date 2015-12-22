@@ -30,8 +30,9 @@ Also, a few test cases covering some initial conditions were added:
 
 I know, I know... Talk is cheap, show me the code, right?
 
-Okey-dokey, so let's dive in and enjoy the ride!
+Okey-dokey, let's dive in and enjoy the ride!
 
+--
 ### Table of Contents
 
 - [Bubble Sort](https://github.com/adrfer/Sort/blob/master/Sort.playground/Pages/Bubble%20Sort.xcplaygroundpage/Contents.swift)
@@ -39,6 +40,15 @@ Okey-dokey, so let's dive in and enjoy the ride!
 - [Merge Sort](https://github.com/adrfer/Sort/blob/master/Sort.playground/Pages/Merge%20Sort.xcplaygroundpage/Contents.swift)
 - [Quick Sort](https://github.com/adrfer/Sort/blob/master/Sort.playground/Pages/Quick%20Sort.xcplaygroundpage/Contents.swift)
 - [Selection Sort](https://github.com/adrfer/Sort/blob/master/Sort.playground/Pages/Selection%20Sort.xcplaygroundpage/Contents.swift)
+
+--
+##### What's Next
+
+Here are some future ideas yet to be considered:
+
+- Review and/or include a version that takes a closure/predicate, similar to `sort` from the [Swift Standard Library](https://developer.apple.com/library/ios//documentation/Swift/Reference/Swift_MutableCollectionType_Protocol/index.html#//apple_ref/swift/intfm/MutableCollectionType/s:FeRq_Ss21MutableCollectionTypeqq_Ss16MutableIndexable5IndexSs21RandomAccessIndexType_SsS_9partitionuRq_S_qq_S0_5IndexS1__FRq_FTGVSs5Rangeqq_S0_5Index_15isOrderedBeforeFTqqq_Ss14CollectionType9GeneratorSs13GeneratorType7Elementqqq_S3_9GeneratorS4_7Element_Sb_qq_S0_5Index)
+- Refactor tests into its own playground page, if possible
+- Implement Heap Sort and Shell Sort algorithms
 
 --
 Feel free to [ping me](https://twitter.com/_adrfer) on Twitter.
