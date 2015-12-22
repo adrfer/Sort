@@ -242,7 +242,7 @@ assert(bubbleSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffle()).isSorted(
 ///
 /// A quirky take that unleashes some of the neat declarative aspects of the language
 ///
-/// This version showcases `guard`, `count`, nested function, tuple decomposition, subscripting, `dropFirst`, `min`, `max`, and `?:`
+/// This version showcases `guard`, `count`, nested function, tuple decomposition, subscripting, `dropFirst`, `min`, `max`, `+`, and `?:`
 ///
 /// - parameter array: The `array` to be sorted
 ///
