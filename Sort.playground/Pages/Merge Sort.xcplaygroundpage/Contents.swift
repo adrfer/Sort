@@ -195,11 +195,7 @@ func mergerSort_theSwiftest(array: [Int]) -> [Int] {
 
         while !left.isEmpty && !right.isEmpty {
 
-            if left[0] < right[0] {
-                merged += [left.removeFirst()]
-            } else {
-                merged += [right.removeFirst()]
-            }
+            merged += left[0] < right[0] ? [left.removeFirst()] : [right.removeFirst()]
         }
 
         if !left.isEmpty {
@@ -242,7 +238,7 @@ assert(mergerSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// A play on the swiftest version, but elevated to a type-agnostic nirvana status
 ///
-/// This version showcases `guard`, `count`, nested function, `while`, `isEmpty`, subcripting, `+=`, `removeFirst`, and generics
+/// This version showcases `guard`, `count`, nested function, `while`, `isEmpty`, `+=`, subcripting, `+=`, `removeFirst`, and generics
 ///
 /// - parameter array: The `array` to be sorted
 ///
@@ -263,11 +259,7 @@ func mergeSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
 
         while !left.isEmpty && !right.isEmpty {
 
-            if left[0] < right[0] {
-                merged += [left.removeFirst()]
-            } else {
-                merged += [right.removeFirst()]
-            }
+            merged += left[0] < right[0] ? [left.removeFirst()] : [right.removeFirst()]
         }
 
         if !left.isEmpty {
