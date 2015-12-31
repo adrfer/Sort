@@ -241,6 +241,75 @@ assert(insertionSort_theGeneric([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 assert(insertionSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffle()).isSorted())
 
 
+/// The Generic Algorithm w/ a Predicate
+///
+/// A tuned generic version that takes a strict weak ordering closure/predicate
+///
+/// This version showcases `guard`, `count`, `for-in`, `..<`, `removeAtIndex`, subcripting, `insert`, `@noescape`, and generics
+///
+/// - parameter array: The `array` to be sorted
+///
+/// - returns: A new array with elements sorted in `isOrderedBefore` order
+
+func insertionSort_withPredicate<T>(array: [T], @noescape isOrderedBefore: (T, T) -> Bool) -> [T] {
+
+    var array = array
+
+    guard array.count > 1 else {
+        return array
+    }
+
+    for i in 1..<array.count {
+
+        let element = array.removeAtIndex(i)
+        var j = i
+
+        while j > 0 && isOrderedBefore(element, array[j - 1]) {
+            j -= 1
+        }
+
+        array.insert(element, atIndex: j)
+    }
+
+    return array
+}
+
+// Tests
+
+// Already Sorted
+assert(insertionSort_withPredicate([Int](), isOrderedBefore: <).isSorted())
+assert(insertionSort_withPredicate([Int](), isOrderedBefore: >).isSorted(>=))
+assert(insertionSort_withPredicate([7], isOrderedBefore: <).isSorted())
+assert(insertionSort_withPredicate([7], isOrderedBefore: >).isSorted(>=))
+assert(insertionSort_withPredicate([1, 1, 2, 3, 5, 8, 13], isOrderedBefore: <).isSorted())
+assert(insertionSort_withPredicate([1, 1, 2, 3, 5, 8, 13], isOrderedBefore: >).isSorted(>=))
+
+assert(insertionSort_withPredicate([String](), isOrderedBefore: <).isSorted())
+assert(insertionSort_withPredicate([String](), isOrderedBefore: >).isSorted(>=))
+assert(insertionSort_withPredicate(["a"], isOrderedBefore: <).isSorted())
+assert(insertionSort_withPredicate(["a"], isOrderedBefore: >).isSorted(>=))
+assert(insertionSort_withPredicate(["a", "a", "b", "c", "d", "e"], isOrderedBefore: <).isSorted())
+assert(insertionSort_withPredicate(["a", "a", "b", "c", "d", "e"], isOrderedBefore: >).isSorted(>=))
+
+// Nearly Sorted
+assert(insertionSort_withPredicate([1, 2, 1, 3, 5, 13, 8], isOrderedBefore: <).isSorted())
+assert(insertionSort_withPredicate([1, 2, 1, 3, 5, 13, 8], isOrderedBefore: >).isSorted(>=))
+assert(insertionSort_withPredicate(["a", "b", "a", "c", "e", "d"], isOrderedBefore: <).isSorted())
+assert(insertionSort_withPredicate(["a", "b", "a", "c", "e", "d"], isOrderedBefore: >).isSorted(>=))
+
+// Reversed
+assert(insertionSort_withPredicate([1, 1, 2, 3, 5, 8, 13].reverse(), isOrderedBefore: <).isSorted())
+assert(insertionSort_withPredicate([1, 1, 2, 3, 5, 8, 13].reverse(), isOrderedBefore: >).isSorted(>=))
+assert(insertionSort_withPredicate(["a", "a", "b", "c", "d", "e"].reverse(), isOrderedBefore: <).isSorted())
+assert(insertionSort_withPredicate(["a", "a", "b", "c", "d", "e"].reverse(), isOrderedBefore: >).isSorted(>=))
+
+// Shuffled
+assert(insertionSort_withPredicate([1, 1, 2, 3, 5, 8, 13].shuffle(), isOrderedBefore: <).isSorted())
+assert(insertionSort_withPredicate([1, 1, 2, 3, 5, 8, 13].shuffle(), isOrderedBefore: >).isSorted(>=))
+assert(insertionSort_withPredicate(["a", "a", "b", "c", "d", "e"].shuffle(), isOrderedBefore: <).isSorted())
+assert(insertionSort_withPredicate(["a", "a", "b", "c", "d", "e"].shuffle(), isOrderedBefore: >).isSorted(>=))
+
+
 /// The Functional Algorithm
 ///
 /// A quirky take that unleashes some of the neat declarative aspects of the language
