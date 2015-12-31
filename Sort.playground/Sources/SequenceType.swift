@@ -28,7 +28,11 @@ public extension SequenceType {
 
 public extension SequenceType where Generator.Element: Comparable {
     
-    /// Checks if sequence is sorted in ascending order
+    /// Checks by default if sequence is sorted in ascending order
+    ///
+    /// - remark: The `<=` predicate accounts for reapeated values
+    ///
+    /// - note: To sort in descending order use `isSorted(>=)` instead
     ///
     /// - returns: True if sequence is sorted, false otherwise
     
