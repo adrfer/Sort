@@ -244,7 +244,6 @@ assert(selectionSort_theGeneric(["a", "a", "b", "c", "d", "e"].reverse()).isSort
 assert(selectionSort_theGeneric([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 assert(selectionSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffle()).isSorted())
 
-
 /// The Functional Algorithm
 ///
 /// A quirky take that unleashes some of the neat declarative aspects of the language
@@ -285,5 +284,80 @@ assert(selectionSort_theFunctional([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
 
 // Shuffled
 assert(selectionSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
+
+
+/// The Bonus Version
+///
+/// A generic version based on The Swift-ish Algorithm that takes a strict weak ordering closure/predicate
+///
+/// This version showcases `guard`, `count`, `for-in-where`, `..<`, subcripting,`continue`, `swap`,`@noescape`, and generics
+///
+/// - parameters:
+///
+///   - array: The `array` to be sorted
+///   - isOrderedBefore: The predicate used to establish the order of the elements
+///
+/// - returns: A new array with elements sorted based on the `isOrderedBefore` predicate
+
+func selectionSort_withPredicate<T>(array: [T], @noescape isOrderedBefore: (T, T) -> Bool) -> [T] {
+
+    var array = array
+
+    guard array.count > 1 else {
+        return array
+    }
+
+    for i in 0..<array.count - 1 {
+
+        var indexOfMinElement = i
+
+        for j in (indexOfMinElement + 1)..<array.count where isOrderedBefore(array[j], array[indexOfMinElement]) {
+            indexOfMinElement = j
+        }
+
+        if i == indexOfMinElement {
+            continue
+        }
+
+        swap(&array[i], &array[indexOfMinElement])
+    }
+
+    return array
+}
+
+// Tests
+
+// Already Sorted
+assert(selectionSort_withPredicate([Int](), isOrderedBefore: <).isSorted())
+assert(selectionSort_withPredicate([Int](), isOrderedBefore: >).isSorted(>=))
+assert(selectionSort_withPredicate([7], isOrderedBefore: <).isSorted())
+assert(selectionSort_withPredicate([7], isOrderedBefore: >).isSorted(>=))
+assert(selectionSort_withPredicate([1, 1, 2, 3, 5, 8, 13], isOrderedBefore: <).isSorted())
+assert(selectionSort_withPredicate([1, 1, 2, 3, 5, 8, 13], isOrderedBefore: >).isSorted(>=))
+
+assert(selectionSort_withPredicate([String](), isOrderedBefore: <).isSorted())
+assert(selectionSort_withPredicate([String](), isOrderedBefore: >).isSorted(>=))
+assert(selectionSort_withPredicate(["a"], isOrderedBefore: <).isSorted())
+assert(selectionSort_withPredicate(["a"], isOrderedBefore: >).isSorted(>=))
+assert(selectionSort_withPredicate(["a", "a", "b", "c", "d", "e"], isOrderedBefore: <).isSorted())
+assert(selectionSort_withPredicate(["a", "a", "b", "c", "d", "e"], isOrderedBefore: >).isSorted(>=))
+
+// Nearly Sorted
+assert(selectionSort_withPredicate([1, 2, 1, 3, 5, 13, 8], isOrderedBefore: <).isSorted())
+assert(selectionSort_withPredicate([1, 2, 1, 3, 5, 13, 8], isOrderedBefore: >).isSorted(>=))
+assert(selectionSort_withPredicate(["a", "b", "a", "c", "e", "d"], isOrderedBefore: <).isSorted())
+assert(selectionSort_withPredicate(["a", "b", "a", "c", "e", "d"], isOrderedBefore: >).isSorted(>=))
+
+// Reversed
+assert(selectionSort_withPredicate([1, 1, 2, 3, 5, 8, 13].reverse(), isOrderedBefore: <).isSorted())
+assert(selectionSort_withPredicate([1, 1, 2, 3, 5, 8, 13].reverse(), isOrderedBefore: >).isSorted(>=))
+assert(selectionSort_withPredicate(["a", "a", "b", "c", "d", "e"].reverse(), isOrderedBefore: <).isSorted())
+assert(selectionSort_withPredicate(["a", "a", "b", "c", "d", "e"].reverse(), isOrderedBefore: >).isSorted(>=))
+
+// Shuffled
+assert(selectionSort_withPredicate([1, 1, 2, 3, 5, 8, 13].shuffle(), isOrderedBefore: <).isSorted())
+assert(selectionSort_withPredicate([1, 1, 2, 3, 5, 8, 13].shuffle(), isOrderedBefore: >).isSorted(>=))
+assert(selectionSort_withPredicate(["a", "a", "b", "c", "d", "e"].shuffle(), isOrderedBefore: <).isSorted())
+assert(selectionSort_withPredicate(["a", "a", "b", "c", "d", "e"].shuffle(), isOrderedBefore: >).isSorted(>=))
 
 //: [Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)
