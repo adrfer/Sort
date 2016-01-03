@@ -292,7 +292,7 @@ assert(bubbleSort_theFunctional([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
 assert(bubbleSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 
 
-/// The Bonus Version
+/// The Bonus Algorithm
 ///
 /// A generic version based on The Swift-ish Algorithm that takes a strict weak ordering closure/predicate
 ///
