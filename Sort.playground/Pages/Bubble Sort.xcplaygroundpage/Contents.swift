@@ -237,6 +237,7 @@ assert(bubbleSort_theGeneric(["a", "a", "b", "c", "d", "e"].reverse()).isSorted(
 assert(bubbleSort_theGeneric([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 assert(bubbleSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffle()).isSorted())
 
+
 /// The Functional Algorithm
 ///
 /// A quirky take that unleashes some of the neat declarative aspects of the language
@@ -304,7 +305,7 @@ assert(bubbleSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// - returns: A new array with elements sorted based on the `isOrderedBefore` predicate
 
-func bubbleSort_withPredicate<T>(array: [T], @noescape isOrderedBefore: (T, T) -> Bool) -> [T] {
+func bubbleSort_theBonus<T>(array: [T], @noescape isOrderedBefore: (T, T) -> Bool) -> [T] {
 
     var array = array
 
@@ -334,36 +335,36 @@ func bubbleSort_withPredicate<T>(array: [T], @noescape isOrderedBefore: (T, T) -
 // Tests
 
 // Already Sorted
-assert(bubbleSort_withPredicate([Int](), isOrderedBefore: <).isSorted())
-assert(bubbleSort_withPredicate([Int](), isOrderedBefore: >).isSorted(>=))
-assert(bubbleSort_withPredicate([7], isOrderedBefore: <).isSorted())
-assert(bubbleSort_withPredicate([7], isOrderedBefore: >).isSorted(>=))
-assert(bubbleSort_withPredicate([1, 1, 2, 3, 5, 8, 13], isOrderedBefore: <).isSorted())
-assert(bubbleSort_withPredicate([1, 1, 2, 3, 5, 8, 13], isOrderedBefore: >).isSorted(>=))
+assert(bubbleSort_theBonus([Int](), isOrderedBefore: <).isSorted())
+assert(bubbleSort_theBonus([Int](), isOrderedBefore: >).isSorted(>=))
+assert(bubbleSort_theBonus([7], isOrderedBefore: <).isSorted())
+assert(bubbleSort_theBonus([7], isOrderedBefore: >).isSorted(>=))
+assert(bubbleSort_theBonus([1, 1, 2, 3, 5, 8, 13], isOrderedBefore: <).isSorted())
+assert(bubbleSort_theBonus([1, 1, 2, 3, 5, 8, 13], isOrderedBefore: >).isSorted(>=))
 
-assert(bubbleSort_withPredicate([String](), isOrderedBefore: <).isSorted())
-assert(bubbleSort_withPredicate([String](), isOrderedBefore: >).isSorted(>=))
-assert(bubbleSort_withPredicate(["a"], isOrderedBefore: <).isSorted())
-assert(bubbleSort_withPredicate(["a"], isOrderedBefore: >).isSorted(>=))
-assert(bubbleSort_withPredicate(["a", "a", "b", "c", "d", "e"], isOrderedBefore: <).isSorted())
-assert(bubbleSort_withPredicate(["a", "a", "b", "c", "d", "e"], isOrderedBefore: >).isSorted(>=))
+assert(bubbleSort_theBonus([String](), isOrderedBefore: <).isSorted())
+assert(bubbleSort_theBonus([String](), isOrderedBefore: >).isSorted(>=))
+assert(bubbleSort_theBonus(["a"], isOrderedBefore: <).isSorted())
+assert(bubbleSort_theBonus(["a"], isOrderedBefore: >).isSorted(>=))
+assert(bubbleSort_theBonus(["a", "a", "b", "c", "d", "e"], isOrderedBefore: <).isSorted())
+assert(bubbleSort_theBonus(["a", "a", "b", "c", "d", "e"], isOrderedBefore: >).isSorted(>=))
 
 // Nearly Sorted
-assert(bubbleSort_withPredicate([1, 2, 1, 3, 5, 13, 8], isOrderedBefore: <).isSorted())
-assert(bubbleSort_withPredicate([1, 2, 1, 3, 5, 13, 8], isOrderedBefore: >).isSorted(>=))
-assert(bubbleSort_withPredicate(["a", "b", "a", "c", "e", "d"], isOrderedBefore: <).isSorted())
-assert(bubbleSort_withPredicate(["a", "b", "a", "c", "e", "d"], isOrderedBefore: >).isSorted(>=))
+assert(bubbleSort_theBonus([1, 2, 1, 3, 5, 13, 8], isOrderedBefore: <).isSorted())
+assert(bubbleSort_theBonus([1, 2, 1, 3, 5, 13, 8], isOrderedBefore: >).isSorted(>=))
+assert(bubbleSort_theBonus(["a", "b", "a", "c", "e", "d"], isOrderedBefore: <).isSorted())
+assert(bubbleSort_theBonus(["a", "b", "a", "c", "e", "d"], isOrderedBefore: >).isSorted(>=))
 
 // Reversed
-assert(bubbleSort_withPredicate([1, 1, 2, 3, 5, 8, 13].reverse(), isOrderedBefore: <).isSorted())
-assert(bubbleSort_withPredicate([1, 1, 2, 3, 5, 8, 13].reverse(), isOrderedBefore: >).isSorted(>=))
-assert(bubbleSort_withPredicate(["a", "a", "b", "c", "d", "e"].reverse(), isOrderedBefore: <).isSorted())
-assert(bubbleSort_withPredicate(["a", "a", "b", "c", "d", "e"].reverse(), isOrderedBefore: >).isSorted(>=))
+assert(bubbleSort_theBonus([1, 1, 2, 3, 5, 8, 13].reverse(), isOrderedBefore: <).isSorted())
+assert(bubbleSort_theBonus([1, 1, 2, 3, 5, 8, 13].reverse(), isOrderedBefore: >).isSorted(>=))
+assert(bubbleSort_theBonus(["a", "a", "b", "c", "d", "e"].reverse(), isOrderedBefore: <).isSorted())
+assert(bubbleSort_theBonus(["a", "a", "b", "c", "d", "e"].reverse(), isOrderedBefore: >).isSorted(>=))
 
 // Shuffled
-assert(bubbleSort_withPredicate([1, 1, 2, 3, 5, 8, 13].shuffle(), isOrderedBefore: <).isSorted())
-assert(bubbleSort_withPredicate([1, 1, 2, 3, 5, 8, 13].shuffle(), isOrderedBefore: >).isSorted(>=))
-assert(bubbleSort_withPredicate(["a", "a", "b", "c", "d", "e"].shuffle(), isOrderedBefore: <).isSorted())
-assert(bubbleSort_withPredicate(["a", "a", "b", "c", "d", "e"].shuffle(), isOrderedBefore: >).isSorted(>=))
+assert(bubbleSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffle(), isOrderedBefore: <).isSorted())
+assert(bubbleSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffle(), isOrderedBefore: >).isSorted(>=))
+assert(bubbleSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffle(), isOrderedBefore: <).isSorted())
+assert(bubbleSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffle(), isOrderedBefore: >).isSorted(>=))
 
 //: [Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)
