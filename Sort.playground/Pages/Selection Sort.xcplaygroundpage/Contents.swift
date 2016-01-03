@@ -244,6 +244,7 @@ assert(selectionSort_theGeneric(["a", "a", "b", "c", "d", "e"].reverse()).isSort
 assert(selectionSort_theGeneric([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 assert(selectionSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffle()).isSorted())
 
+
 /// The Functional Algorithm
 ///
 /// A quirky take that unleashes some of the neat declarative aspects of the language
@@ -286,7 +287,7 @@ assert(selectionSort_theFunctional([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
 assert(selectionSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 
 
-/// The Bonus Version
+/// The Bonus Algorithm
 ///
 /// A generic version based on The Swift-ish Algorithm that takes a strict weak ordering closure/predicate
 ///
@@ -299,7 +300,7 @@ assert(selectionSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// - returns: A new array with elements sorted based on the `isOrderedBefore` predicate
 
-func selectionSort_withPredicate<T>(array: [T], @noescape isOrderedBefore: (T, T) -> Bool) -> [T] {
+func selectionSort_theBonus<T>(array: [T], @noescape isOrderedBefore: (T, T) -> Bool) -> [T] {
 
     var array = array
 
@@ -328,36 +329,36 @@ func selectionSort_withPredicate<T>(array: [T], @noescape isOrderedBefore: (T, T
 // Tests
 
 // Already Sorted
-assert(selectionSort_withPredicate([Int](), isOrderedBefore: <).isSorted())
-assert(selectionSort_withPredicate([Int](), isOrderedBefore: >).isSorted(>=))
-assert(selectionSort_withPredicate([7], isOrderedBefore: <).isSorted())
-assert(selectionSort_withPredicate([7], isOrderedBefore: >).isSorted(>=))
-assert(selectionSort_withPredicate([1, 1, 2, 3, 5, 8, 13], isOrderedBefore: <).isSorted())
-assert(selectionSort_withPredicate([1, 1, 2, 3, 5, 8, 13], isOrderedBefore: >).isSorted(>=))
+assert(selectionSort_theBonus([Int](), isOrderedBefore: <).isSorted())
+assert(selectionSort_theBonus([Int](), isOrderedBefore: >).isSorted(>=))
+assert(selectionSort_theBonus([7], isOrderedBefore: <).isSorted())
+assert(selectionSort_theBonus([7], isOrderedBefore: >).isSorted(>=))
+assert(selectionSort_theBonus([1, 1, 2, 3, 5, 8, 13], isOrderedBefore: <).isSorted())
+assert(selectionSort_theBonus([1, 1, 2, 3, 5, 8, 13], isOrderedBefore: >).isSorted(>=))
 
-assert(selectionSort_withPredicate([String](), isOrderedBefore: <).isSorted())
-assert(selectionSort_withPredicate([String](), isOrderedBefore: >).isSorted(>=))
-assert(selectionSort_withPredicate(["a"], isOrderedBefore: <).isSorted())
-assert(selectionSort_withPredicate(["a"], isOrderedBefore: >).isSorted(>=))
-assert(selectionSort_withPredicate(["a", "a", "b", "c", "d", "e"], isOrderedBefore: <).isSorted())
-assert(selectionSort_withPredicate(["a", "a", "b", "c", "d", "e"], isOrderedBefore: >).isSorted(>=))
+assert(selectionSort_theBonus([String](), isOrderedBefore: <).isSorted())
+assert(selectionSort_theBonus([String](), isOrderedBefore: >).isSorted(>=))
+assert(selectionSort_theBonus(["a"], isOrderedBefore: <).isSorted())
+assert(selectionSort_theBonus(["a"], isOrderedBefore: >).isSorted(>=))
+assert(selectionSort_theBonus(["a", "a", "b", "c", "d", "e"], isOrderedBefore: <).isSorted())
+assert(selectionSort_theBonus(["a", "a", "b", "c", "d", "e"], isOrderedBefore: >).isSorted(>=))
 
 // Nearly Sorted
-assert(selectionSort_withPredicate([1, 2, 1, 3, 5, 13, 8], isOrderedBefore: <).isSorted())
-assert(selectionSort_withPredicate([1, 2, 1, 3, 5, 13, 8], isOrderedBefore: >).isSorted(>=))
-assert(selectionSort_withPredicate(["a", "b", "a", "c", "e", "d"], isOrderedBefore: <).isSorted())
-assert(selectionSort_withPredicate(["a", "b", "a", "c", "e", "d"], isOrderedBefore: >).isSorted(>=))
+assert(selectionSort_theBonus([1, 2, 1, 3, 5, 13, 8], isOrderedBefore: <).isSorted())
+assert(selectionSort_theBonus([1, 2, 1, 3, 5, 13, 8], isOrderedBefore: >).isSorted(>=))
+assert(selectionSort_theBonus(["a", "b", "a", "c", "e", "d"], isOrderedBefore: <).isSorted())
+assert(selectionSort_theBonus(["a", "b", "a", "c", "e", "d"], isOrderedBefore: >).isSorted(>=))
 
 // Reversed
-assert(selectionSort_withPredicate([1, 1, 2, 3, 5, 8, 13].reverse(), isOrderedBefore: <).isSorted())
-assert(selectionSort_withPredicate([1, 1, 2, 3, 5, 8, 13].reverse(), isOrderedBefore: >).isSorted(>=))
-assert(selectionSort_withPredicate(["a", "a", "b", "c", "d", "e"].reverse(), isOrderedBefore: <).isSorted())
-assert(selectionSort_withPredicate(["a", "a", "b", "c", "d", "e"].reverse(), isOrderedBefore: >).isSorted(>=))
+assert(selectionSort_theBonus([1, 1, 2, 3, 5, 8, 13].reverse(), isOrderedBefore: <).isSorted())
+assert(selectionSort_theBonus([1, 1, 2, 3, 5, 8, 13].reverse(), isOrderedBefore: >).isSorted(>=))
+assert(selectionSort_theBonus(["a", "a", "b", "c", "d", "e"].reverse(), isOrderedBefore: <).isSorted())
+assert(selectionSort_theBonus(["a", "a", "b", "c", "d", "e"].reverse(), isOrderedBefore: >).isSorted(>=))
 
 // Shuffled
-assert(selectionSort_withPredicate([1, 1, 2, 3, 5, 8, 13].shuffle(), isOrderedBefore: <).isSorted())
-assert(selectionSort_withPredicate([1, 1, 2, 3, 5, 8, 13].shuffle(), isOrderedBefore: >).isSorted(>=))
-assert(selectionSort_withPredicate(["a", "a", "b", "c", "d", "e"].shuffle(), isOrderedBefore: <).isSorted())
-assert(selectionSort_withPredicate(["a", "a", "b", "c", "d", "e"].shuffle(), isOrderedBefore: >).isSorted(>=))
+assert(selectionSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffle(), isOrderedBefore: <).isSorted())
+assert(selectionSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffle(), isOrderedBefore: >).isSorted(>=))
+assert(selectionSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffle(), isOrderedBefore: <).isSorted())
+assert(selectionSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffle(), isOrderedBefore: >).isSorted(>=))
 
 //: [Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)
