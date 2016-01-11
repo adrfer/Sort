@@ -298,7 +298,7 @@ assert(quickSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// - returns: A new array with elements sorted based on the `isOrderedBefore` predicate
 
-func quickSort_theBonus<T>(array: [T], @noescape isOrderedBefore: (T, T) -> Bool) -> [T] {
+func quickSort_theBonus<T>(array: [T], @noescape _ isOrderedBefore: (T, T) -> Bool) -> [T] {
 
     guard array.count > 1, let pivot = array.pick() else {
         return array
@@ -316,8 +316,8 @@ func quickSort_theBonus<T>(array: [T], @noescape isOrderedBefore: (T, T) -> Bool
         }
     }
 
-    lessThan = quickSort_theBonus(lessThan, isOrderedBefore: isOrderedBefore)
-    greaterThan = quickSort_theBonus(greaterThan, isOrderedBefore: isOrderedBefore)
+    lessThan = quickSort_theBonus(lessThan, isOrderedBefore)
+    greaterThan = quickSort_theBonus(greaterThan, isOrderedBefore)
 
     return lessThan + equal + greaterThan
 }
@@ -325,36 +325,36 @@ func quickSort_theBonus<T>(array: [T], @noescape isOrderedBefore: (T, T) -> Bool
 // Tests
 
 // Already Sorted
-assert(quickSort_theBonus([Int](), isOrderedBefore: <).isSorted())
-assert(quickSort_theBonus([Int](), isOrderedBefore: >).isSorted(>=))
-assert(quickSort_theBonus([7], isOrderedBefore: <).isSorted())
-assert(quickSort_theBonus([7], isOrderedBefore: >).isSorted(>=))
-assert(quickSort_theBonus([1, 1, 2, 3, 5, 8, 13], isOrderedBefore: <).isSorted())
-assert(quickSort_theBonus([1, 1, 2, 3, 5, 8, 13], isOrderedBefore: >).isSorted(>=))
+assert(quickSort_theBonus([Int](), <).isSorted())
+assert(quickSort_theBonus([Int](), >).isSorted(>=))
+assert(quickSort_theBonus([7], <).isSorted())
+assert(quickSort_theBonus([7], >).isSorted(>=))
+assert(quickSort_theBonus([1, 1, 2, 3, 5, 8, 13], <).isSorted())
+assert(quickSort_theBonus([1, 1, 2, 3, 5, 8, 13], >).isSorted(>=))
 
-assert(quickSort_theBonus([String](), isOrderedBefore: <).isSorted())
-assert(quickSort_theBonus([String](), isOrderedBefore: >).isSorted(>=))
-assert(quickSort_theBonus(["a"], isOrderedBefore: <).isSorted())
-assert(quickSort_theBonus(["a"], isOrderedBefore: >).isSorted(>=))
-assert(quickSort_theBonus(["a", "a", "b", "c", "d", "e"], isOrderedBefore: <).isSorted())
-assert(quickSort_theBonus(["a", "a", "b", "c", "d", "e"], isOrderedBefore: >).isSorted(>=))
+assert(quickSort_theBonus([String](), <).isSorted())
+assert(quickSort_theBonus([String](), >).isSorted(>=))
+assert(quickSort_theBonus(["a"], <).isSorted())
+assert(quickSort_theBonus(["a"], >).isSorted(>=))
+assert(quickSort_theBonus(["a", "a", "b", "c", "d", "e"], <).isSorted())
+assert(quickSort_theBonus(["a", "a", "b", "c", "d", "e"], >).isSorted(>=))
 
 // Nearly Sorted
-assert(quickSort_theBonus([1, 2, 1, 3, 5, 13, 8], isOrderedBefore: <).isSorted())
-assert(quickSort_theBonus([1, 2, 1, 3, 5, 13, 8], isOrderedBefore: >).isSorted(>=))
-assert(quickSort_theBonus(["a", "b", "a", "c", "e", "d"], isOrderedBefore: <).isSorted())
-assert(quickSort_theBonus(["a", "b", "a", "c", "e", "d"], isOrderedBefore: >).isSorted(>=))
+assert(quickSort_theBonus([1, 2, 1, 3, 5, 13, 8], <).isSorted())
+assert(quickSort_theBonus([1, 2, 1, 3, 5, 13, 8], >).isSorted(>=))
+assert(quickSort_theBonus(["a", "b", "a", "c", "e", "d"], <).isSorted())
+assert(quickSort_theBonus(["a", "b", "a", "c", "e", "d"], >).isSorted(>=))
 
 // Reversed
-assert(quickSort_theBonus([1, 1, 2, 3, 5, 8, 13].reverse(), isOrderedBefore: <).isSorted())
-assert(quickSort_theBonus([1, 1, 2, 3, 5, 8, 13].reverse(), isOrderedBefore: >).isSorted(>=))
-assert(quickSort_theBonus(["a", "a", "b", "c", "d", "e"].reverse(), isOrderedBefore: <).isSorted())
-assert(quickSort_theBonus(["a", "a", "b", "c", "d", "e"].reverse(), isOrderedBefore: >).isSorted(>=))
+assert(quickSort_theBonus([1, 1, 2, 3, 5, 8, 13].reverse(), <).isSorted())
+assert(quickSort_theBonus([1, 1, 2, 3, 5, 8, 13].reverse(), >).isSorted(>=))
+assert(quickSort_theBonus(["a", "a", "b", "c", "d", "e"].reverse(), <).isSorted())
+assert(quickSort_theBonus(["a", "a", "b", "c", "d", "e"].reverse(), >).isSorted(>=))
 
 // Shuffled
-assert(quickSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffle(), isOrderedBefore: <).isSorted())
-assert(quickSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffle(), isOrderedBefore: >).isSorted(>=))
-assert(quickSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffle(), isOrderedBefore: <).isSorted())
-assert(quickSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffle(), isOrderedBefore: >).isSorted(>=))
+assert(quickSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffle(), <).isSorted())
+assert(quickSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffle(), >).isSorted(>=))
+assert(quickSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffle(), <).isSorted())
+assert(quickSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffle(), >).isSorted(>=))
 
 //: [Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)
