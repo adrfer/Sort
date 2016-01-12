@@ -362,4 +362,87 @@ assert(mergerSort_theFunctional([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
 // Shuffled
 assert(mergerSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 
+
+
+/// The Bonus Algorithm
+///
+/// A generic version based on The Swift-ish Algorithm that takes a strict weak ordering closure/predicate
+///
+/// This version showcases `guard`, `count`, subcripting, `..<`, `while`, `isEmpty`, and `removeFirst`, `@noescape`, and generics
+///
+/// - parameters:
+///
+///   - array: The `array` to be sorted
+///   - isOrderedBefore: The predicate used to establish the order of the elements
+///
+/// - returns: A new array with elements sorted based on the `isOrderedBefore` predicate
+
+func mergeSort_theBonus<T>(array: [T], @noescape _ isOrderedBefore: (T, T) -> Bool) -> [T] {
+
+    guard array.count > 1 else {
+        return array
+    }
+
+    let pivot = array.count / 2
+
+    var left = mergeSort_theBonus(Array(array[0..<pivot]), isOrderedBefore)
+    var right = mergeSort_theBonus(Array(array[pivot..<array.count]), isOrderedBefore)
+
+    var sorted: [T] = []
+
+    while !left.isEmpty && !right.isEmpty {
+
+        if isOrderedBefore(left[0], right[0]) {
+            sorted.append(left.removeFirst())
+        } else {
+            sorted.append(right.removeFirst())
+        }
+    }
+
+    while !left.isEmpty {
+        sorted.append(left.removeFirst())
+    }
+
+    while !right.isEmpty {
+        sorted.append(right.removeFirst())
+    }
+    
+    return sorted
+}
+
+// Tests
+
+// Already Sorted
+assert(mergeSort_theBonus([Int](), <).isSorted())
+assert(mergeSort_theBonus([Int](), >).isSorted(>=))
+assert(mergeSort_theBonus([7], <).isSorted())
+assert(mergeSort_theBonus([7], >).isSorted(>=))
+assert(mergeSort_theBonus([1, 1, 2, 3, 5, 8, 13], <).isSorted())
+assert(mergeSort_theBonus([1, 1, 2, 3, 5, 8, 13], >).isSorted(>=))
+
+assert(mergeSort_theBonus([String](), <).isSorted())
+assert(mergeSort_theBonus([String](), >).isSorted(>=))
+assert(mergeSort_theBonus(["a"], <).isSorted())
+assert(mergeSort_theBonus(["a"], >).isSorted(>=))
+assert(mergeSort_theBonus(["a", "a", "b", "c", "d", "e"], <).isSorted())
+assert(mergeSort_theBonus(["a", "a", "b", "c", "d", "e"], >).isSorted(>=))
+
+// Nearly Sorted
+assert(mergeSort_theBonus([1, 2, 1, 3, 5, 13, 8], <).isSorted())
+assert(mergeSort_theBonus([1, 2, 1, 3, 5, 13, 8], >).isSorted(>=))
+assert(mergeSort_theBonus(["a", "b", "a", "c", "e", "d"], <).isSorted())
+assert(mergeSort_theBonus(["a", "b", "a", "c", "e", "d"], >).isSorted(>=))
+
+// Reversed
+assert(mergeSort_theBonus([1, 1, 2, 3, 5, 8, 13].reverse(), <).isSorted())
+assert(mergeSort_theBonus([1, 1, 2, 3, 5, 8, 13].reverse(), >).isSorted(>=))
+assert(mergeSort_theBonus(["a", "a", "b", "c", "d", "e"].reverse(), <).isSorted())
+assert(mergeSort_theBonus(["a", "a", "b", "c", "d", "e"].reverse(), >).isSorted(>=))
+
+// Shuffled
+assert(mergeSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffle(), <).isSorted())
+assert(mergeSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffle(), >).isSorted(>=))
+assert(mergeSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffle(), <).isSorted())
+assert(mergeSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffle(), >).isSorted(>=))
+
 //: [Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)
