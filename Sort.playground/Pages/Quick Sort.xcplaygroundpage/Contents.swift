@@ -156,13 +156,8 @@ func quickSort_theSwiftest(array: [Int]) -> [Int] {
 
     let pivot = array.removeFirst()
 
-    let lessThan = array.filter {
-        $0 < pivot
-    }
-
-    let greaterThanOrEqual = array.filter {
-        $0 >= pivot
-    }
+    let lessThan = array.filter({ $0 < pivot })
+    let greaterThanOrEqual = array.filter({ $0 >= pivot })
 
     return quickSort_theSwiftest(lessThan) + [pivot] + quickSort_theSwiftest(greaterThanOrEqual)
 }
@@ -204,13 +199,8 @@ func quickSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
 
     let pivot = array.removeFirst()
 
-    let lessThan = array.filter {
-        $0 < pivot
-    }
-
-    let greaterThanOrEqual = array.filter {
-        $0 >= pivot
-    }
+    let lessThan = array.filter({ $0 < pivot })
+    let greaterThanOrEqual = array.filter({ $0 >= pivot })
 
     return quickSort_theGeneric(lessThan) + [pivot] + quickSort_theGeneric(greaterThanOrEqual)
 }
@@ -257,13 +247,8 @@ func quickSort_theFunctional(array: [Int]) -> [Int] {
 
     let (pivot, rest) = (array[0], array.dropFirst())
 
-    let lessThan = rest.filter {
-        $0 < pivot
-    }
-
-    let greaterThanOrEqual = rest.filter {
-        $0 >= pivot
-    }
+    let lessThan = rest.filter({ $0 < pivot })
+    let greaterThanOrEqual = rest.filter({ $0 >= pivot })
 
     return quickSort_theFunctional(lessThan) + [pivot] + quickSort_theFunctional(greaterThanOrEqual)
 }
