@@ -1,5 +1,7 @@
 import Foundation
 
+/// Describe the possible ways to order a sequence
+
 public enum Order {
     case Ascending
     case Descending
