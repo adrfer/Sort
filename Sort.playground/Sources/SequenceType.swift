@@ -34,27 +34,16 @@ public extension SequenceType {
 }
 
 public extension SequenceType where Generator.Element: Comparable {
-    
-    /// Check by default if sequence is sorted in ascending order
-    ///
-    /// - remark: The `<=` predicate accounts for reapeated values
-    ///
-    /// - note: To check if sequence is sorted in descending order use `isSorted(>=)` instead
-    ///
-    /// - returns: True if sequence is sorted, false otherwise
-    
-    func isSorted() -> Bool {
-        
-        return isSorted(<=)
-    }
 
     /// Check if sequence is sorted based on a given ordering
     ///
     /// - parameter order: The order the sequence should be sorted
     ///
     /// - returns: True if sequence is sorted, false otherwise
+    ///
+    /// - remark: The `<=` and `>=` predicates account for reapeated values
 
-    func isSorted(order: Order) -> Bool {
+    func isSorted(order: Order = .Ascending) -> Bool {
 
         return order == .Ascending ? isSorted(<=) : isSorted(>=)
     }
