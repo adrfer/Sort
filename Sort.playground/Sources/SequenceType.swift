@@ -1,5 +1,10 @@
 import Foundation
 
+public enum Order {
+    case Ascending
+    case Descending
+}
+
 public extension SequenceType {
     
     /// Checks if sequence is sorted based on a comparison closure
@@ -39,5 +44,16 @@ public extension SequenceType where Generator.Element: Comparable {
     func isSorted() -> Bool {
         
         return isSorted(<=)
+    }
+
+    /// Check if sequence is sorted based on a given ordering
+    ///
+    /// - parameter order: The order the sequence should be sorted
+    ///
+    /// - returns: True if sequence is sorted, false otherwise
+
+    func isSorted(order: Order) -> Bool {
+
+        return order == .Ascending ? isSorted(<=) : isSorted(>=)
     }
 }
