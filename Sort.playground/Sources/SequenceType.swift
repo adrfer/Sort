@@ -7,7 +7,7 @@ public enum Order {
 
 public extension SequenceType {
     
-    /// Checks if sequence is sorted based on a comparison closure
+    /// Check if sequence is sorted based on a comparison closure
     ///
     /// - parameter isOrderedBefore: A closure that takes in the two elements to be compares,
     ///             and returns true if the first is orderd before the second, false otherwise
