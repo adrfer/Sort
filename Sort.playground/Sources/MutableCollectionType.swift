@@ -14,13 +14,11 @@ public extension MutableCollectionType where Index == Int {
 
         for i in 0..<count - 1 {
 
-            let j = Int.random(min: i, max: self.count - 1)
+            let j = Int.random(min: i, max: count - 1)
 
-            guard i != j else {
-                continue
+            if i != j {
+                swap(&self[i], &self[j])
             }
-
-            (self[i], self[j]) = (self[j], self[i])
         }
     }
 
