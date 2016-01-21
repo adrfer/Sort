@@ -32,7 +32,8 @@ public extension MutableCollectionType where Index == Int {
             return nil
         }
 
-        let index = Int.random(max: self.count - 1)
+        let index = Int.random(max: count - 1)
+        
         return self[index]
     }
 }
