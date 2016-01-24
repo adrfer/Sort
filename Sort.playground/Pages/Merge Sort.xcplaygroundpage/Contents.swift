@@ -42,14 +42,14 @@ func mergeSort_theClassic(array: [Int]) -> [Int] {
     let pivot = array.count / 2
 
     // set the left half of the array
-    var left: [Int] = []
+    var left = [Int]()
 
     for element in 0..<pivot {
         left.append(element)
     }
 
     // set the right half of the array
-    var right: [Int] = []
+    var right = [Int]()
 
     for element in pivot..<array.count {
         right.append(element)
@@ -60,7 +60,7 @@ func mergeSort_theClassic(array: [Int]) -> [Int] {
     right = mergeSort_theClassic(right)
 
     // create an array to be populated with sorted elements
-    var sorted: [Int] = []
+    var sorted = [Int]()
 
     // set initial indidces, start by comparing the first element of each half
     var leftIndex = 0, rightIndex = 0
@@ -131,7 +131,7 @@ func mergeSort_theSwiftish(array: [Int]) -> [Int] {
     var left = mergeSort_theSwiftish(Array(array[0..<pivot]))
     var right = mergeSort_theSwiftish(Array(array[pivot..<array.count]))
 
-    var sorted: [Int] = []
+    var sorted = [Int]()
 
     while !left.isEmpty && !right.isEmpty {
 
@@ -191,7 +191,7 @@ func mergerSort_theSwiftest(array: [Int]) -> [Int] {
         var left = left
         var right = right
 
-        var merged: [Int] = []
+        var merged = [Int]()
 
         while !left.isEmpty && !right.isEmpty {
 
@@ -255,7 +255,7 @@ func mergeSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
         var left = left
         var right = right
 
-        var merged: [T] = []
+        var merged = [T]()
 
         while !left.isEmpty && !right.isEmpty {
 
@@ -388,7 +388,7 @@ func mergeSort_theBonus<T>(array: [T], @noescape _ isOrderedBefore: (T, T) -> Bo
     var left = mergeSort_theBonus(Array(array[0..<pivot]), isOrderedBefore)
     var right = mergeSort_theBonus(Array(array[pivot..<array.count]), isOrderedBefore)
 
-    var sorted: [T] = []
+    var sorted = [T]()
 
     while !left.isEmpty && !right.isEmpty {
 

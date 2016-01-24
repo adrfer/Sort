@@ -43,7 +43,7 @@ func quickSort_theClassic(array: [Int]) -> [Int] {
     let pivot = array.pick()
 
     // define the partitions soon to be populated
-    var lessThan: [Int] = [], equal: [Int] = [], greaterThan: [Int] = []
+    var lessThan = [Int](), equal = [Int](), greaterThan = [Int]()
 
     // pass through the array rearranging all elements into their corresponding partitions
     for i in 0..<array.count {
@@ -104,7 +104,7 @@ func quickSort_theSwiftish(array: [Int]) -> [Int] {
 
     let pivot = array.pick()
     
-    var lessThan: [Int] = [], equal: [Int] = [], greaterThan: [Int] = []
+    var lessThan = [Int](), equal = [Int](), greaterThan = [Int]()
 
     for element in array {
 
@@ -289,7 +289,7 @@ func quickSort_theBonus<T>(array: [T], @noescape _ isOrderedBefore: (T, T) -> Bo
         return array
     }
 
-    var lessThan: [T] = [], equal: [T] = [], greaterThan: [T] = []
+    var lessThan = [T](), equal = [T](), greaterThan = [T]()
 
     for element in array {
 
