@@ -1,5 +1,20 @@
-.DS_Store
+# For more info about `gitignore`, open a terminal and run:
+#
+#   man gitignore
+#
+# or
+#
+#   git help ignore
+#
+# Also, check git-scm.com/docs/gitignore and/or refer to github.com/github/gitignore (Xcode & Swift).
+
+# Various settings
 xcuserdata
-*.xcuserstate
+
+# Playgrounds
 timeline.xctimeline
 playground.xcworkspace
+
+# Other
+.DS_Store
+*.xcuserstate
