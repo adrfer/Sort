@@ -14,7 +14,7 @@ public extension MutableCollectionType where Index == Int {
 
         for i in 0..<count - 1 {
 
-            let j = Int.random(min: i, max: count - 1)
+            let j = Int.random(from: i, to: count - 1)
 
             if i != j {
                 swap(&self[i], &self[j])
@@ -32,7 +32,7 @@ public extension MutableCollectionType where Index == Int {
             return nil
         }
 
-        let index = Int.random(max: count - 1)
+        let index = Int.random(to: count - 1)
         
         return self[index]
     }

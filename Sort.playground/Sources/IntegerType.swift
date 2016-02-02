@@ -8,12 +8,12 @@ public extension IntegerType {
     ///
     /// - parameters:
     ///
-    ///   - min: Inclusive lower bound random value
-    ///   - max: Inclusive upper bound random value
+    ///   - lower: Inclusive lower bound random value
+    ///   - upper: Inclusive upper bound random value
     ///
-    /// - returns: A random integer between min and max
+    /// - returns: A random integer between lower and upper bounds
 
-    static func random(min min: Int = 0, max: Int) -> Int {
-        return min + Int(arc4random_uniform(UInt32(max - min + 1)))
+    static func random(from lower: Int = 0, to upper: Int) -> Int {
+        return lower + Int(arc4random_uniform(UInt32(upper - lower + 1)))
     }
 }
