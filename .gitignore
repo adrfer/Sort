@@ -8,8 +8,9 @@
 #
 # Also, check git-scm.com/docs/gitignore and/or refer to github.com/github/gitignore (Xcode & Swift).
 
-# Various settings
+# Xcode
 xcuserdata
+*.xcuserstate
 
 # Playgrounds
 timeline.xctimeline
@@ -17,4 +18,3 @@ playground.xcworkspace
 
 # Other
 .DS_Store
-*.xcuserstate
