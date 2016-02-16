@@ -135,7 +135,7 @@ func mergeSort_theSwiftish(array: [Int]) -> [Int] {
 
     while !left.isEmpty && !right.isEmpty {
 
-        if left[0] < right[0] {
+        if left.first! < right.first! {
             sorted.append(left.removeFirst())
         } else {
             sorted.append(right.removeFirst())
@@ -195,7 +195,7 @@ func mergerSort_theSwiftest(array: [Int]) -> [Int] {
 
         while !left.isEmpty && !right.isEmpty {
 
-            merged += left[0] < right[0] ? [left.removeFirst()] : [right.removeFirst()]
+            merged += left.first! < right.first! ? [left.removeFirst()] : [right.removeFirst()]
         }
 
         if !left.isEmpty {
@@ -259,7 +259,7 @@ func mergeSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
 
         while !left.isEmpty && !right.isEmpty {
 
-            merged += left[0] < right[0] ? [left.removeFirst()] : [right.removeFirst()]
+            merged += left.first! < right.first! ? [left.removeFirst()] : [right.removeFirst()]
         }
 
         if !left.isEmpty {
@@ -331,10 +331,10 @@ func mergerSort_theFunctional(array: [Int]) -> [Int] {
             return left
         }
 
-        if left[0] < right[0] {
-            return [left[0]] + merge(Array(left[1..<left.count]), right)
+        if left.first! < right.first! {
+            return [left.first!] + merge(Array(left[1..<left.count]), right)
         } else {
-            return [right[0]] + merge(left, Array(right[1..<right.count]))
+            return [right.first!] + merge(left, Array(right[1..<right.count]))
         }
     }
 
@@ -392,7 +392,7 @@ func mergeSort_theBonus<T>(array: [T], @noescape _ isOrderedBefore: (T, T) -> Bo
 
     while !left.isEmpty && !right.isEmpty {
 
-        if isOrderedBefore(left[0], right[0]) {
+        if isOrderedBefore(left.first!, right.first!) {
             sorted.append(left.removeFirst())
         } else {
             sorted.append(right.removeFirst())
