@@ -263,12 +263,12 @@ func insertionSort_theFunctional(array: [Int]) -> [Int] {
             return [first]
         }
 
-        let (newFirst, newRest) = (rest[0], Array(rest.dropFirst()))
+        let (newFirst, newRest) = (rest.first!, Array(rest.dropFirst()))
 
         return first < newFirst ? [first, newFirst] + newRest : [newFirst] + insert(first, newRest)
     }
 
-    let (first, rest) = (array[0], Array(array.dropFirst()))
+    let (first, rest) = (array.first!, Array(array.dropFirst()))
 
     return insert(first, insertionSort_theFunctional(rest))
 }
