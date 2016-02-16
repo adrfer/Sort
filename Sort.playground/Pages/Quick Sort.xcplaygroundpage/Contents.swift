@@ -245,7 +245,7 @@ func quickSort_theFunctional(array: [Int]) -> [Int] {
         return array
     }
 
-    let (pivot, rest) = (array[0], array.dropFirst())
+    let (pivot, rest) = (array.first!, array.dropFirst())
 
     let lessThan = rest.filter({ $0 < pivot })
     let greaterThanOrEqual = rest.filter({ $0 >= pivot })
