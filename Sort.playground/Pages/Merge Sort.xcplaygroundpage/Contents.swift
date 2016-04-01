@@ -25,11 +25,11 @@
 ///
 /// This version showcases early exit `if`, `count`, `while`, subcripting, `+=`, and `append`
 ///
-/// - parameter array: The `array` to be sorted
+/// - Parameter array: The `array` to be sorted
 ///
-/// - returns: A new array with elements sorted in ascending order
+/// - Returns: A new array with elements sorted in ascending order
 ///
-/// - todo: Remove code annotations
+/// - Todo: Remove code annotations
 
 func mergeSort_theClassic(array: [Int]) -> [Int] {
 
@@ -116,9 +116,9 @@ assert(mergeSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// This version showcases `guard`, `count`, subcripting, `..<`, `while`, `isEmpty`, and `removeFirst`
 ///
-/// - parameter array: The `array` to be sorted
+/// - Parameter array: The `array` to be sorted
 ///
-/// - returns: A new array with elements sorted in ascending order
+/// - Returns: A new array with elements sorted in ascending order
 
 func mergeSort_theSwiftish(array: [Int]) -> [Int] {
 
@@ -176,9 +176,9 @@ assert(mergeSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// This version showcases `guard`, `count`, nested function, `while`, `isEmpty`, subcripting, `+=`, and `removeFirst`
 ///
-/// - parameter array: The `array` to be sorted
+/// - Parameter array: The `array` to be sorted
 ///
-/// - returns: A new array with elements sorted in ascending order
+/// - Returns: A new array with elements sorted in ascending order
 
 func mergerSort_theSwiftest(array: [Int]) -> [Int] {
 
@@ -240,9 +240,9 @@ assert(mergerSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// This version showcases `guard`, `count`, nested function, `while`, `isEmpty`, `+=`, subcripting, `+=`, `removeFirst`, and generics
 ///
-/// - parameter array: The `array` to be sorted
+/// - Parameter array: The `array` to be sorted
 ///
-/// - returns: A new array with elements sorted in ascending order
+/// - Returns: A new array with elements sorted in ascending order
 
 func mergeSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
 
@@ -311,9 +311,9 @@ assert(mergeSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffle()).isSorted()
 ///
 /// This version showcases `guard`, `count`, nested function, `isEmpty`, `..<`, subscripting, and `+`
 ///
-/// - parameter array: The `array` to be sorted
+/// - Parameter array: The `array` to be sorted
 ///
-/// - returns: A new array with elements sorted in ascending order
+/// - Returns: A new array with elements sorted in ascending order
 
 func mergerSort_theFunctional(array: [Int]) -> [Int] {
 
@@ -370,12 +370,12 @@ assert(mergerSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// This version showcases `guard`, `count`, subcripting, `..<`, `while`, `isEmpty`, and `removeFirst`, `@noescape`, and generics
 ///
-/// - parameters:
+/// - Parameters:
 ///
 ///   - array: The `array` to be sorted
 ///   - isOrderedBefore: The predicate used to establish the order of the elements
 ///
-/// - returns: A new array with elements sorted based on the `isOrderedBefore` predicate
+/// - Returns: A new array with elements sorted based on the `isOrderedBefore` predicate
 
 func mergeSort_theBonus<T>(array: [T], @noescape _ isOrderedBefore: (T, T) -> Bool) -> [T] {
 
