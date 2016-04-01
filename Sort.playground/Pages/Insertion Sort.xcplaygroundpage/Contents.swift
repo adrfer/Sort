@@ -27,11 +27,11 @@
 ///
 /// This version showcases early exit `if`, `count`, `for-in`, `..<`, `-=`, and subcripting
 ///
-/// - parameter array: The `array` to be sorted
+/// - Parameter array: The `array` to be sorted
 ///
-/// - returns: A new array with elements sorted in ascending order
+/// - Returns: A new array with elements sorted in ascending order
 ///
-/// - todo: Remove code annotations
+/// - Todo: Remove code annotations
 
 func insertionSort_theClassic(array: [Int]) -> [Int] {
 
@@ -91,9 +91,9 @@ assert(insertionSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// This version showcases `guard`, `count`, `for-in`, `..<`, `while`, `-=`, subcripting, and `swap`
 ///
-/// - parameter array: The `array` to be sorted
+/// - Parameter array: The `array` to be sorted
 ///
-/// - returns: A new array with elements sorted in ascending order
+/// - Returns: A new array with elements sorted in ascending order
 
 func insertionSort_theSwiftish(array: [Int]) -> [Int] {
 
@@ -140,9 +140,9 @@ assert(insertionSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// This version showcases `guard`, `count`, `for-in`, `..<`, `removeAtIndex`, subcripting, and `insert`
 ///
-/// - parameter array: The `array` to be sorted
+/// - Parameter array: The `array` to be sorted
 ///
-/// - returns: A new array with elements sorted in ascending order
+/// - Returns: A new array with elements sorted in ascending order
 
 func insertionSort_theSwiftest(array: [Int]) -> [Int] {
 
@@ -190,9 +190,9 @@ assert(insertionSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// This version showcases `guard`, `count`, `for-in`, `..<`, `removeAtIndex`, subcripting, `insert`, and generics
 ///
-/// - parameter array: The `array` to be sorted
+/// - Parameter array: The `array` to be sorted
 ///
-/// - returns: A new array with elements sorted in ascending order
+/// - Returns: A new array with elements sorted in ascending order
 
 func insertionSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
 
@@ -247,9 +247,9 @@ assert(insertionSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffle()).isSort
 ///
 /// This version showcases `guard`, `count`, nested function, tuple decomposition, `isEmpty`, `dropFirst`, `+`, and `?:`
 ///
-/// - parameter array: The `array` to be sorted
+/// - Parameter array: The `array` to be sorted
 ///
-/// - returns: A new array with elements sorted in ascending order
+/// - Returns: A new array with elements sorted in ascending order
 
 func insertionSort_theFunctional(array: [Int]) -> [Int] {
 
@@ -296,12 +296,12 @@ assert(insertionSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// This version showcases `guard`, `count`, `for-in`, `..<`, `while`, `-=`, subcripting, `swap`, `@noescape`, and generics
 ///
-/// - parameters:
+/// - Parameters:
 ///
 ///   - array: The `array` to be sorted
 ///   - isOrderedBefore: The predicate used to establish the order of the elements
 ///
-/// - returns: A new array with elements sorted based on the `isOrderedBefore` predicate
+/// - Returns: A new array with elements sorted based on the `isOrderedBefore` predicate
 
 func insertionSort_theBonus<T>(array: [T], @noescape _ isOrderedBefore: (T, T) -> Bool) -> [T] {
 
