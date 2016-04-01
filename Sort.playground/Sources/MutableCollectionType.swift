@@ -4,16 +4,16 @@ public extension MutableCollectionType where Index == Int {
 
     // MARK: - Instance Methods
 
-    /// Shuffle the elements of `self` in-place using Fisher-Yeates algorithm
+    /// Shuffle elements of `self` in place
+    ///
+    /// - Note: This implementation uses the Fisher–Yates algorithm
 
     mutating func shuffleInPlace() {
-
         guard count > 1 else {
             return
         }
 
         for i in 0..<count - 1 {
-
             let j = Int.random(from: i, to: count - 1)
 
             if i != j {
@@ -24,7 +24,7 @@ public extension MutableCollectionType where Index == Int {
 
     /// Choose a random element from self
     ///
-    /// - returns: An optional random element from `self` or `nil` if `self` is empty
+    /// - Returns: An optional random element from `self` or `nil` if `self` is empty
 
     func pick() -> Generator.Element? {
 
@@ -32,7 +32,7 @@ public extension MutableCollectionType where Index == Int {
             return nil
         }
 
-        let index = Int.random(to: count - 1)
+        let index = Int.random(from: 0, to: count - 1)
         
         return self[index]
     }
