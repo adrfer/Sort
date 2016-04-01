@@ -24,11 +24,11 @@
 ///
 /// This version showcases early exit `if`, `count`, `for-in`, `..<`, subcripting, tuple swapping, and `break`
 ///
-/// - parameter array: The `array` to be sorted
+/// - Parameter array: The `array` to be sorted
 ///
-/// - returns: A new array with elements sorted in ascending order
+/// - Returns: A new array with elements sorted in ascending order
 ///
-/// - todo: Remove code annotations
+/// - Todo: Remove code annotations
 
 func bubbleSort_theClassic(array: [Int]) -> [Int] {
 
@@ -93,9 +93,9 @@ assert(bubbleSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// This version showcases `guard`, `count`, `repeat-while`, `for-in-where`, subcripting, `..<`, and tuple swapping
 ///
-/// - parameter array: The `array` to be sorted
+/// - Parameter array: The `array` to be sorted
 ///
-/// - returns: A new array with elements sorted in ascending order
+/// - Returns: A new array with elements sorted in ascending order
 
 func bubbleSort_theSwiftish(array: [Int]) -> [Int] {
 
@@ -147,9 +147,9 @@ assert(bubbleSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// This version showcases `guard`, `count`, `for-in-where`, `..<`, subcripting, `swap`, `?:`, and `dropFirst`
 ///
-/// - parameter array: The `array` to be sorted
+/// - Parameter array: The `array` to be sorted
 ///
-/// - returns: A new array with elements sorted in ascending order
+/// - Returns: A new array with elements sorted in ascending order
 
 func bubbleSort_theSwiftest(array: [Int]) -> [Int] {
 
@@ -192,9 +192,9 @@ assert(bubbleSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// This version showcases `guard`, `count`, `for-in-where`, `..<`, subcripting, `swap`, `?:`, `dropFirst`, and generics
 ///
-/// - parameter array: The `array` to be sorted
+/// - Parameter array: The `array` to be sorted
 ///
-/// - returns: A new array with elements sorted in ascending order
+/// - Returns: A new array with elements sorted in ascending order
 
 func bubbleSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
 
@@ -244,9 +244,9 @@ assert(bubbleSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffle()).isSorted(
 ///
 /// This version showcases `guard`, `count`, nested function, tuple decomposition, subscripting, `dropFirst`, `min`, `max`, `+`, and `?:`
 ///
-/// - parameter array: The `array` to be sorted
+/// - Parameter array: The `array` to be sorted
 ///
-/// - returns: A new array with elements sorted in ascending order
+/// - Returns: A new array with elements sorted in ascending order
 
 func bubbleSort_theFunctional(array: [Int]) -> [Int] {
 
@@ -298,7 +298,7 @@ assert(bubbleSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// This version showcases `guard`, `count`, `repeat-while`, `for-in-where`, subcripting, `..<`, tuple swapping, `@noescape`, and generics
 ///
-/// - parameters:
+/// - Parameters:
 ///
 ///   - array: The `array` to be sorted
 ///   - isOrderedBefore: The predicate used to establish the order of the elements
