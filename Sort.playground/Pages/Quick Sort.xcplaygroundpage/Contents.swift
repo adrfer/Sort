@@ -26,11 +26,11 @@
 ///
 /// This version showcases early exit `if`, `count`, `pick`, `for-in`, `..<`, subcripting, `append`tuple swapping, and `break`
 ///
-/// - parameter array: The `array` to be sorted
+/// - Parameter array: The `array` to be sorted
 ///
-/// - returns: A new array with elements sorted in ascending order
+/// - Returns: A new array with elements sorted in ascending order
 ///
-/// - todo: Remove code annotations
+/// - Todo: Remove code annotations
 
 func quickSort_theClassic(array: [Int]) -> [Int] {
 
@@ -92,9 +92,9 @@ assert(quickSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// This version showcases `guard`, `count`, `pick`, `for-in`, `switch`, `+=`, and `+`
 ///
-/// - parameter array: The `array` to be sorted
+/// - Parameter array: The `array` to be sorted
 ///
-/// - returns: A new array with elements sorted in ascending order
+/// - Returns: A new array with elements sorted in ascending order
 
 func quickSort_theSwiftish(array: [Int]) -> [Int] {
 
@@ -142,9 +142,9 @@ assert(quickSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// This version showcases `guard`, `count`, `removeFirst`, `filter, and `+`
 ///
-/// - parameter array: The `array` to be sorted
+/// - Parameter array: The `array` to be sorted
 ///
-/// - returns: A new array with elements sorted in ascending order
+/// - Returns: A new array with elements sorted in ascending order
 
 func quickSort_theSwiftest(array: [Int]) -> [Int] {
 
@@ -185,9 +185,9 @@ assert(quickSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// This version showcases `guard`, `count`, `removeFirst`, `filter, and `+`, and generics
 ///
-/// - parameter array: The `array` to be sorted
+/// - Parameter array: The `array` to be sorted
 ///
-/// - returns: A new array with elements sorted in ascending order
+/// - Returns: A new array with elements sorted in ascending order
 
 func quickSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
 
@@ -235,9 +235,9 @@ assert(quickSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffle()).isSorted()
 ///
 /// This version showcases `guard`, `count`, tuple decomposition, `dropFirst`, `filter, and `+`
 ///
-/// - parameter array: The `array` to be sorted
+/// - Parameter array: The `array` to be sorted
 ///
-/// - returns: A new array with elements sorted in ascending order
+/// - Returns: A new array with elements sorted in ascending order
 
 func quickSort_theFunctional(array: [Int]) -> [Int] {
 
@@ -276,12 +276,12 @@ assert(quickSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// This version showcases `guard`, `count`, `pick`, `for-in`, `switch`, `+=`, and `+`, `@noescape`, and generics
 ///
-/// - parameters:
+/// - Parameters:
 ///
 ///   - array: The `array` to be sorted
 ///   - isOrderedBefore: The predicate used to establish the order of the elements
 ///
-/// - returns: A new array with elements sorted based on the `isOrderedBefore` predicate
+/// - Returns: A new array with elements sorted based on the `isOrderedBefore` predicate
 
 func quickSort_theBonus<T>(array: [T], @noescape _ isOrderedBefore: (T, T) -> Bool) -> [T] {
 
