@@ -303,7 +303,7 @@ assert(bubbleSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///   - array: The `array` to be sorted
 ///   - isOrderedBefore: The predicate used to establish the order of the elements
 ///
-/// - returns: A new array with elements sorted based on the `isOrderedBefore` predicate
+/// - Returns: A new array with elements sorted based on the `isOrderedBefore` predicate
 
 func bubbleSort_theBonus<T>(array: [T], @noescape _ isOrderedBefore: (T, T) -> Bool) -> [T] {
 
