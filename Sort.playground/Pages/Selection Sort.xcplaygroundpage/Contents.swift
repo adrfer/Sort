@@ -25,11 +25,11 @@
 ///
 /// This version showcases early exit `if`, `count`, `for-in`, `..<`, subcripting, and tuple swapping
 ///
-/// - parameter array: The `array` to be sorted
+/// - Parameter array: The `array` to be sorted
 ///
-/// - returns: A new array with elements sorted in ascending order
+/// - Returns: A new array with elements sorted in ascending order
 ///
-/// - todo: Remove code annotations
+/// - Todo: Remove code annotations
 
 func selectionSort_theClassic(array: [Int]) -> [Int] {
 
@@ -93,9 +93,9 @@ assert(selectionSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// This version showcases `guard`, `count`, `for-in-where`, `..<`, subcripting,`continue`, and `swap`
 ///
-/// - parameter array: The `array` to be sorted
+/// - Parameter array: The `array` to be sorted
 ///
-/// - returns: A new array with elements sorted in ascending order
+/// - Returns: A new array with elements sorted in ascending order
 
 func selectionSort_theSwiftish(array: [Int]) -> [Int] {
 
@@ -146,9 +146,9 @@ assert(selectionSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// This version showcases `guard`, `count`, `for-in`, subcripting, `..<`, `minElement`, `indexOf`, `removeAtIndex`, and `append`
 ///
-/// - parameter array: The `array` to be sorted
+/// - Parameter array: The `array` to be sorted
 ///
-/// - returns: A new array with elements sorted in ascending order
+/// - Returns: A new array with elements sorted in ascending order
 
 func selectionSort_theSwiftest(array: [Int]) -> [Int] {
 
@@ -195,9 +195,9 @@ assert(selectionSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// This version showcases `guard`, `count`, `for-in`, subcripting, `..<`, `minElement`, `indexOf`, `removeAtIndex`, `append`, and generics
 ///
-/// - parameter array: The `array` to be sorted
+/// - Parameter array: The `array` to be sorted
 ///
-/// - returns: A new array with elements sorted in ascending order
+/// - Returns: A new array with elements sorted in ascending order
 
 func selectionSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
 
@@ -251,9 +251,9 @@ assert(selectionSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffle()).isSort
 ///
 /// This version showcases `guard`, `count`, `minElement`, `indexOf`, `filter`, and `+`
 ///
-/// - parameter array: The `array` to be sorted
+/// - Parameter array: The `array` to be sorted
 ///
-/// - returns: A new array with elements sorted in ascending order
+/// - Returns: A new array with elements sorted in ascending order
 
 func selectionSort_theFunctional(array: [Int]) -> [Int] {
 
@@ -293,12 +293,12 @@ assert(selectionSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// This version showcases `guard`, `count`, `for-in-where`, `..<`, subcripting,`continue`, `swap`,`@noescape`, and generics
 ///
-/// - parameters:
+/// - Parameters:
 ///
 ///   - array: The `array` to be sorted
 ///   - isOrderedBefore: The predicate used to establish the order of the elements
 ///
-/// - returns: A new array with elements sorted based on the `isOrderedBefore` predicate
+/// - Returns: A new array with elements sorted based on the `isOrderedBefore` predicate
 
 func selectionSort_theBonus<T>(array: [T], @noescape _ isOrderedBefore: (T, T) -> Bool) -> [T] {
 
