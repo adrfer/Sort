@@ -24,7 +24,7 @@ public extension MutableCollectionType where Index == Int {
 
     /// Choose a random element from self
     ///
-    /// - Returns: An optional random element from `self` or `nil` if `self` is empty
+    /// - Returns: An optional random element from `self`, or `nil` if it is empty
 
     func pick() -> Generator.Element? {
 
