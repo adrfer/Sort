@@ -17,7 +17,6 @@ public extension SequenceType {
     /// - Returns: True if sequence is sorted, false otherwise
     
     func isSorted(@noescape isOrderedBefore: (Generator.Element, Generator.Element) -> Bool) -> Bool {
-        
         var previous: Generator.Element?
         
         for element in self {
@@ -44,7 +43,6 @@ public extension SequenceType where Generator.Element: Comparable {
     /// - Remark: The `<=` and `>=` predicates account for reapeated values
 
     func isSorted(order: Order = .Ascending) -> Bool {
-
         return order == .Ascending ? isSorted(<=) : isSorted(>=)
     }
 }
