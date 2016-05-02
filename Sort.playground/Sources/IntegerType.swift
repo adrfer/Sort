@@ -11,7 +11,7 @@ public extension IntegerType {
     ///   - lower: Inclusive lower bound random value
     ///   - upper: Inclusive upper bound random value
     ///
-    /// - Returns: A random integer between lower and upper bounds
+    /// - Returns: A random integer between `lower` and `upper` bounds
 
     static func random(from lower: Int, to upper: Int) -> Int {
         return lower + Int(arc4random_uniform(UInt32(upper - lower + 1)))
