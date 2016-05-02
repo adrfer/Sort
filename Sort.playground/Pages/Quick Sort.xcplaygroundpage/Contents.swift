@@ -24,7 +24,7 @@
 ///
 /// A die-hard style, rooted in tradition, in all its imperative glory
 ///
-/// This version showcases early exit `if`, `count`, `pick`, `for-in`, `..<`, subcripting, `append`tuple swapping, and `break`
+/// This version showcases early exit `if`, `count`, `sample`, `for-in`, `..<`, subcripting, `append`tuple swapping, and `break`
 ///
 /// - Parameter array: The `array` to be sorted
 ///
@@ -40,7 +40,7 @@ func quickSort_theClassic(array: [Int]) -> [Int] {
     }
 
     // pick the pivot element randomly
-    let pivot = array.pick()
+    let pivot = array.sample()
 
     // define the partitions soon to be populated
     var lessThan = [Int](), equal = [Int](), greaterThan = [Int]()
@@ -90,7 +90,7 @@ assert(quickSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// A sligthly more modern take on the classic, but still not quite quaint enough
 ///
-/// This version showcases `guard`, `count`, `pick`, `for-in`, `switch`, `+=`, and `+`
+/// This version showcases `guard`, `count`, `sample`, `for-in`, `switch`, `+=`, and `+`
 ///
 /// - Parameter array: The `array` to be sorted
 ///
@@ -102,7 +102,7 @@ func quickSort_theSwiftish(array: [Int]) -> [Int] {
         return array
     }
 
-    let pivot = array.pick()
+    let pivot = array.sample()
     
     var lessThan = [Int](), equal = [Int](), greaterThan = [Int]()
 
@@ -274,7 +274,7 @@ assert(quickSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// A generic version based on The Swift-ish Algorithm that takes a strict weak ordering closure/predicate
 ///
-/// This version showcases `guard`, `count`, `pick`, `for-in`, `switch`, `+=`, and `+`, `@noescape`, and generics
+/// This version showcases `guard`, `count`, `sample`, `for-in`, `switch`, `+=`, and `+`, `@noescape`, and generics
 ///
 /// - Parameters:
 ///
@@ -285,7 +285,7 @@ assert(quickSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 
 func quickSort_theBonus<T>(array: [T], @noescape _ isOrderedBefore: (T, T) -> Bool) -> [T] {
 
-    guard array.count > 1, let pivot = array.pick() else {
+    guard array.count > 1, let pivot = array.sample() else {
         return array
     }
 

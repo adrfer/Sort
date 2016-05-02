@@ -15,3 +15,24 @@ public extension CollectionType {
         return array
     }
 }
+
+public extension CollectionType where Index.Distance == Int {
+
+    // MARK: - Instance Methods
+
+    /// Choose a random element from `self`
+    ///
+    /// - Returns: An optional random element from `self`, or `nil` if `self` is empty
+
+    @warn_unused_result
+    func sample() -> Generator.Element? {
+        guard !isEmpty else {
+            return nil
+        }
+
+        let offset = Int.random(from: 0, to: count - 1)
+        let index = startIndex.advancedBy(offset)
+
+        return self[index]
+    }
+}
