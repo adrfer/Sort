@@ -42,13 +42,13 @@ func selectionSort_theClassic(array: [Int]) -> [Int] {
     }
 
     // pass through the array, but it needs only as many passes as the number of swaps required
-    for i in 0..<array.count - 1 {
+    for i in 0 ..< array.count - 1 {
         
         // consider the first element of the unsorted portion to be the smallest
         var indexOfTheSmallestElement = i
 
         // pass thorugh the unsorted portion to find the smallest unsorted element
-        for j in (indexOfTheSmallestElement + 1)..<array.count {
+        for j in (indexOfTheSmallestElement + 1) ..< array.count {
 
             // compare the current element to the considered smallest element
             if array[j] < array[indexOfTheSmallestElement] {
@@ -105,11 +105,11 @@ func selectionSort_theSwiftish(array: [Int]) -> [Int] {
         return array
     }
 
-    for i in 0..<array.count - 1 {
+    for i in 0 ..< array.count - 1 {
 
         var indexOfMinElement = i
 
-        for j in (indexOfMinElement + 1)..<array.count where array[j] < array[indexOfMinElement] {
+        for j in (indexOfMinElement + 1) ..< array.count where array[j] < array[indexOfMinElement] {
             indexOfMinElement = j
         }
 
@@ -158,9 +158,9 @@ func selectionSort_theSwiftest(array: [Int]) -> [Int] {
         return array
     }
 
-    for index in 0..<array.count {
+    for index in 0 ..< array.count {
 
-        let newArray = array[0..<array.count - index]
+        let newArray = array[0 ..< array.count - index]
 
         if let minElement = newArray.minElement(), indexOfMinElement = newArray.indexOf(minElement) {
 
@@ -207,9 +207,9 @@ func selectionSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
         return array
     }
 
-    for index in 0..<array.count {
+    for index in 0 ..< array.count {
 
-        let newArray = array[0..<array.count - index]
+        let newArray = array[0 ..< array.count - index]
 
         if let minElement = newArray.minElement(), indexOfMinElement = newArray.indexOf(minElement) {
 
@@ -308,11 +308,11 @@ func selectionSort_theBonus<T>(array: [T], @noescape _ isOrderedBefore: (T, T) -
         return array
     }
 
-    for i in 0..<array.count - 1 {
+    for i in 0 ..< array.count - 1 {
 
         var indexOfMinElement = i
 
-        for j in (indexOfMinElement + 1)..<array.count where isOrderedBefore(array[j], array[indexOfMinElement]) {
+        for j in (indexOfMinElement + 1) ..< array.count where isOrderedBefore(array[j], array[indexOfMinElement]) {
             indexOfMinElement = j
         }
 
