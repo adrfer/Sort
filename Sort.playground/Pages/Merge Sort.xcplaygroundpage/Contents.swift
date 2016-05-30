@@ -44,14 +44,14 @@ func mergeSort_theClassic(array: [Int]) -> [Int] {
     // set the left half of the array
     var left = [Int]()
 
-    for element in 0..<pivot {
+    for element in 0 ..< pivot {
         left.append(element)
     }
 
     // set the right half of the array
     var right = [Int]()
 
-    for element in pivot..<array.count {
+    for element in pivot ..< array.count {
         right.append(element)
     }
 
@@ -128,8 +128,8 @@ func mergeSort_theSwiftish(array: [Int]) -> [Int] {
 
     let pivot = array.count / 2
 
-    var left = mergeSort_theSwiftish(Array(array[0..<pivot]))
-    var right = mergeSort_theSwiftish(Array(array[pivot..<array.count]))
+    var left = mergeSort_theSwiftish(Array(array[0 ..< pivot]))
+    var right = mergeSort_theSwiftish(Array(array[pivot ..< array.count]))
 
     var sorted = [Int]()
 
@@ -211,8 +211,8 @@ func mergerSort_theSwiftest(array: [Int]) -> [Int] {
 
     let pivot = array.count / 2
 
-    let left = mergerSort_theSwiftest(Array(array[0..<pivot]))
-    let right = mergerSort_theSwiftest(Array(array[pivot..<array.count]))
+    let left = mergerSort_theSwiftest(Array(array[0 ..< pivot]))
+    let right = mergerSort_theSwiftest(Array(array[pivot ..< array.count]))
 
     return merge(left, right)
 }
@@ -275,8 +275,8 @@ func mergeSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
 
     let pivot = array.count / 2
 
-    let left = mergeSort_theGeneric(Array(array[0..<pivot]))
-    let right = mergeSort_theGeneric(Array(array[pivot..<array.count]))
+    let left = mergeSort_theGeneric(Array(array[0 ..< pivot]))
+    let right = mergeSort_theGeneric(Array(array[pivot ..< array.count]))
     
     return merge(left, right)
 }
@@ -332,16 +332,16 @@ func mergerSort_theFunctional(array: [Int]) -> [Int] {
         }
 
         if left.first! < right.first! {
-            return [left.first!] + merge(Array(left[1..<left.count]), right)
+            return [left.first!] + merge(Array(left[1 ..< left.count]), right)
         } else {
-            return [right.first!] + merge(left, Array(right[1..<right.count]))
+            return [right.first!] + merge(left, Array(right[1 ..< right.count]))
         }
     }
 
     let pivot = array.count / 2
 
-    let left = mergerSort_theSwiftest(Array(array[0..<pivot]))
-    let right = mergerSort_theSwiftest(Array(array[pivot..<array.count]))
+    let left = mergerSort_theSwiftest(Array(array[0 ..< pivot]))
+    let right = mergerSort_theSwiftest(Array(array[pivot ..< array.count]))
 
     return merge(left, right)
 }
@@ -385,8 +385,8 @@ func mergeSort_theBonus<T>(array: [T], @noescape _ isOrderedBefore: (T, T) -> Bo
 
     let pivot = array.count / 2
 
-    var left = mergeSort_theBonus(Array(array[0..<pivot]), isOrderedBefore)
-    var right = mergeSort_theBonus(Array(array[pivot..<array.count]), isOrderedBefore)
+    var left = mergeSort_theBonus(Array(array[0 ..< pivot]), isOrderedBefore)
+    var right = mergeSort_theBonus(Array(array[pivot ..< array.count]), isOrderedBefore)
 
     var sorted = [T]()
 
