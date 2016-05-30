@@ -41,13 +41,13 @@ func bubbleSort_theClassic(array: [Int]) -> [Int] {
     }
 
     // pass through the array, but it needs only as many passes as the number of swaps required
-    for i in 0..<array.count - 1 {
+    for i in 0 ..< array.count - 1 {
 
         // define a flag keep track if the array is already sorted
         var hasSwapped = false
 
         // compare each pair of adjacent elements, except to already sorted elements on subsequent passes
-        for j in 0..<array.count - i - 1 {
+        for j in 0 ..< array.count - i - 1 {
 
             // check is elements are in the wrong order
             if array[j] > array[j + 1] {
@@ -112,7 +112,7 @@ func bubbleSort_theSwiftish(array: [Int]) -> [Int] {
 
         hasSwapped = false
 
-        for i in 0..<count - 1 where array[i] > array[i + 1] {
+        for i in 0 ..< count - 1 where array[i] > array[i + 1] {
             (array[i], array[i + 1]) = (array[i + 1], array[i])
             hasSwapped = true
         }
@@ -161,7 +161,7 @@ func bubbleSort_theSwiftest(array: [Int]) -> [Int] {
 
     var hasSwapped = false
 
-    for i in 0..<array.count - 1 where array[i] > array[i + 1] {
+    for i in 0 ..< array.count - 1 where array[i] > array[i + 1] {
         swap(&array[i], &array[i + 1])
         hasSwapped = true
     }
@@ -206,7 +206,7 @@ func bubbleSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
 
     var hasSwapped = false
 
-    for i in 0..<array.count - 1 where array[i] > array[i + 1] {
+    for i in 0 ..< array.count - 1 where array[i] > array[i + 1] {
         swap(&array[i], &array[i + 1])
         hasSwapped = true
     }
@@ -320,7 +320,7 @@ func bubbleSort_theBonus<T>(array: [T], @noescape _ isOrderedBefore: (T, T) -> B
 
         hasSwapped = false
 
-        for i in 0..<count - 1 where isOrderedBefore(array[i + 1], array[i]) {
+        for i in 0 ..< count - 1 where isOrderedBefore(array[i + 1], array[i]) {
             (array[i], array[i + 1]) = (array[i + 1], array[i])
             hasSwapped = true
         }
