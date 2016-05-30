@@ -46,7 +46,7 @@ func quickSort_theClassic(array: [Int]) -> [Int] {
     var lessThan = [Int](), equal = [Int](), greaterThan = [Int]()
 
     // pass through the array rearranging all elements into their corresponding partitions
-    for i in 0..<array.count {
+    for i in 0 ..< array.count {
 
         // append to the less-than partition elements smaller than the pivot
         if array[i] < pivot {
