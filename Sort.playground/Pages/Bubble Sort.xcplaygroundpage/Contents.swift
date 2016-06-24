@@ -166,7 +166,7 @@ func bubbleSort_theSwiftest(array: [Int]) -> [Int] {
         hasSwapped = true
     }
 
-    return !hasSwapped ? array : bubbleSort_theSwiftest(Array(array.dropFirst()))
+    return !hasSwapped ? array : bubbleSort_theSwiftest(Array(array))
 }
 
 // Tests
@@ -211,7 +211,7 @@ func bubbleSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
         hasSwapped = true
     }
 
-    return !hasSwapped ? array : bubbleSort_theGeneric(Array(array.dropFirst()))
+    return !hasSwapped ? array : bubbleSort_theGeneric(Array(array))
 }
 
 // Tests
