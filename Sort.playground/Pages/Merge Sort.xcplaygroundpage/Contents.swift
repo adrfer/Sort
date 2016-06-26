@@ -44,15 +44,15 @@ func mergeSort_theClassic(array: [Int]) -> [Int] {
     // set the left half of the array
     var left = [Int]()
 
-    for element in 0 ..< pivot {
-        left.append(element)
+    for index in 0 ..< pivot {
+        left.append(array[index])
     }
 
     // set the right half of the array
     var right = [Int]()
 
-    for element in pivot ..< array.count {
-        right.append(element)
+    for index in pivot ..< array.count {
+        right.append(array[index])
     }
 
     // sort both halves recursively
