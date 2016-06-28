@@ -263,9 +263,10 @@ func selectionSort_theFunctional(array: [Int]) -> [Int] {
 
     let indexOfMinElement = array.indexOf(minElement)
 
-    let rest = array.filter { element in
-        indexOfMinElement != array.indexOf(element)
-    }
+
+    let rest = array.enumerate()
+                    .filter({ index, _ in index != indexOfMinElement })
+                    .map({ _, element in element })
 
     return [minElement] + selectionSort_theFunctional(rest)
 }
