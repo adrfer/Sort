@@ -43,12 +43,4 @@ Okey-dokey, let's dive in and enjoy the ride!
 - [Selection Sort](https://github.com/adrfer/Sort/blob/master/Sort.playground/Pages/Selection%20Sort.xcplaygroundpage/Contents.swift)
 
 --
-##### What's Next
-
-Here are some future ideas yet to be considered:
-
-- Refactor tests into its own playground page, if possible
-- Implement Heap Sort, Shell Sort, and Intro Sort algorithms
-
---
 Feel free to [ping me](https://twitter.com/_adrfer) on Twitter.
