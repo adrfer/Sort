@@ -3,9 +3,6 @@ Alluring experiments with sorting algorithms in Swift, sort of.
 
 Tested on `Xcode 7.3` and `Swift 2.2`.
 
-**Important:**
-This is a preliminary document of sorting algorithms writen in the [Swift Programming Language](https://developer.apple.com/swift/).
-
 --
 Welcome to the Sort Playground!
 
