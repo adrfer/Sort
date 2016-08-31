@@ -1,9 +1,5 @@
 //: # Sort
 //:
-//: > **Important:**
-//: > This is a preliminary document of sorting algorithms writen in the [Swift Programming Language](https://developer.apple.com/swift/).
-//: > The code was tested in _Xcode 7.3_ and _Swift 2.2_.
-//:
 //: Welcome to the Sort Playground!
 //:
 //: The idea here is to have fun while exploring alternative implementations of different sorting techniques written in Swift, a modern and very exciting programming language. So, to better experience how to move from disarray to order when managing collections of data, some variations of these sorting algorithms are provided, starting with a classic implementation that is then forged over and over until it becomes more idiomatic, or simply, more Swift-y.
