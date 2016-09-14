@@ -31,7 +31,7 @@
 ///
 /// - Todo: Remove code annotations
 
-func mergeSort_theClassic(array: [Int]) -> [Int] {
+func mergeSort_theClassic(_ array: [Int]) -> [Int] {
 
     // return the array if it is empty or contains a single element, for it is sorted
     if array.count <= 1 {
@@ -62,7 +62,7 @@ func mergeSort_theClassic(array: [Int]) -> [Int] {
     // create an array to be populated with sorted elements
     var sorted = [Int]()
 
-    // set initial indidces, start by comparing the first element of each half
+    // set initial indices, start by comparing the first element of each half
     var leftIndex = 0, rightIndex = 0
 
     // sort and merge the two halves while there are elements in both of them
@@ -96,31 +96,31 @@ func mergeSort_theClassic(array: [Int]) -> [Int] {
 // Tests
 
 // Already Sorted
-assert(mergeSort_theClassic([Int]()).isSorted())
-assert(mergeSort_theClassic([7]).isSorted())
-assert(mergeSort_theClassic([1, 1, 2, 3, 5, 8, 13]).isSorted())
+mergeSort_theClassic([Int]()) == [Int]()
+mergeSort_theClassic([7]) == [7]
+mergeSort_theClassic([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Nearly Sorted
-assert(mergeSort_theClassic([1, 2, 1, 3, 5, 13, 8]).isSorted())
+mergeSort_theClassic([1, 2, 1, 3, 5, 13, 8]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Reversed
-assert(mergeSort_theClassic([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
+mergeSort_theClassic([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5, 8, 13]
 
 // Shuffled
-assert(mergeSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
+mergeSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
 
 
 /// The Swift-ish Algorithm
 ///
 /// A sligthly more modern take on the classic, but still not quite quaint enough
 ///
-/// This version showcases `guard`, `count`, subcripting, `..<`, `while`, `isEmpty`, and `removeFirst`
+/// This version showcases `guard`, `count`, subcripting, `..<`, `while`, `isEmpty`, and `remove`
 ///
 /// - Parameter array: The `array` to be sorted
 ///
 /// - Returns: A new array with elements sorted in ascending order
 
-func mergeSort_theSwiftish(array: [Int]) -> [Int] {
+func mergeSort_theSwiftish(_ array: [Int]) -> [Int] {
 
     guard array.count > 1 else {
         return array
@@ -136,57 +136,57 @@ func mergeSort_theSwiftish(array: [Int]) -> [Int] {
     while !left.isEmpty && !right.isEmpty {
 
         if left.first! < right.first! {
-            sorted.append(left.removeFirst())
+            sorted.append(left.remove(at: 0))
         } else {
-            sorted.append(right.removeFirst())
+            sorted.append(right.remove(at: 0))
         }
     }
 
     while !left.isEmpty {
-        sorted.append(left.removeFirst())
+        sorted.append(left.remove(at: 0))
     }
 
     while !right.isEmpty {
-        sorted.append(right.removeFirst())
+        sorted.append(right.remove(at: 0))
     }
-    
+
     return sorted
 }
 
 // Tests
 
 // Already Sorted
-assert(mergeSort_theSwiftish([Int]()).isSorted())
-assert(mergeSort_theSwiftish([7]).isSorted())
-assert(mergeSort_theSwiftish([1, 1, 2, 3, 5, 8, 13]).isSorted())
+mergeSort_theSwiftish([Int]()) == [Int]()
+mergeSort_theSwiftish([7]) == [7]
+mergeSort_theSwiftish([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Nearly Sorted
-assert(mergeSort_theSwiftish([1, 2, 1, 3, 5, 13, 8]).isSorted())
+mergeSort_theSwiftish([1, 2, 1, 3, 5, 13, 8]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Reversed
-assert(mergeSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
+mergeSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5, 8, 13]
 
 // Shuffled
-assert(mergeSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
+mergeSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
 
 
 /// The Swiftest Algorithm
 ///
 /// A nifty approach that attempts to tap into the most powerful language features yet
 ///
-/// This version showcases `guard`, `count`, nested function, `while`, `isEmpty`, subcripting, `+=`, and `removeFirst`
+/// This version showcases `guard`, `count`, nested function, `while`, `isEmpty`, subcripting, `+=`, and `remove`
 ///
 /// - Parameter array: The `array` to be sorted
 ///
 /// - Returns: A new array with elements sorted in ascending order
 
-func mergerSort_theSwiftest(array: [Int]) -> [Int] {
+func mergerSort_theSwiftest(_ array: [Int]) -> [Int] {
 
     guard array.count > 1 else {
         return array
     }
 
-    func merge(left: [Int], _ right: [Int]) -> [Int] {
+    func merge(_ left: [Int], _ right: [Int]) -> [Int] {
 
         var left = left
         var right = right
@@ -195,7 +195,7 @@ func mergerSort_theSwiftest(array: [Int]) -> [Int] {
 
         while !left.isEmpty && !right.isEmpty {
 
-            merged += left.first! < right.first! ? [left.removeFirst()] : [right.removeFirst()]
+            merged += left.first! < right.first! ? [left.remove(at: 0)] : [right.remove(at: 0)]
         }
 
         if !left.isEmpty {
@@ -220,37 +220,37 @@ func mergerSort_theSwiftest(array: [Int]) -> [Int] {
 // Tests
 
 // Already Sorted
-assert(mergerSort_theSwiftest([Int]()).isSorted())
-assert(mergerSort_theSwiftest([7]).isSorted())
-assert(mergerSort_theSwiftest([1, 1, 2, 3, 5, 8, 13]).isSorted())
+mergerSort_theSwiftest([Int]()) == [Int]()
+mergerSort_theSwiftest([7]) == [7]
+mergerSort_theSwiftest([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Nearly Sorted
-assert(mergerSort_theSwiftest([1, 2, 1, 3, 5, 13, 8]).isSorted())
+mergerSort_theSwiftest([1, 2, 1, 3, 5, 13, 8]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Reversed
-assert(mergerSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
+mergerSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5, 8, 13]
 
 // Shuffled
-assert(mergerSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
+mergerSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
 
 
 /// The Generic Algorithm
 ///
 /// A play on the swiftest version, but elevated to a type-agnostic nirvana status
 ///
-/// This version showcases `guard`, `count`, nested function, `while`, `isEmpty`, `+=`, subcripting, `+=`, `removeFirst`, and generics
+/// This version showcases `guard`, `count`, nested function, `while`, `isEmpty`, `+=`, subcripting, `+=`, `remove`, and generics
 ///
 /// - Parameter array: The `array` to be sorted
 ///
 /// - Returns: A new array with elements sorted in ascending order
 
-func mergeSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
+func mergeSort_theGeneric<T: Comparable>(_ array: [T]) -> [T] {
 
     guard array.count > 1 else {
         return array
     }
 
-    func merge(left: [T], _ right: [T]) -> [T] {
+    func merge(_ left: [T], _ right: [T]) -> [T] {
 
         var left = left
         var right = right
@@ -259,7 +259,7 @@ func mergeSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
 
         while !left.isEmpty && !right.isEmpty {
 
-            merged += left.first! < right.first! ? [left.removeFirst()] : [right.removeFirst()]
+            merged += left.first! < right.first! ? [left.remove(at: 0)] : [right.remove(at: 0)]
         }
 
         if !left.isEmpty {
@@ -277,32 +277,32 @@ func mergeSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
 
     let left = mergeSort_theGeneric(Array(array[0 ..< pivot]))
     let right = mergeSort_theGeneric(Array(array[pivot ..< array.count]))
-    
+
     return merge(left, right)
 }
 
 // Tests
 
 // Already Sorted
-assert(mergeSort_theGeneric([Int]()).isSorted())
-assert(mergeSort_theGeneric([7]).isSorted())
-assert(mergeSort_theGeneric([1, 1, 2, 3, 5, 8, 13]).isSorted())
+mergeSort_theGeneric([Int]()) == [Int]()
+mergeSort_theGeneric([7]) == [7]
+mergeSort_theGeneric([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
 
-assert(mergeSort_theGeneric([String]()).isSorted())
-assert(mergeSort_theGeneric(["a"]).isSorted())
-assert(mergeSort_theGeneric(["a", "a", "b", "c", "d", "e"]).isSorted())
+mergeSort_theGeneric([String]()) == [String]()
+mergeSort_theGeneric(["a"]) == ["a"]
+mergeSort_theGeneric(["a", "a", "b", "c", "d", "e"]) == ["a", "a", "b", "c", "d", "e"]
 
 // Nearly Sorted
-assert(mergeSort_theGeneric([1, 2, 1, 3, 5, 13, 8]).isSorted())
-assert(mergeSort_theGeneric(["a", "b", "a", "c", "e", "d"]).isSorted())
+mergeSort_theGeneric([1, 2, 1, 3, 5, 13, 8]) == [1, 1, 2, 3, 5, 8, 13]
+mergeSort_theGeneric(["a", "b", "a", "c", "e", "d"]) == ["a", "a", "b", "c", "d", "e"]
 
 // Reversed
-assert(mergeSort_theGeneric([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
-assert(mergeSort_theGeneric(["a", "a", "b", "c", "d", "e"].reverse()).isSorted())
+mergeSort_theGeneric([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5, 8, 13]
+mergeSort_theGeneric(["a", "a", "b", "c", "d", "e"].reversed()) == ["a", "a", "b", "c", "d", "e"]
 
 // Shuffled
-assert(mergeSort_theGeneric([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
-assert(mergeSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffle()).isSorted())
+mergeSort_theGeneric([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
+mergeSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffled()) == ["a", "a", "b", "c", "d", "e"]
 
 
 /// The Functional Algorithm
@@ -315,13 +315,13 @@ assert(mergeSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffle()).isSorted()
 ///
 /// - Returns: A new array with elements sorted in ascending order
 
-func mergerSort_theFunctional(array: [Int]) -> [Int] {
+func mergerSort_theFunctional(_ array: [Int]) -> [Int] {
 
     guard array.count > 1 else {
         return array
     }
 
-    func merge(left: [Int], _ right: [Int]) -> [Int] {
+    func merge(_ left: [Int], _ right: [Int]) -> [Int] {
 
         guard !left.isEmpty else {
             return right
@@ -349,26 +349,25 @@ func mergerSort_theFunctional(array: [Int]) -> [Int] {
 // Tests
 
 // Already Sorted
-assert(mergerSort_theFunctional([Int]()).isSorted())
-assert(mergerSort_theFunctional([7]).isSorted())
-assert(mergerSort_theFunctional([1, 1, 2, 3, 5, 8, 13]).isSorted())
+mergerSort_theFunctional([Int]()) == [Int]()
+mergerSort_theFunctional([7]) == [7]
+mergerSort_theFunctional([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Nearly Sorted
-assert(mergerSort_theFunctional([1, 2, 1, 3, 5, 13, 8]).isSorted())
+mergerSort_theFunctional([1, 2, 1, 3, 5, 13, 8]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Reversed
-assert(mergerSort_theFunctional([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
+mergerSort_theFunctional([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5, 8, 13]
 
 // Shuffled
-assert(mergerSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
-
+mergerSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
 
 
 /// The Bonus Algorithm
 ///
 /// A generic version based on The Swift-ish Algorithm that takes a strict weak ordering closure/predicate
 ///
-/// This version showcases `guard`, `count`, subcripting, `..<`, `while`, `isEmpty`, and `removeFirst`, `@noescape`, and generics
+/// This version showcases `guard`, `count`, subcripting, `..<`, `while`, `isEmpty`, and `remove`, `@noescape`, and generics
 ///
 /// - Parameters:
 ///
@@ -377,7 +376,7 @@ assert(mergerSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// - Returns: A new array with elements sorted based on the `isOrderedBefore` predicate
 
-func mergeSort_theBonus<T>(array: [T], @noescape _ isOrderedBefore: (T, T) -> Bool) -> [T] {
+func mergeSort_theBonus<T>(_ array: [T], _ isOrderedBefore: (T, T) -> Bool) -> [T] {
 
     guard array.count > 1 else {
         return array
@@ -393,56 +392,55 @@ func mergeSort_theBonus<T>(array: [T], @noescape _ isOrderedBefore: (T, T) -> Bo
     while !left.isEmpty && !right.isEmpty {
 
         if isOrderedBefore(left.first!, right.first!) {
-            sorted.append(left.removeFirst())
+            sorted.append(left.remove(at: 0))
         } else {
-            sorted.append(right.removeFirst())
+            sorted.append(right.remove(at: 0))
         }
     }
 
     while !left.isEmpty {
-        sorted.append(left.removeFirst())
+        sorted.append(left.remove(at: 0))
     }
 
     while !right.isEmpty {
-        sorted.append(right.removeFirst())
+        sorted.append(right.remove(at: 0))
     }
-    
+
     return sorted
 }
 
 // Tests
 
 // Already Sorted
-assert(mergeSort_theBonus([Int](), <).isSorted())
-assert(mergeSort_theBonus([Int](), >).isSorted(>=))
-assert(mergeSort_theBonus([7], <).isSorted())
-assert(mergeSort_theBonus([7], >).isSorted(>=))
-assert(mergeSort_theBonus([1, 1, 2, 3, 5, 8, 13], <).isSorted())
-assert(mergeSort_theBonus([1, 1, 2, 3, 5, 8, 13], >).isSorted(>=))
+mergeSort_theBonus([Int](), <) == [Int]()
+mergeSort_theBonus([Int](), >) == [Int]()
+mergeSort_theBonus([7], <) == [7]
+mergeSort_theBonus([7], >) == [7]
+mergeSort_theBonus([1, 1, 2, 3, 5, 8, 13], <) == [1, 1, 2, 3, 5, 8, 13]
+mergeSort_theBonus([1, 1, 2, 3, 5, 8, 13], >) == [1, 1, 2, 3, 5, 8, 13].reversed()
 
-assert(mergeSort_theBonus([String](), <).isSorted())
-assert(mergeSort_theBonus([String](), >).isSorted(>=))
-assert(mergeSort_theBonus(["a"], <).isSorted())
-assert(mergeSort_theBonus(["a"], >).isSorted(>=))
-assert(mergeSort_theBonus(["a", "a", "b", "c", "d", "e"], <).isSorted())
-assert(mergeSort_theBonus(["a", "a", "b", "c", "d", "e"], >).isSorted(>=))
+mergeSort_theBonus([String](), <) == [String]()
+mergeSort_theBonus([String](), >) == [String]()
+mergeSort_theBonus(["a"], <) == ["a"]
+mergeSort_theBonus(["a"], >) == ["a"]
+mergeSort_theBonus(["a", "a", "b", "c", "d", "e"], <) == ["a", "a", "b", "c", "d", "e"]
+mergeSort_theBonus(["a", "a", "b", "c", "d", "e"], >) == ["a", "a", "b", "c", "d", "e"].reversed()
 
 // Nearly Sorted
-assert(mergeSort_theBonus([1, 2, 1, 3, 5, 13, 8], <).isSorted())
-assert(mergeSort_theBonus([1, 2, 1, 3, 5, 13, 8], >).isSorted(>=))
-assert(mergeSort_theBonus(["a", "b", "a", "c", "e", "d"], <).isSorted())
-assert(mergeSort_theBonus(["a", "b", "a", "c", "e", "d"], >).isSorted(>=))
+mergeSort_theBonus([1, 2, 1, 3, 5, 13, 8], <) == [1, 1, 2, 3, 5, 8, 13]
+mergeSort_theBonus([1, 2, 1, 3, 5, 13, 8], >) == [1, 1, 2, 3, 5, 8, 13].reversed()
+mergeSort_theBonus(["a", "b", "a", "c", "e", "d"], <) == ["a", "a", "b", "c", "d", "e"]
+mergeSort_theBonus(["a", "b", "a", "c", "e", "d"], >) == ["a", "a", "b", "c", "d", "e"].reversed()
 
 // Reversed
-assert(mergeSort_theBonus([1, 1, 2, 3, 5, 8, 13].reverse(), <).isSorted())
-assert(mergeSort_theBonus([1, 1, 2, 3, 5, 8, 13].reverse(), >).isSorted(>=))
-assert(mergeSort_theBonus(["a", "a", "b", "c", "d", "e"].reverse(), <).isSorted())
-assert(mergeSort_theBonus(["a", "a", "b", "c", "d", "e"].reverse(), >).isSorted(>=))
+mergeSort_theBonus([1, 1, 2, 3, 5, 8, 13].reversed(), <) == [1, 1, 2, 3, 5, 8, 13]
+mergeSort_theBonus([1, 1, 2, 3, 5, 8, 13].reversed(), >) == [1, 1, 2, 3, 5, 8, 13].reversed()
+mergeSort_theBonus(["a", "a", "b", "c", "d", "e"].reversed(), <) == ["a", "a", "b", "c", "d", "e"]
+mergeSort_theBonus(["a", "a", "b", "c", "d", "e"].reversed(), >) == ["a", "a", "b", "c", "d", "e"].reversed()
 
 // Shuffled
-assert(mergeSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffle(), <).isSorted())
-assert(mergeSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffle(), >).isSorted(>=))
-assert(mergeSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffle(), <).isSorted())
-assert(mergeSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffle(), >).isSorted(>=))
-
+mergeSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffled(), <) == [1, 1, 2, 3, 5, 8, 13]
+mergeSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffled(), >) == [1, 1, 2, 3, 5, 8, 13].reversed()
+mergeSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffled(), <) == ["a", "a", "b", "c", "d", "e"]
+mergeSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffled(), >) == ["a", "a", "b", "c", "d", "e"].reversed()
 //: [Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)
