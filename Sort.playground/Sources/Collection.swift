@@ -1,6 +1,6 @@
 import Foundation
 
-public extension CollectionType {
+public extension Collection {
 
     // MARK: - Instance Methods
 
@@ -8,15 +8,16 @@ public extension CollectionType {
     ///
     /// - Returns: A copy of `self` with its elements shuffled
 
-    @warn_unused_result(mutable_variant="shuffleInPlace")
-    func shuffle() -> [Generator.Element] {
+    func shuffled() -> [Iterator.Element] {
+
         var array = Array(self)
-        array.shuffleInPlace()
+        array.shuffle()
+
         return array
     }
 }
 
-public extension CollectionType where Index.Distance == Int {
+public extension Collection where IndexDistance == Int {
 
     // MARK: - Instance Methods
 
@@ -24,15 +25,14 @@ public extension CollectionType where Index.Distance == Int {
     ///
     /// - Returns: An optional random element from `self`, or `nil` if `self` is empty
 
-    @warn_unused_result
-    func sample() -> Generator.Element? {
+    func sampled() -> Iterator.Element? {
+
         guard !isEmpty else {
             return nil
         }
 
         let offset = Int.random(from: 0, to: count - 1)
-        let index = startIndex.advancedBy(offset)
 
-        return self[index]
+        return self[index(startIndex, offsetBy: offset)]
     }
 }

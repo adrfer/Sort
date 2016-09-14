@@ -1,6 +1,6 @@
 import Foundation
 
-public extension IntegerType {
+public extension Integer {
 
     // MARK: - Type Methods
 
@@ -13,8 +13,8 @@ public extension IntegerType {
     ///
     /// - Returns: A random integer between `lower` and `upper` bounds
 
-    @warn_unused_result
     static func random(from lower: Int, to upper: Int) -> Int {
+        
         return lower + Int(arc4random_uniform(UInt32(upper - lower + 1)))
     }
 }
