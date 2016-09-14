@@ -31,7 +31,7 @@
 ///
 /// - Todo: Remove code annotations
 
-func selectionSort_theClassic(array: [Int]) -> [Int] {
+func selectionSort_theClassic(_ array: [Int]) -> [Int] {
 
     // take in an array that is considered unsorted and make a copy of it
     var array = array
@@ -43,7 +43,7 @@ func selectionSort_theClassic(array: [Int]) -> [Int] {
 
     // pass through the array, but it needs only as many passes as the number of swaps required
     for i in 0 ..< array.count - 1 {
-        
+
         // consider the first element of the unsorted portion to be the smallest
         var indexOfTheSmallestElement = i
 
@@ -73,18 +73,18 @@ func selectionSort_theClassic(array: [Int]) -> [Int] {
 // Tests
 
 // Already Sorted
-assert(selectionSort_theClassic([Int]()).isSorted())
-assert(selectionSort_theClassic([7]).isSorted())
-assert(selectionSort_theClassic([1, 1, 2, 3, 5, 8, 13]).isSorted())
+selectionSort_theClassic([Int]()) == [Int]()
+selectionSort_theClassic([7]) == [7]
+selectionSort_theClassic([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Nearly Sorted
-assert(selectionSort_theClassic([1, 2, 1, 3, 5, 13, 8]).isSorted())
+selectionSort_theClassic([1, 2, 1, 3, 5, 13, 8]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Reversed
-assert(selectionSort_theClassic([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
+selectionSort_theClassic([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5, 8, 13]
 
 // Shuffled
-assert(selectionSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
+selectionSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
 
 
 /// The Swift-ish Algorithm
@@ -97,7 +97,7 @@ assert(selectionSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// - Returns: A new array with elements sorted in ascending order
 
-func selectionSort_theSwiftish(array: [Int]) -> [Int] {
+func selectionSort_theSwiftish(_ array: [Int]) -> [Int] {
 
     var array = array
 
@@ -119,38 +119,38 @@ func selectionSort_theSwiftish(array: [Int]) -> [Int] {
 
         swap(&array[i], &array[indexOfMinElement])
     }
-    
+
     return array
 }
 
 // Tests
 
 // Already Sorted
-assert(selectionSort_theSwiftish([Int]()).isSorted())
-assert(selectionSort_theSwiftish([7]).isSorted())
-assert(selectionSort_theSwiftish([1, 1, 2, 3, 5, 8, 13]).isSorted())
+selectionSort_theSwiftish([Int]()) == [Int]()
+selectionSort_theSwiftish([7]) == [7]
+selectionSort_theSwiftish([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Nearly Sorted
-assert(selectionSort_theSwiftish([1, 2, 1, 3, 5, 13, 8]).isSorted())
+selectionSort_theSwiftish([1, 2, 1, 3, 5, 13, 8]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Reversed
-assert(selectionSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
+selectionSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5, 8, 13]
 
 // Shuffled
-assert(selectionSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
+selectionSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
 
 
 /// The Swiftest Algorithm
 ///
 /// A nifty approach that attempts to tap into the most powerful language features yet
 ///
-/// This version showcases `guard`, `count`, `for-in`, subcripting, `..<`, `minElement`, `indexOf`, `removeAtIndex`, and `append`
+/// This version showcases `guard`, `count`, `for-in`, subcripting, `..<`, `min`, `index`, `remove`, and `append`
 ///
 /// - Parameter array: The `array` to be sorted
 ///
 /// - Returns: A new array with elements sorted in ascending order
 
-func selectionSort_theSwiftest(array: [Int]) -> [Int] {
+func selectionSort_theSwiftest(_ array: [Int]) -> [Int] {
 
     var array = array
 
@@ -162,44 +162,44 @@ func selectionSort_theSwiftest(array: [Int]) -> [Int] {
 
         let newArray = array[0 ..< array.count - index]
 
-        if let minElement = newArray.minElement(), indexOfMinElement = newArray.indexOf(minElement) {
+        if let minElement = newArray.min(), let indexOfMinElement = newArray.index(of: minElement) {
 
-            array.removeAtIndex(indexOfMinElement)
+            array.remove(at: indexOfMinElement)
             array.append(minElement)
         }
     }
-    
+
     return array
 }
 
 // Tests
 
 // Already Sorted
-assert(selectionSort_theSwiftest([Int]()).isSorted())
-assert(selectionSort_theSwiftest([7]).isSorted())
-assert(selectionSort_theSwiftest([1, 1, 2, 3, 5, 8, 13]).isSorted())
+selectionSort_theSwiftest([Int]()) == [Int]()
+selectionSort_theSwiftest([7]) == [7]
+selectionSort_theSwiftest([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Nearly Sorted
-assert(selectionSort_theSwiftest([1, 2, 1, 3, 5, 13, 8]).isSorted())
+selectionSort_theSwiftest([1, 2, 1, 3, 5, 13, 8]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Reversed
-assert(selectionSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
+selectionSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5, 8, 13]
 
 // Shuffled
-assert(selectionSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
+selectionSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
 
 
 /// The Generic Algorithm
 ///
 /// A play on the swiftest version, but elevated to a type-agnostic nirvana status
 ///
-/// This version showcases `guard`, `count`, `for-in`, subcripting, `..<`, `minElement`, `indexOf`, `removeAtIndex`, `append`, and generics
+/// This version showcases `guard`, `count`, `for-in`, subcripting, `..<`, `min`, `index`, `remove`, `append`, and generics
 ///
 /// - Parameter array: The `array` to be sorted
 ///
 /// - Returns: A new array with elements sorted in ascending order
 
-func selectionSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
+func selectionSort_theGeneric<T: Comparable>(_ array: [T]) -> [T] {
 
     var array = array
 
@@ -211,9 +211,9 @@ func selectionSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
 
         let newArray = array[0 ..< array.count - index]
 
-        if let minElement = newArray.minElement(), indexOfMinElement = newArray.indexOf(minElement) {
+        if let minElement = newArray.min(), let indexOfMinElement = newArray.index(of: minElement) {
 
-            array.removeAtIndex(indexOfMinElement)
+            array.remove(at: indexOfMinElement)
             array.append(minElement)
         }
     }
@@ -224,49 +224,47 @@ func selectionSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
 // Tests
 
 // Already Sorted
-assert(selectionSort_theGeneric([Int]()).isSorted())
-assert(selectionSort_theGeneric([7]).isSorted())
-assert(selectionSort_theGeneric([1, 1, 2, 3, 5, 8, 13]).isSorted())
+selectionSort_theGeneric([Int]()) == [Int]()
+selectionSort_theGeneric([7]) == [7]
+selectionSort_theGeneric([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
 
-assert(selectionSort_theGeneric([String]()).isSorted())
-assert(selectionSort_theGeneric(["a"]).isSorted())
-assert(selectionSort_theGeneric(["a", "a", "b", "c", "d", "e"]).isSorted())
+selectionSort_theGeneric([String]()) == [String]()
+selectionSort_theGeneric(["a"]) == ["a"]
+selectionSort_theGeneric(["a", "a", "b", "c", "d", "e"]) == ["a", "a", "b", "c", "d", "e"]
 
 // Nearly Sorted
-assert(selectionSort_theGeneric([1, 2, 1, 3, 5, 13, 8]).isSorted())
-assert(selectionSort_theGeneric(["a", "b", "a", "c", "e", "d"]).isSorted())
+selectionSort_theGeneric([1, 2, 1, 3, 5, 13, 8]) == [1, 1, 2, 3, 5, 8, 13]
+selectionSort_theGeneric(["a", "b", "a", "c", "e", "d"]) == ["a", "a", "b", "c", "d", "e"]
 
 // Reversed
-assert(selectionSort_theGeneric([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
-assert(selectionSort_theGeneric(["a", "a", "b", "c", "d", "e"].reverse()).isSorted())
+selectionSort_theGeneric([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5, 8, 13]
+selectionSort_theGeneric(["a", "a", "b", "c", "d", "e"].reversed()) == ["a", "a", "b", "c", "d", "e"]
 
 // Shuffled
-assert(selectionSort_theGeneric([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
-assert(selectionSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffle()).isSorted())
+selectionSort_theGeneric([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
+selectionSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffled()) == ["a", "a", "b", "c", "d", "e"]
 
 
 /// The Functional Algorithm
 ///
 /// A quirky take that unleashes some of the neat declarative aspects of the language
 ///
-/// This version showcases `guard`, `count`, `minElement`, `indexOf`, `filter`, and `+`
+/// This version showcases `guard`, `count`, `min`, `index`, `enumerated`, `filter`, `map`, and `+`
 ///
 /// - Parameter array: The `array` to be sorted
 ///
 /// - Returns: A new array with elements sorted in ascending order
 
-func selectionSort_theFunctional(array: [Int]) -> [Int] {
+func selectionSort_theFunctional(_ array: [Int]) -> [Int] {
 
-    guard array.count > 1, let minElement = array.minElement() else {
+    guard array.count > 1, let minElement = array.min() else {
         return array
     }
 
-    let indexOfMinElement = array.indexOf(minElement)
-
-
-    let rest = array.enumerate()
-                    .filter({ index, _ in index != indexOfMinElement })
-                    .map({ _, element in element })
+    let indexOfMinElement = array.index(of: minElement)!
+    let rest = array.enumerated()
+        .filter({ index, _ in index != indexOfMinElement })
+        .map({ _, element in element })
 
     return [minElement] + selectionSort_theFunctional(rest)
 }
@@ -274,18 +272,18 @@ func selectionSort_theFunctional(array: [Int]) -> [Int] {
 // Tests
 
 // Already Sorted
-assert(selectionSort_theFunctional([Int]()).isSorted())
-assert(selectionSort_theFunctional([7]).isSorted())
-assert(selectionSort_theFunctional([1, 1, 2, 3, 5, 8, 13]).isSorted())
+selectionSort_theFunctional([Int]()) == [Int]()
+selectionSort_theFunctional([7]) == [7]
+selectionSort_theFunctional([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Nearly Sorted
-assert(selectionSort_theFunctional([1, 2, 1, 3, 5, 13, 8]).isSorted())
+selectionSort_theFunctional([1, 2, 1, 3, 5, 13, 8]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Reversed
-assert(selectionSort_theFunctional([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
+selectionSort_theFunctional([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5, 8, 13]
 
 // Shuffled
-assert(selectionSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
+selectionSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
 
 
 /// The Bonus Algorithm
@@ -301,7 +299,7 @@ assert(selectionSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// - Returns: A new array with elements sorted based on the `isOrderedBefore` predicate
 
-func selectionSort_theBonus<T>(array: [T], @noescape _ isOrderedBefore: (T, T) -> Bool) -> [T] {
+func selectionSort_theBonus<T>(_ array: [T], _ isOrderedBefore: (T, T) -> Bool) -> [T] {
 
     var array = array
 
@@ -330,36 +328,36 @@ func selectionSort_theBonus<T>(array: [T], @noescape _ isOrderedBefore: (T, T) -
 // Tests
 
 // Already Sorted
-assert(selectionSort_theBonus([Int](), <).isSorted())
-assert(selectionSort_theBonus([Int](), >).isSorted(>=))
-assert(selectionSort_theBonus([7], <).isSorted())
-assert(selectionSort_theBonus([7], >).isSorted(>=))
-assert(selectionSort_theBonus([1, 1, 2, 3, 5, 8, 13], <).isSorted())
-assert(selectionSort_theBonus([1, 1, 2, 3, 5, 8, 13], >).isSorted(>=))
+selectionSort_theBonus([Int](), <) == [Int]()
+selectionSort_theBonus([Int](), >) == [Int]()
+selectionSort_theBonus([7], <) == [7]
+selectionSort_theBonus([7], >) == [7]
+selectionSort_theBonus([1, 1, 2, 3, 5, 8, 13], <) == [1, 1, 2, 3, 5, 8, 13]
+selectionSort_theBonus([1, 1, 2, 3, 5, 8, 13], >) == [1, 1, 2, 3, 5, 8, 13].reversed()
 
-assert(selectionSort_theBonus([String](), <).isSorted())
-assert(selectionSort_theBonus([String](), >).isSorted(>=))
-assert(selectionSort_theBonus(["a"], <).isSorted())
-assert(selectionSort_theBonus(["a"], >).isSorted(>=))
-assert(selectionSort_theBonus(["a", "a", "b", "c", "d", "e"], <).isSorted())
-assert(selectionSort_theBonus(["a", "a", "b", "c", "d", "e"], >).isSorted(>=))
+selectionSort_theBonus([String](), <) == [String]()
+selectionSort_theBonus([String](), >) == [String]()
+selectionSort_theBonus(["a"], <) == ["a"]
+selectionSort_theBonus(["a"], >) == ["a"]
+selectionSort_theBonus(["a", "a", "b", "c", "d", "e"], <) == ["a", "a", "b", "c", "d", "e"]
+selectionSort_theBonus(["a", "a", "b", "c", "d", "e"], >) == ["a", "a", "b", "c", "d", "e"].reversed()
 
 // Nearly Sorted
-assert(selectionSort_theBonus([1, 2, 1, 3, 5, 13, 8], <).isSorted())
-assert(selectionSort_theBonus([1, 2, 1, 3, 5, 13, 8], >).isSorted(>=))
-assert(selectionSort_theBonus(["a", "b", "a", "c", "e", "d"], <).isSorted())
-assert(selectionSort_theBonus(["a", "b", "a", "c", "e", "d"], >).isSorted(>=))
+selectionSort_theBonus([1, 2, 1, 3, 5, 13, 8], <) == [1, 1, 2, 3, 5, 8, 13]
+selectionSort_theBonus([1, 2, 1, 3, 5, 13, 8], >) == [1, 1, 2, 3, 5, 8, 13].reversed()
+selectionSort_theBonus(["a", "b", "a", "c", "e", "d"], <) == ["a", "a", "b", "c", "d", "e"]
+selectionSort_theBonus(["a", "b", "a", "c", "e", "d"], >) == ["a", "a", "b", "c", "d", "e"].reversed()
 
 // Reversed
-assert(selectionSort_theBonus([1, 1, 2, 3, 5, 8, 13].reverse(), <).isSorted())
-assert(selectionSort_theBonus([1, 1, 2, 3, 5, 8, 13].reverse(), >).isSorted(>=))
-assert(selectionSort_theBonus(["a", "a", "b", "c", "d", "e"].reverse(), <).isSorted())
-assert(selectionSort_theBonus(["a", "a", "b", "c", "d", "e"].reverse(), >).isSorted(>=))
+selectionSort_theBonus([1, 1, 2, 3, 5, 8, 13].reversed(), <) == [1, 1, 2, 3, 5, 8, 13]
+selectionSort_theBonus([1, 1, 2, 3, 5, 8, 13].reversed(), >) == [1, 1, 2, 3, 5, 8, 13].reversed()
+selectionSort_theBonus(["a", "a", "b", "c", "d", "e"].reversed(), <) == ["a", "a", "b", "c", "d", "e"]
+selectionSort_theBonus(["a", "a", "b", "c", "d", "e"].reversed(), >) == ["a", "a", "b", "c", "d", "e"].reversed()
 
 // Shuffled
-assert(selectionSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffle(), <).isSorted())
-assert(selectionSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffle(), >).isSorted(>=))
-assert(selectionSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffle(), <).isSorted())
-assert(selectionSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffle(), >).isSorted(>=))
+selectionSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffled(), <) == [1, 1, 2, 3, 5, 8, 13]
+selectionSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffled(), >) == [1, 1, 2, 3, 5, 8, 13].reversed()
+selectionSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffled(), <) == ["a", "a", "b", "c", "d", "e"]
+selectionSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffled(), >) == ["a", "a", "b", "c", "d", "e"].reversed()
 
 //: [Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)
