@@ -33,7 +33,7 @@
 ///
 /// - Todo: Remove code annotations
 
-func insertionSort_theClassic(array: [Int]) -> [Int] {
+func insertionSort_theClassic(_ array: [Int]) -> [Int] {
 
     // take in an array that is considered unsorted and make a copy of it
     var array = array
@@ -71,18 +71,18 @@ func insertionSort_theClassic(array: [Int]) -> [Int] {
 // Tests
 
 // Already Sorted
-assert(insertionSort_theClassic([Int]()).isSorted())
-assert(insertionSort_theClassic([7]).isSorted())
-assert(insertionSort_theClassic([1, 1, 2, 3, 5, 8, 13]).isSorted())
+insertionSort_theClassic([Int]()) == [Int]()
+insertionSort_theClassic([7]) == [7]
+insertionSort_theClassic([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Nearly Sorted
-assert(insertionSort_theClassic([1, 2, 1, 3, 5, 13, 8]).isSorted())
+insertionSort_theClassic([1, 2, 1, 3, 5, 13, 8]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Reversed
-assert(insertionSort_theClassic([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
+insertionSort_theClassic([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5, 8, 13]
 
 // Shuffled
-assert(insertionSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
+insertionSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
 
 
 /// The Swift-ish Algorithm
@@ -95,7 +95,7 @@ assert(insertionSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// - Returns: A new array with elements sorted in ascending order
 
-func insertionSort_theSwiftish(array: [Int]) -> [Int] {
+func insertionSort_theSwiftish(_ array: [Int]) -> [Int] {
 
     var array = array
 
@@ -113,38 +113,38 @@ func insertionSort_theSwiftish(array: [Int]) -> [Int] {
             j -= 1
         }
     }
-    
+
     return array
 }
 
 // Tests
 
 // Already Sorted
-assert(insertionSort_theSwiftish([Int]()).isSorted())
-assert(insertionSort_theSwiftish([7]).isSorted())
-assert(insertionSort_theSwiftish([1, 1, 2, 3, 5, 8, 13]).isSorted())
+insertionSort_theSwiftish([Int]()) == [Int]()
+insertionSort_theSwiftish([7]) == [7]
+insertionSort_theSwiftish([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Nearly Sorted
-assert(insertionSort_theSwiftish([1, 2, 1, 3, 5, 13, 8]).isSorted())
+insertionSort_theSwiftish([1, 2, 1, 3, 5, 13, 8]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Reversed
-assert(insertionSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
+insertionSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5, 8, 13]
 
 // Shuffled
-assert(insertionSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
+insertionSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
 
 
 /// The Swiftest Algorithm
 ///
 /// A nifty approach that attempts to tap into the most powerful language features yet
 ///
-/// This version showcases `guard`, `count`, `for-in`, `..<`, `removeAtIndex`, subcripting, and `insert`
+/// This version showcases `guard`, `count`, `for-in`, `..<`, `remove`, subcripting, and `insert`
 ///
 /// - Parameter array: The `array` to be sorted
 ///
 /// - Returns: A new array with elements sorted in ascending order
 
-func insertionSort_theSwiftest(array: [Int]) -> [Int] {
+func insertionSort_theSwiftest(_ array: [Int]) -> [Int] {
 
     var array = array
 
@@ -154,14 +154,14 @@ func insertionSort_theSwiftest(array: [Int]) -> [Int] {
 
     for i in 1 ..< array.count {
 
-        let element = array.removeAtIndex(i)
+        let element = array.remove(at: i)
         var j = i
 
         while j > 0 && element < array[j - 1] {
             j -= 1
         }
 
-        array.insert(element, atIndex: j)
+        array.insert(element, at: j)
     }
 
     return array
@@ -170,31 +170,31 @@ func insertionSort_theSwiftest(array: [Int]) -> [Int] {
 // Tests
 
 // Already Sorted
-assert(insertionSort_theSwiftest([Int]()).isSorted())
-assert(insertionSort_theSwiftest([7]).isSorted())
-assert(insertionSort_theSwiftest([1, 1, 2, 3, 5, 8, 13]).isSorted())
+insertionSort_theSwiftest([Int]()) == [Int]()
+insertionSort_theSwiftest([7]) == [7]
+insertionSort_theSwiftest([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Nearly Sorted
-assert(insertionSort_theSwiftest([1, 2, 1, 3, 5, 13, 8]).isSorted())
+insertionSort_theSwiftest([1, 2, 1, 3, 5, 13, 8]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Reversed
-assert(insertionSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
+insertionSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5, 8, 13]
 
 // Shuffled
-assert(insertionSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
+insertionSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
 
 
 /// The Generic Algorithm
 ///
 /// A play on the swiftest version, but elevated to a type-agnostic nirvana status
 ///
-/// This version showcases `guard`, `count`, `for-in`, `..<`, `removeAtIndex`, subcripting, `insert`, and generics
+/// This version showcases `guard`, `count`, `for-in`, `..<`, `remove`, subcripting, `insert`, and generics
 ///
 /// - Parameter array: The `array` to be sorted
 ///
 /// - Returns: A new array with elements sorted in ascending order
 
-func insertionSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
+func insertionSort_theGeneric<T: Comparable>(_ array: [T]) -> [T] {
 
     var array = array
 
@@ -204,41 +204,41 @@ func insertionSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
 
     for i in 1 ..< array.count {
 
-        let element = array.removeAtIndex(i)
+        let element = array.remove(at: i)
         var j = i
 
         while j > 0 && element < array[j - 1] {
             j -= 1
         }
 
-        array.insert(element, atIndex: j)
+        array.insert(element, at: j)
     }
-    
+
     return array
 }
 
 // Tests
 
 // Already Sorted
-assert(insertionSort_theGeneric([Int]()).isSorted())
-assert(insertionSort_theGeneric([7]).isSorted())
-assert(insertionSort_theGeneric([1, 1, 2, 3, 5, 8, 13]).isSorted())
+insertionSort_theGeneric([Int]()) == [Int]()
+insertionSort_theGeneric([7]) == [7]
+insertionSort_theGeneric([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
 
-assert(insertionSort_theGeneric([String]()).isSorted())
-assert(insertionSort_theGeneric(["a"]).isSorted())
-assert(insertionSort_theGeneric(["a", "a", "b", "c", "d", "e"]).isSorted())
+insertionSort_theGeneric([String]()) == [String]()
+insertionSort_theGeneric(["a"]) == ["a"]
+insertionSort_theGeneric(["a", "a", "b", "c", "d", "e"]) == ["a", "a", "b", "c", "d", "e"]
 
 // Nearly Sorted
-assert(insertionSort_theGeneric([1, 2, 1, 3, 5, 13, 8]).isSorted())
-assert(insertionSort_theGeneric(["a", "b", "a", "c", "e", "d"]).isSorted())
+insertionSort_theGeneric([1, 2, 1, 3, 5, 13, 8]) == [1, 1, 2, 3, 5, 8, 13]
+insertionSort_theGeneric(["a", "b", "a", "c", "e", "d"]) == ["a", "a", "b", "c", "d", "e"]
 
 // Reversed
-assert(insertionSort_theGeneric([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
-assert(insertionSort_theGeneric(["a", "a", "b", "c", "d", "e"].reverse()).isSorted())
+insertionSort_theGeneric([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5, 8, 13]
+insertionSort_theGeneric(["a", "a", "b", "c", "d", "e"].reversed()) == ["a", "a", "b", "c", "d", "e"]
 
 // Shuffled
-assert(insertionSort_theGeneric([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
-assert(insertionSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffle()).isSorted())
+insertionSort_theGeneric([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
+insertionSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffled()) == ["a", "a", "b", "c", "d", "e"]
 
 
 /// The Functional Algorithm
@@ -251,13 +251,13 @@ assert(insertionSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffle()).isSort
 ///
 /// - Returns: A new array with elements sorted in ascending order
 
-func insertionSort_theFunctional(array: [Int]) -> [Int] {
+func insertionSort_theFunctional(_ array: [Int]) -> [Int] {
 
     guard array.count > 1 else {
         return array
     }
 
-    func insert(first: Int, _ rest: [Int]) -> [Int] {
+    func insert(_ first: Int, _ rest: [Int]) -> [Int] {
 
         guard !rest.isEmpty else {
             return [first]
@@ -276,18 +276,18 @@ func insertionSort_theFunctional(array: [Int]) -> [Int] {
 // Tests
 
 // Already Sorted
-assert(insertionSort_theFunctional([Int]()).isSorted())
-assert(insertionSort_theFunctional([7]).isSorted())
-assert(insertionSort_theFunctional([1, 1, 2, 3, 5, 8, 13]).isSorted())
+insertionSort_theFunctional([Int]()) == [Int]()
+insertionSort_theFunctional([7]) == [7]
+insertionSort_theFunctional([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Nearly Sorted
-assert(insertionSort_theFunctional([1, 2, 1, 3, 5, 13, 8]).isSorted())
+insertionSort_theFunctional([1, 2, 1, 3, 5, 13, 8]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Reversed
-assert(insertionSort_theFunctional([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
+insertionSort_theFunctional([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5, 8, 13]
 
 // Shuffled
-assert(insertionSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
+insertionSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
 
 
 /// The Bonus Algorithm
@@ -303,7 +303,7 @@ assert(insertionSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// - Returns: A new array with elements sorted based on the `isOrderedBefore` predicate
 
-func insertionSort_theBonus<T>(array: [T], @noescape _ isOrderedBefore: (T, T) -> Bool) -> [T] {
+func insertionSort_theBonus<T>(_ array: [T], _ isOrderedBefore: (T, T) -> Bool) -> [T] {
 
     var array = array
 
@@ -328,35 +328,35 @@ func insertionSort_theBonus<T>(array: [T], @noescape _ isOrderedBefore: (T, T) -
 // Tests
 
 // Already Sorted
-assert(insertionSort_theBonus([Int](), <).isSorted())
-assert(insertionSort_theBonus([Int](), >).isSorted(>=))
-assert(insertionSort_theBonus([7], <).isSorted())
-assert(insertionSort_theBonus([7], >).isSorted(>=))
-assert(insertionSort_theBonus([1, 1, 2, 3, 5, 8, 13], <).isSorted())
-assert(insertionSort_theBonus([1, 1, 2, 3, 5, 8, 13], >).isSorted(>=))
+insertionSort_theBonus([Int](), <) == [Int]()
+insertionSort_theBonus([Int](), >) == [Int]()
+insertionSort_theBonus([7], <) == [7]
+insertionSort_theBonus([7], >) == [7]
+insertionSort_theBonus([1, 1, 2, 3, 5, 8, 13], <) == [1, 1, 2, 3, 5, 8, 13]
+insertionSort_theBonus([1, 1, 2, 3, 5, 8, 13], >) == [1, 1, 2, 3, 5, 8, 13].reversed()
 
-assert(insertionSort_theBonus([String](), <).isSorted())
-assert(insertionSort_theBonus([String](), >).isSorted(>=))
-assert(insertionSort_theBonus(["a"], <).isSorted())
-assert(insertionSort_theBonus(["a"], >).isSorted(>=))
-assert(insertionSort_theBonus(["a", "a", "b", "c", "d", "e"], <).isSorted())
-assert(insertionSort_theBonus(["a", "a", "b", "c", "d", "e"], >).isSorted(>=))
+insertionSort_theBonus([String](), <) == [String]()
+insertionSort_theBonus([String](), >) == [String]()
+insertionSort_theBonus(["a"], <) == ["a"]
+insertionSort_theBonus(["a"], >) == ["a"]
+insertionSort_theBonus(["a", "a", "b", "c", "d", "e"], <) == ["a", "a", "b", "c", "d", "e"]
+insertionSort_theBonus(["a", "a", "b", "c", "d", "e"], >) == ["a", "a", "b", "c", "d", "e"].reversed()
 
 // Nearly Sorted
-assert(insertionSort_theBonus([1, 2, 1, 3, 5, 13, 8], <).isSorted())
-assert(insertionSort_theBonus([1, 2, 1, 3, 5, 13, 8], >).isSorted(>=))
-assert(insertionSort_theBonus(["a", "b", "a", "c", "e", "d"], <).isSorted())
-assert(insertionSort_theBonus(["a", "b", "a", "c", "e", "d"], >).isSorted(>=))
+insertionSort_theBonus([1, 2, 1, 3, 5, 13, 8], <) == [1, 1, 2, 3, 5, 8, 13]
+insertionSort_theBonus([1, 2, 1, 3, 5, 13, 8], >) == [1, 1, 2, 3, 5, 8, 13].reversed()
+insertionSort_theBonus(["a", "b", "a", "c", "e", "d"], <) == ["a", "a", "b", "c", "d", "e"]
+insertionSort_theBonus(["a", "b", "a", "c", "e", "d"], >) == ["a", "a", "b", "c", "d", "e"].reversed()
 
 // Reversed
-assert(insertionSort_theBonus([1, 1, 2, 3, 5, 8, 13].reverse(), <).isSorted())
-assert(insertionSort_theBonus([1, 1, 2, 3, 5, 8, 13].reverse(), >).isSorted(>=))
-assert(insertionSort_theBonus(["a", "a", "b", "c", "d", "e"].reverse(), <).isSorted())
-assert(insertionSort_theBonus(["a", "a", "b", "c", "d", "e"].reverse(), >).isSorted(>=))
+insertionSort_theBonus([1, 1, 2, 3, 5, 8, 13].reversed(), <) == [1, 1, 2, 3, 5, 8, 13]
+insertionSort_theBonus([1, 1, 2, 3, 5, 8, 13].reversed(), >) == [1, 1, 2, 3, 5, 8, 13].reversed()
+insertionSort_theBonus(["a", "a", "b", "c", "d", "e"].reversed(), <) == ["a", "a", "b", "c", "d", "e"]
+insertionSort_theBonus(["a", "a", "b", "c", "d", "e"].reversed(), >) == ["a", "a", "b", "c", "d", "e"].reversed()
 
 // Shuffled
-assert(insertionSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffle(), <).isSorted())
-assert(insertionSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffle(), >).isSorted(>=))
-assert(insertionSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffle(), <).isSorted())
-assert(insertionSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffle(), >).isSorted(>=))
+insertionSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffled(), <) == [1, 1, 2, 3, 5, 8, 13]
+insertionSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffled(), >) == [1, 1, 2, 3, 5, 8, 13].reversed()
+insertionSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffled(), <) == ["a", "a", "b", "c", "d", "e"]
+insertionSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffled(), >) == ["a", "a", "b", "c", "d", "e"].reversed()
 //: [Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)
