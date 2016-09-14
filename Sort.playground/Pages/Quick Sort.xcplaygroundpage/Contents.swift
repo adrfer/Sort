@@ -24,7 +24,7 @@
 ///
 /// A die-hard style, rooted in tradition, in all its imperative glory
 ///
-/// This version showcases early exit `if`, `count`, `sample`, `for-in`, `..<`, subcripting, `append`tuple swapping, and `break`
+/// This version showcases early exit `if`, `count`, `sampled`, `for-in`, `..<`, subcripting, and `append`
 ///
 /// - Parameter array: The `array` to be sorted
 ///
@@ -32,7 +32,7 @@
 ///
 /// - Todo: Remove code annotations
 
-func quickSort_theClassic(array: [Int]) -> [Int] {
+func quickSort_theClassic(_ array: [Int]) -> [Int] {
 
     // return the array if it is empty or contains a single element, for it is sorted
     if array.count <= 1 {
@@ -40,7 +40,7 @@ func quickSort_theClassic(array: [Int]) -> [Int] {
     }
 
     // pick the pivot element randomly
-    let pivot = array.sample()
+    let pivot = array.sampled()
 
     // define the partitions soon to be populated
     var lessThan = [Int](), equal = [Int](), greaterThan = [Int]()
@@ -49,16 +49,16 @@ func quickSort_theClassic(array: [Int]) -> [Int] {
     for i in 0 ..< array.count {
 
         // append to the less-than partition elements smaller than the pivot
-        if array[i] < pivot {
+        if array[i] < pivot! {
 
             lessThan.append(array[i])
 
-        // append to the greater-than partition elements larger than the pivot
-        } else if array[i] > pivot {
+            // append to the greater-than partition elements larger than the pivot
+        } else if array[i] > pivot! {
 
             greaterThan.append(array[i])
 
-        // append to the equal partition elements equal to the pivot
+            // append to the equal partition elements equal to the pivot
         } else {
 
             equal.append(array[i])
@@ -72,47 +72,46 @@ func quickSort_theClassic(array: [Int]) -> [Int] {
 // Tests
 
 // Already Sorted
-assert(quickSort_theClassic([Int]()).isSorted())
-assert(quickSort_theClassic([7]).isSorted())
-assert(quickSort_theClassic([1, 1, 2, 3, 5, 8, 13]).isSorted())
+quickSort_theClassic([Int]()) == [Int]()
+quickSort_theClassic([7]) == [7]
+quickSort_theClassic([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Nearly Sorted
-assert(quickSort_theClassic([1, 2, 1, 3, 5, 13, 8]).isSorted())
+quickSort_theClassic([1, 2, 1, 3, 5, 13, 8]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Reversed
-assert(quickSort_theClassic([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
+quickSort_theClassic([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5, 8, 13]
 
 // Shuffled
-assert(quickSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
+quickSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
 
 
 /// The Swift-ish Algorithm
 ///
 /// A sligthly more modern take on the classic, but still not quite quaint enough
 ///
-/// This version showcases `guard`, `count`, `sample`, `for-in`, `switch`, `+=`, and `+`
+/// This version showcases `guard`, `count`, `sampled`, `for-in`, `switch`, `+=`, and `+`
 ///
 /// - Parameter array: The `array` to be sorted
 ///
 /// - Returns: A new array with elements sorted in ascending order
 
-func quickSort_theSwiftish(array: [Int]) -> [Int] {
+func quickSort_theSwiftish(_ array: [Int]) -> [Int] {
 
     guard array.count > 1 else {
         return array
     }
 
-    let pivot = array.sample()
-    
+    let pivot = array.sampled()
+
     var lessThan = [Int](), equal = [Int](), greaterThan = [Int]()
 
     for element in array {
 
         switch element {
-        case let element where element < pivot: lessThan += [element]
-        case let element where element > pivot: greaterThan += [element]
+        case let element where element < pivot!: lessThan += [element]
+        case let element where element > pivot!: greaterThan += [element]
         default: equal += [element]
-
         }
     }
 
@@ -122,31 +121,31 @@ func quickSort_theSwiftish(array: [Int]) -> [Int] {
 // Tests
 
 // Already Sorted
-assert(quickSort_theSwiftish([Int]()).isSorted())
-assert(quickSort_theSwiftish([7]).isSorted())
-assert(quickSort_theSwiftish([1, 1, 2, 3, 5, 8, 13]).isSorted())
+quickSort_theSwiftish([Int]()) == [Int]()
+quickSort_theSwiftish([7]) == [7]
+quickSort_theSwiftish([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Nearly Sorted
-assert(quickSort_theSwiftish([1, 2, 1, 3, 5, 13, 8]).isSorted())
+quickSort_theSwiftish([1, 2, 1, 3, 5, 13, 8]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Reversed
-assert(quickSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
+quickSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5, 8, 13]
 
 // Shuffled
-assert(quickSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
+quickSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
 
 
 /// The Swiftest Algorithm
 ///
 /// A nifty approach that attempts to tap into the most powerful language features yet
 ///
-/// This version showcases `guard`, `count`, `removeFirst`, `filter, and `+`
+/// This version showcases `guard`, `count`, `remove`, `filter, and `+`
 ///
 /// - Parameter array: The `array` to be sorted
 ///
 /// - Returns: A new array with elements sorted in ascending order
 
-func quickSort_theSwiftest(array: [Int]) -> [Int] {
+func quickSort_theSwiftest(_ array: [Int]) -> [Int] {
 
     var array = array
 
@@ -154,42 +153,43 @@ func quickSort_theSwiftest(array: [Int]) -> [Int] {
         return array
     }
 
-    let pivot = array.removeFirst()
+    let pivot = array.remove(at: 0)
 
     let lessThan = array.filter({ $0 < pivot })
     let greaterThanOrEqual = array.filter({ $0 >= pivot })
 
-    return quickSort_theSwiftest(lessThan) + [pivot] + quickSort_theSwiftest(greaterThanOrEqual)
+    return quickSort_theSwiftest(lessThan) + ([pivot] as [Int]) + quickSort_theSwiftest(greaterThanOrEqual)
 }
 
 // Tests
 
 // Already Sorted
-assert(quickSort_theSwiftest([Int]()).isSorted())
-assert(quickSort_theSwiftest([7]).isSorted())
-assert(quickSort_theSwiftest([1, 1, 2, 3, 5, 8, 13]).isSorted())
+// Already Sorted
+quickSort_theSwiftest([Int]()) == [Int]()
+quickSort_theSwiftest([7]) == [7]
+quickSort_theSwiftest([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Nearly Sorted
-assert(quickSort_theSwiftest([1, 2, 1, 3, 5, 13, 8]).isSorted())
+quickSort_theSwiftest([1, 2, 1, 3, 5, 13, 8]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Reversed
-assert(quickSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
+quickSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5, 8, 13]
 
 // Shuffled
-assert(quickSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
+quickSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
 
 
 /// The Generic Algorithm
 ///
 /// A play on the swiftest version, but elevated to a type-agnostic nirvana status
 ///
-/// This version showcases `guard`, `count`, `removeFirst`, `filter, and `+`, and generics
+/// This version showcases `guard`, `count`, `remove`, `filter, and `+`, and generics
 ///
 /// - Parameter array: The `array` to be sorted
 ///
 /// - Returns: A new array with elements sorted in ascending order
 
-func quickSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
+func quickSort_theGeneric<T: Comparable>(_ array: [T]) -> [T] {
 
     var array = array
 
@@ -197,36 +197,36 @@ func quickSort_theGeneric<T: Comparable>(array: [T]) -> [T] {
         return array
     }
 
-    let pivot = array.removeFirst()
+    let pivot = array.remove(at: 0)
 
     let lessThan = array.filter({ $0 < pivot })
     let greaterThanOrEqual = array.filter({ $0 >= pivot })
 
-    return quickSort_theGeneric(lessThan) + [pivot] + quickSort_theGeneric(greaterThanOrEqual)
+    return quickSort_theGeneric(lessThan) + ([pivot] as [T]) + quickSort_theGeneric(greaterThanOrEqual)
 }
 
 // Tests
 
 // Already Sorted
-assert(quickSort_theGeneric([Int]()).isSorted())
-assert(quickSort_theGeneric([7]).isSorted())
-assert(quickSort_theGeneric([1, 1, 2, 3, 5, 8, 13]).isSorted())
+quickSort_theGeneric([Int]()) == [Int]()
+quickSort_theGeneric([7]) == [7]
+quickSort_theGeneric([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
 
-assert(quickSort_theGeneric([String]()).isSorted())
-assert(quickSort_theGeneric(["a"]).isSorted())
-assert(quickSort_theGeneric(["a", "a", "b", "c", "d", "e"]).isSorted())
+quickSort_theGeneric([String]()) == [String]()
+quickSort_theGeneric(["a"]) == ["a"]
+quickSort_theGeneric(["a", "a", "b", "c", "d", "e"]) == ["a", "a", "b", "c", "d", "e"]
 
 // Nearly Sorted
-assert(quickSort_theGeneric([1, 2, 1, 3, 5, 13, 8]).isSorted())
-assert(quickSort_theGeneric(["a", "b", "a", "c", "e", "d"]).isSorted())
+quickSort_theGeneric([1, 2, 1, 3, 5, 13, 8]) == [1, 1, 2, 3, 5, 8, 13]
+quickSort_theGeneric(["a", "b", "a", "c", "e", "d"]) == ["a", "a", "b", "c", "d", "e"]
 
 // Reversed
-assert(quickSort_theGeneric([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
-assert(quickSort_theGeneric(["a", "a", "b", "c", "d", "e"].reverse()).isSorted())
+quickSort_theGeneric([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5, 8, 13]
+quickSort_theGeneric(["a", "a", "b", "c", "d", "e"].reversed()) == ["a", "a", "b", "c", "d", "e"]
 
 // Shuffled
-assert(quickSort_theGeneric([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
-assert(quickSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffle()).isSorted())
+quickSort_theGeneric([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
+quickSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffled()) == ["a", "a", "b", "c", "d", "e"]
 
 
 /// The Functional Algorithm
@@ -239,7 +239,7 @@ assert(quickSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffle()).isSorted()
 ///
 /// - Returns: A new array with elements sorted in ascending order
 
-func quickSort_theFunctional(array: [Int]) -> [Int] {
+func quickSort_theFunctional(_ array: [Int]) -> [Int] {
 
     guard array.count > 1 else {
         return array
@@ -250,24 +250,24 @@ func quickSort_theFunctional(array: [Int]) -> [Int] {
     let lessThan = rest.filter({ $0 < pivot })
     let greaterThanOrEqual = rest.filter({ $0 >= pivot })
 
-    return quickSort_theFunctional(lessThan) + [pivot] + quickSort_theFunctional(greaterThanOrEqual)
+    return quickSort_theFunctional(lessThan) + ([pivot] as [Int]) + quickSort_theFunctional(greaterThanOrEqual)
 }
 
 // Tests
 
 // Already Sorted
-assert(quickSort_theFunctional([Int]()).isSorted())
-assert(quickSort_theFunctional([7]).isSorted())
-assert(quickSort_theFunctional([1, 1, 2, 3, 5, 8, 13]).isSorted())
+quickSort_theFunctional([Int]()) == [Int]()
+quickSort_theFunctional([7]) == [7]
+quickSort_theFunctional([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Nearly Sorted
-assert(quickSort_theFunctional([1, 2, 1, 3, 5, 13, 8]).isSorted())
+quickSort_theFunctional([1, 2, 1, 3, 5, 13, 8]) == [1, 1, 2, 3, 5, 8, 13]
 
 // Reversed
-assert(quickSort_theFunctional([1, 1, 2, 3, 5, 8, 13].reverse()).isSorted())
+quickSort_theFunctional([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5, 8, 13]
 
 // Shuffled
-assert(quickSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
+quickSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
 
 
 /// The Bonus Algorithm
@@ -283,9 +283,9 @@ assert(quickSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffle()).isSorted())
 ///
 /// - Returns: A new array with elements sorted based on the `isOrderedBefore` predicate
 
-func quickSort_theBonus<T>(array: [T], @noescape _ isOrderedBefore: (T, T) -> Bool) -> [T] {
+func quickSort_theBonus<T>(_ array: [T], _ isOrderedBefore: (T, T) -> Bool) -> [T] {
 
-    guard array.count > 1, let pivot = array.sample() else {
+    guard array.count > 1, let pivot = array.sampled() else {
         return array
     }
 
@@ -297,7 +297,6 @@ func quickSort_theBonus<T>(array: [T], @noescape _ isOrderedBefore: (T, T) -> Bo
         case let element where isOrderedBefore(element, pivot): lessThan += [element]
         case let element where isOrderedBefore(pivot, element): greaterThan += [element]
         default: equal += [element]
-
         }
     }
 
@@ -310,36 +309,35 @@ func quickSort_theBonus<T>(array: [T], @noescape _ isOrderedBefore: (T, T) -> Bo
 // Tests
 
 // Already Sorted
-assert(quickSort_theBonus([Int](), <).isSorted())
-assert(quickSort_theBonus([Int](), >).isSorted(>=))
-assert(quickSort_theBonus([7], <).isSorted())
-assert(quickSort_theBonus([7], >).isSorted(>=))
-assert(quickSort_theBonus([1, 1, 2, 3, 5, 8, 13], <).isSorted())
-assert(quickSort_theBonus([1, 1, 2, 3, 5, 8, 13], >).isSorted(>=))
+quickSort_theBonus([Int](), <) == [Int]()
+quickSort_theBonus([Int](), >) == [Int]()
+quickSort_theBonus([7], <) == [7]
+quickSort_theBonus([7], >) == [7]
+quickSort_theBonus([1, 1, 2, 3, 5, 8, 13], <) == [1, 1, 2, 3, 5, 8, 13]
+quickSort_theBonus([1, 1, 2, 3, 5, 8, 13], >) == [1, 1, 2, 3, 5, 8, 13].reversed()
 
-assert(quickSort_theBonus([String](), <).isSorted())
-assert(quickSort_theBonus([String](), >).isSorted(>=))
-assert(quickSort_theBonus(["a"], <).isSorted())
-assert(quickSort_theBonus(["a"], >).isSorted(>=))
-assert(quickSort_theBonus(["a", "a", "b", "c", "d", "e"], <).isSorted())
-assert(quickSort_theBonus(["a", "a", "b", "c", "d", "e"], >).isSorted(>=))
+quickSort_theBonus([String](), <) == [String]()
+quickSort_theBonus([String](), >) == [String]()
+quickSort_theBonus(["a"], <) == ["a"]
+quickSort_theBonus(["a"], >) == ["a"]
+quickSort_theBonus(["a", "a", "b", "c", "d", "e"], <) == ["a", "a", "b", "c", "d", "e"]
+quickSort_theBonus(["a", "a", "b", "c", "d", "e"], >) == ["a", "a", "b", "c", "d", "e"].reversed()
 
 // Nearly Sorted
-assert(quickSort_theBonus([1, 2, 1, 3, 5, 13, 8], <).isSorted())
-assert(quickSort_theBonus([1, 2, 1, 3, 5, 13, 8], >).isSorted(>=))
-assert(quickSort_theBonus(["a", "b", "a", "c", "e", "d"], <).isSorted())
-assert(quickSort_theBonus(["a", "b", "a", "c", "e", "d"], >).isSorted(>=))
+quickSort_theBonus([1, 2, 1, 3, 5, 13, 8], <) == [1, 1, 2, 3, 5, 8, 13]
+quickSort_theBonus([1, 2, 1, 3, 5, 13, 8], >) == [1, 1, 2, 3, 5, 8, 13].reversed()
+quickSort_theBonus(["a", "b", "a", "c", "e", "d"], <) == ["a", "a", "b", "c", "d", "e"]
+quickSort_theBonus(["a", "b", "a", "c", "e", "d"], >) == ["a", "a", "b", "c", "d", "e"].reversed()
 
 // Reversed
-assert(quickSort_theBonus([1, 1, 2, 3, 5, 8, 13].reverse(), <).isSorted())
-assert(quickSort_theBonus([1, 1, 2, 3, 5, 8, 13].reverse(), >).isSorted(>=))
-assert(quickSort_theBonus(["a", "a", "b", "c", "d", "e"].reverse(), <).isSorted())
-assert(quickSort_theBonus(["a", "a", "b", "c", "d", "e"].reverse(), >).isSorted(>=))
+quickSort_theBonus([1, 1, 2, 3, 5, 8, 13].reversed(), <) == [1, 1, 2, 3, 5, 8, 13]
+quickSort_theBonus([1, 1, 2, 3, 5, 8, 13].reversed(), >) == [1, 1, 2, 3, 5, 8, 13].reversed()
+quickSort_theBonus(["a", "a", "b", "c", "d", "e"].reversed(), <) == ["a", "a", "b", "c", "d", "e"]
+quickSort_theBonus(["a", "a", "b", "c", "d", "e"].reversed(), >) == ["a", "a", "b", "c", "d", "e"].reversed()
 
 // Shuffled
-assert(quickSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffle(), <).isSorted())
-assert(quickSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffle(), >).isSorted(>=))
-assert(quickSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffle(), <).isSorted())
-assert(quickSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffle(), >).isSorted(>=))
-
+quickSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffled(), <) == [1, 1, 2, 3, 5, 8, 13]
+quickSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffled(), >) == [1, 1, 2, 3, 5, 8, 13].reversed()
+quickSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffled(), <) == ["a", "a", "b", "c", "d", "e"]
+quickSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffled(), >) == ["a", "a", "b", "c", "d", "e"].reversed()
 //: [Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)
