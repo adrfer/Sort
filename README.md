@@ -10,12 +10,12 @@ The idea here is to have fun while exploring alternative implementations of diff
 
 Now, you're about to indulge yourself with the following takes:
 
-- The Classic: a die-hard style, rooted in tradition, in all its imperative glory
-- The Swift-ish: a sligthly more modern take on the classic, but still not quite quaint enough
-- The Swiftest: a nifty approach that attempts to tap into the most powerful features of the language yet
-- The Generic: a play on the swiftest version, but elevated to a type-agnostic nirvana status
-- The Functional: a quirky take that unleashes some of the neat declarative aspects of the language
-- The Bonus: a twist on the swift-ish version that takes a predicate, similar to `sort` from the [Swift Standard Library](https://developer.apple.com/reference/swift)
+- **The Classic:** a die-hard style, rooted in tradition, in all its imperative glory
+- **The Swift-ish:** a sligthly more modern take on the classic, but still not quite quaint enough
+- **The Swiftest:** a nifty approach that attempts to tap into the most powerful features of the language yet
+- **The Generic:** a play on the swiftest version, but elevated to a type-agnostic nirvana status
+- **The Functional:** a quirky take that unleashes some of the neat declarative aspects of the language
+- **The Bonus:** a twist on the swift-ish version that takes a predicate, similar to `sort` from the [Swift Standard Library](https://developer.apple.com/reference/swift)
 
 Also, a few test cases covering some initial conditions are included:
 
@@ -25,8 +25,6 @@ Also, a few test cases covering some initial conditions are included:
 - Shuffled
 
 I know, I know... Talk is cheap, show me the code, right?
-
-Ok then, let's dive in and enjoy the ride!
 
 --
 ### Table of Contents
