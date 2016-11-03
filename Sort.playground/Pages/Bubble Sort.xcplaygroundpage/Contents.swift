@@ -1,14 +1,14 @@
 //: [Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)
 //:
-//: ----
-//: # Bubble Sort
-//: ----
+//: ---
+//: ## Bubble Sort
+//: ---
 //:
 //: ### About
 //:
 //: - Pass through the array repeatedly comparing each pair of adjacent elements
 //: - At each pass, swap these elements if they happen to be in the wrong order
-//: - Wnen there are no more swaps, unsorted elements will have bubbled up to their appropiated positions
+//: - When swaps are no more, initially unsorted elements will be in the right order
 //:
 //:
 //: ### Properties
@@ -17,18 +17,16 @@
 //: - Adaptative, as it benefits from the presortedness in the input array
 //: - Stable, as it preserves the relative order of elements of the input array
 //: - The best and worst case runtime are respectively of complexity _Ω(n²)_ and _O(n²)_
-
+//:
+//: ---
+//:
 /// The Classic Algorithm
 ///
 /// A die-hard style, rooted in tradition, in all its imperative glory
 ///
-/// This version showcases early exit `if`, `count`, `for-in`, `..<`, subcripting, tuple swapping, and `break`
-///
 /// - Parameter array: The `array` to be sorted
 ///
 /// - Returns: A new array with elements sorted in ascending order
-///
-/// - Todo: Remove code annotations
 
 func bubbleSort_theClassic(_ array: [Int]) -> [Int] {
 
@@ -43,16 +41,16 @@ func bubbleSort_theClassic(_ array: [Int]) -> [Int] {
     // pass through the array, but it needs only as many passes as the number of swaps required
     for i in 0 ..< array.count - 1 {
 
-        // define a flag keep track if the array is already sorted
+        // define a flag to keep track if the array is sorted, meaning no swaps means the array is sorted
         var hasSwapped = false
 
         // compare each pair of adjacent elements, except to already sorted elements on subsequent passes
         for j in 0 ..< array.count - i - 1 {
 
-            // check is elements are in the wrong order
+            // check if elements are in the wrong order
             if array[j] > array[j + 1] {
 
-                // perform a swap
+                // perform the swap
                 (array[j], array[j + 1]) = (array[j + 1], array[j])
 
                 // flag if array is not properly sorted yet
@@ -66,13 +64,11 @@ func bubbleSort_theClassic(_ array: [Int]) -> [Int] {
         }
     }
 
-    // return sorted array
+    // return the sorted array
     return array
 }
 
-// Tests
-
-// Already Sorted
+// Sorted
 bubbleSort_theClassic([Int]()) == [Int]()
 bubbleSort_theClassic([7]) == [7]
 bubbleSort_theClassic([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
@@ -86,12 +82,11 @@ bubbleSort_theClassic([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5, 8, 1
 // Shuffled
 bubbleSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
 
-
+//: ---
+//:
 /// The Swift-ish Algorithm
 ///
 /// A sligthly more modern take on the classic, but still not quite quaint enough
-///
-/// This version showcases `guard`, `count`, `repeat-while`, `for-in-where`, subcripting, `..<`, and tuple swapping
 ///
 /// - Parameter array: The `array` to be sorted
 ///
@@ -109,7 +104,6 @@ func bubbleSort_theSwiftish(_ array: [Int]) -> [Int] {
     var count = array.count
 
     repeat {
-
         hasSwapped = false
 
         for i in 0 ..< count - 1 where array[i] > array[i + 1] {
@@ -124,9 +118,7 @@ func bubbleSort_theSwiftish(_ array: [Int]) -> [Int] {
     return array
 }
 
-// Tests
-
-// Already Sorted
+// Sorted
 bubbleSort_theSwiftish([Int]()) == [Int]()
 bubbleSort_theSwiftish([7]) == [7]
 bubbleSort_theSwiftish([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
@@ -140,12 +132,11 @@ bubbleSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5, 8, 
 // Shuffled
 bubbleSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
 
-
+//: ---
+//:
 /// The Swiftest Algorithm
 ///
-/// A nifty approach that attempts to tap into the most powerful language features yet
-///
-/// This version showcases `guard`, `count`, `for-in-where`, `..<`, subcripting, `swap`, and `?:`
+/// A nifty approach that attempts to tap into the most powerful features of the language yet
 ///
 /// - Parameter array: The `array` to be sorted
 ///
@@ -166,12 +157,10 @@ func bubbleSort_theSwiftest(_ array: [Int]) -> [Int] {
         hasSwapped = true
     }
 
-    return !hasSwapped ? array : bubbleSort_theSwiftest(Array(array))
+    return !hasSwapped ? array : bubbleSort_theSwiftest(array)
 }
 
-// Tests
-
-// Already Sorted
+// Sorted
 bubbleSort_theSwiftest([Int]()) == [Int]()
 bubbleSort_theSwiftest([7]) == [7]
 bubbleSort_theSwiftest([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
@@ -185,12 +174,11 @@ bubbleSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5, 8, 
 // Shuffled
 bubbleSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
 
-
+//: ---
+//:
 /// The Generic Algorithm
 ///
 /// A play on the swiftest version, but elevated to a type-agnostic nirvana status
-///
-/// This version showcases `guard`, `count`, `for-in-where`, `..<`, subcripting, `swap`, `?:`, and generics
 ///
 /// - Parameter array: The `array` to be sorted
 ///
@@ -211,12 +199,10 @@ func bubbleSort_theGeneric<T: Comparable>(_ array: [T]) -> [T] {
         hasSwapped = true
     }
 
-    return !hasSwapped ? array : bubbleSort_theGeneric(Array(array))
+    return !hasSwapped ? array : bubbleSort_theGeneric(array)
 }
 
-// Tests
-
-// Already Sorted
+// Sorted
 bubbleSort_theGeneric([Int]()) == [Int]()
 bubbleSort_theGeneric([7]) == [7]
 bubbleSort_theGeneric([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
@@ -237,12 +223,11 @@ bubbleSort_theGeneric(["a", "a", "b", "c", "d", "e"].reversed()) == ["a", "a", "
 bubbleSort_theGeneric([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
 bubbleSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffled()) == ["a", "a", "b", "c", "d", "e"]
 
-
+//: ---
+//:
 /// The Functional Algorithm
 ///
 /// A quirky take that unleashes some of the neat declarative aspects of the language
-///
-/// This version showcases `guard`, `count`, nested function, tuple decomposition, subscripting, `dropFirst`, `min`, `max`, `+`, and `?:`
 ///
 /// - Parameter array: The `array` to be sorted
 ///
@@ -275,9 +260,7 @@ func bubbleSort_theFunctional(_ array: [Int]) -> [Int] {
     return isSorted(array) ? array : bubbleSort_theFunctional(bubble(array))
 }
 
-// Tests
-
-// Already Sorted
+// Sorted
 bubbleSort_theFunctional([Int]()) == [Int]()
 bubbleSort_theFunctional([7]) == [7]
 bubbleSort_theFunctional([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
@@ -291,21 +274,20 @@ bubbleSort_theFunctional([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5, 8
 // Shuffled
 bubbleSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
 
-
+//: ---
+//:
 /// The Bonus Algorithm
 ///
-/// A generic version based on The Swift-ish Algorithm that takes a strict weak ordering closure/predicate
-///
-/// This version showcases `guard`, `count`, `repeat-while`, `for-in-where`, subcripting, `..<`, tuple swapping, `@noescape`, and generics
+/// A generic version based on the swift-ish that takes a strict weak ordering predicate
 ///
 /// - Parameters:
 ///
 ///   - array: The `array` to be sorted
-///   - isOrderedBefore: The predicate used to establish the order of the elements
+///   - areInIncreasingOrder: The predicate used to establish the order of the elements
 ///
-/// - Returns: A new array with elements sorted based on the `isOrderedBefore` predicate
+/// - Returns: A new array with elements sorted based on the `areInIncreasingOrder` predicate
 
-func bubbleSort_theBonus<T>(_ array: [T], _ isOrderedBefore: (T, T) -> Bool) -> [T] {
+func bubbleSort_theBonus<T>(_ array: [T], by areInIncreasingOrder: (T, T) -> Bool) -> [T] {
 
     var array = array
 
@@ -317,11 +299,9 @@ func bubbleSort_theBonus<T>(_ array: [T], _ isOrderedBefore: (T, T) -> Bool) -> 
     var count = array.count
 
     repeat {
-
         hasSwapped = false
 
-        for i in 0 ..< count - 1 where isOrderedBefore(array[i + 1], array[i]) {
-
+        for i in 0 ..< count - 1 where areInIncreasingOrder(array[i + 1], array[i]) {
             (array[i], array[i + 1]) = (array[i + 1], array[i])
             hasSwapped = true
         }
@@ -333,40 +313,38 @@ func bubbleSort_theBonus<T>(_ array: [T], _ isOrderedBefore: (T, T) -> Bool) -> 
     return array
 }
 
-// Tests
+// Sorted
+bubbleSort_theBonus([Int](), by: <) == [Int]()
+bubbleSort_theBonus([Int](), by: >) == [Int]()
+bubbleSort_theBonus([7], by: <) == [7]
+bubbleSort_theBonus([7], by: >) == [7]
+bubbleSort_theBonus([1, 1, 2, 3, 5, 8, 13], by: <) == [1, 1, 2, 3, 5, 8, 13]
+bubbleSort_theBonus([1, 1, 2, 3, 5, 8, 13], by: >) == [1, 1, 2, 3, 5, 8, 13].reversed()
 
-// Already Sorted
-bubbleSort_theBonus([Int](), <) == [Int]()
-bubbleSort_theBonus([Int](), >) == [Int]()
-bubbleSort_theBonus([7], <) == [7]
-bubbleSort_theBonus([7], >) == [7]
-bubbleSort_theBonus([1, 1, 2, 3, 5, 8, 13], <) == [1, 1, 2, 3, 5, 8, 13]
-bubbleSort_theBonus([1, 1, 2, 3, 5, 8, 13], >) == [1, 1, 2, 3, 5, 8, 13].reversed()
-
-bubbleSort_theBonus([String](), <) == [String]()
-bubbleSort_theBonus([String](), >) == [String]()
-bubbleSort_theBonus(["a"], <) == ["a"]
-bubbleSort_theBonus(["a"], >) == ["a"]
-bubbleSort_theBonus(["a", "a", "b", "c", "d", "e"], <) == ["a", "a", "b", "c", "d", "e"]
-bubbleSort_theBonus(["a", "a", "b", "c", "d", "e"], >) == ["a", "a", "b", "c", "d", "e"].reversed()
+bubbleSort_theBonus([String](), by: <) == [String]()
+bubbleSort_theBonus([String](), by: >) == [String]()
+bubbleSort_theBonus(["a"], by: <) == ["a"]
+bubbleSort_theBonus(["a"], by: >) == ["a"]
+bubbleSort_theBonus(["a", "a", "b", "c", "d", "e"], by: <) == ["a", "a", "b", "c", "d", "e"]
+bubbleSort_theBonus(["a", "a", "b", "c", "d", "e"], by: >) == ["a", "a", "b", "c", "d", "e"].reversed()
 
 // Nearly Sorted
-bubbleSort_theBonus([1, 2, 1, 3, 5, 13, 8], <) == [1, 1, 2, 3, 5, 8, 13]
-bubbleSort_theBonus([1, 2, 1, 3, 5, 13, 8], >) == [1, 1, 2, 3, 5, 8, 13].reversed()
-bubbleSort_theBonus(["a", "b", "a", "c", "e", "d"], <) == ["a", "a", "b", "c", "d", "e"]
-bubbleSort_theBonus(["a", "b", "a", "c", "e", "d"], >) == ["a", "a", "b", "c", "d", "e"].reversed()
+bubbleSort_theBonus([1, 2, 1, 3, 5, 13, 8], by: <) == [1, 1, 2, 3, 5, 8, 13]
+bubbleSort_theBonus([1, 2, 1, 3, 5, 13, 8], by: >) == [1, 1, 2, 3, 5, 8, 13].reversed()
+bubbleSort_theBonus(["a", "b", "a", "c", "e", "d"], by: <) == ["a", "a", "b", "c", "d", "e"]
+bubbleSort_theBonus(["a", "b", "a", "c", "e", "d"], by: >) == ["a", "a", "b", "c", "d", "e"].reversed()
 
 // Reversed
-bubbleSort_theBonus([1, 1, 2, 3, 5, 8, 13].reversed(), <) == [1, 1, 2, 3, 5, 8, 13]
-bubbleSort_theBonus([1, 1, 2, 3, 5, 8, 13].reversed(), >) == [1, 1, 2, 3, 5, 8, 13].reversed()
-bubbleSort_theBonus(["a", "a", "b", "c", "d", "e"].reversed(), <) == ["a", "a", "b", "c", "d", "e"]
-bubbleSort_theBonus(["a", "a", "b", "c", "d", "e"].reversed(), >) == ["a", "a", "b", "c", "d", "e"].reversed()
+bubbleSort_theBonus([1, 1, 2, 3, 5, 8, 13].reversed(), by: <) == [1, 1, 2, 3, 5, 8, 13]
+bubbleSort_theBonus([1, 1, 2, 3, 5, 8, 13].reversed(), by: >) == [1, 1, 2, 3, 5, 8, 13].reversed()
+bubbleSort_theBonus(["a", "a", "b", "c", "d", "e"].reversed(), by: <) == ["a", "a", "b", "c", "d", "e"]
+bubbleSort_theBonus(["a", "a", "b", "c", "d", "e"].reversed(), by: >) == ["a", "a", "b", "c", "d", "e"].reversed()
 
 // Shuffled
-bubbleSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffled(), <) == [1, 1, 2, 3, 5, 8, 13]
-bubbleSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffled(), >) == [1, 1, 2, 3, 5, 8, 13].reversed()
-bubbleSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffled(), <) == ["a", "a", "b", "c", "d", "e"]
-bubbleSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffled(), >) == ["a", "a", "b", "c", "d", "e"].reversed()
+bubbleSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffled(), by: <) == [1, 1, 2, 3, 5, 8, 13]
+bubbleSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffled(), by: >) == [1, 1, 2, 3, 5, 8, 13].reversed()
+bubbleSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffled(), by: <) == ["a", "a", "b", "c", "d", "e"]
+bubbleSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffled(), by: >) == ["a", "a", "b", "c", "d", "e"].reversed()
 
 //: ---
 //:
