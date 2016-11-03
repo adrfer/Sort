@@ -1,17 +1,16 @@
 //: [Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)
 //:
 //: ----
-//: # Insertion Sort
+//: ## Insertion Sort
 //: ----
 //:
 //: ### About
 //:
-//: - Split the input array in two portions, one sorted and one unsorted
+//: - Split the input array into two portions, one considered sorted and one unsorted
 //: - Initially, the sorted portion is empty, while the unsorted one contains all the elements
-//: - Find the apropriate insert position by comparing each element of the unsorted portion to sorted elements
+//: - Compare each element of the unsorted portion to sorted ones to find the apropriate insert position
 //: - Shift already sorted elements as necessary to make room for the next sorted element
-//: - Eventually, the unsorted portion becomes empty and the array sorted
-//:
+//: - Eventually, the unsorted portion becomes empty and the whole array becomes sorted
 //:
 //: ### Properties
 //:
@@ -20,18 +19,16 @@
 //: - Stable, as it preserves the relative order of elements of the input array
 //: - Online, as it can be used to sort an input array as it receives it
 //: - The best and worst case runtime are respectively of complexity _Ω(n)_ and _O(n²)_
-
+//:
+//: ---
+//:
 /// The Classic Algorithm
 ///
 /// A die-hard style, rooted in tradition, in all its imperative glory
 ///
-/// This version showcases early exit `if`, `count`, `for-in`, `..<`, `-=`, and subcripting
-///
 /// - Parameter array: The `array` to be sorted
 ///
 /// - Returns: A new array with elements sorted in ascending order
-///
-/// - Todo: Remove code annotations
 
 func insertionSort_theClassic(_ array: [Int]) -> [Int] {
 
@@ -64,13 +61,11 @@ func insertionSort_theClassic(_ array: [Int]) -> [Int] {
         array[j] = element
     }
 
-    // return sorted array
+    // return the sorted array
     return array
 }
 
-// Tests
-
-// Already Sorted
+// Sorted
 insertionSort_theClassic([Int]()) == [Int]()
 insertionSort_theClassic([7]) == [7]
 insertionSort_theClassic([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
@@ -84,12 +79,11 @@ insertionSort_theClassic([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5, 8
 // Shuffled
 insertionSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
 
-
+//: ---
+//:
 /// The Swift-ish Algorithm
 ///
 /// A sligthly more modern take on the classic, but still not quite quaint enough
-///
-/// This version showcases `guard`, `count`, `for-in`, `..<`, `while`, `-=`, subcripting, and `swap`
 ///
 /// - Parameter array: The `array` to be sorted
 ///
@@ -104,11 +98,10 @@ func insertionSort_theSwiftish(_ array: [Int]) -> [Int] {
     }
 
     for i in 1 ..< array.count {
-
         var j = i
 
         while j > 0 && array[j] < array[j - 1] {
-
+            
             swap(&array[j], &array[j - 1])
             j -= 1
         }
@@ -117,9 +110,7 @@ func insertionSort_theSwiftish(_ array: [Int]) -> [Int] {
     return array
 }
 
-// Tests
-
-// Already Sorted
+// Sorted
 insertionSort_theSwiftish([Int]()) == [Int]()
 insertionSort_theSwiftish([7]) == [7]
 insertionSort_theSwiftish([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
@@ -133,12 +124,11 @@ insertionSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5, 
 // Shuffled
 insertionSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
 
-
+//: ---
+//:
 /// The Swiftest Algorithm
 ///
-/// A nifty approach that attempts to tap into the most powerful language features yet
-///
-/// This version showcases `guard`, `count`, `for-in`, `..<`, `remove`, subcripting, and `insert`
+/// A nifty approach that attempts to tap into the most powerful features of the language yet
 ///
 /// - Parameter array: The `array` to be sorted
 ///
@@ -153,7 +143,7 @@ func insertionSort_theSwiftest(_ array: [Int]) -> [Int] {
     }
 
     for i in 1 ..< array.count {
-
+        
         let element = array.remove(at: i)
         var j = i
 
@@ -167,9 +157,7 @@ func insertionSort_theSwiftest(_ array: [Int]) -> [Int] {
     return array
 }
 
-// Tests
-
-// Already Sorted
+// Sorted
 insertionSort_theSwiftest([Int]()) == [Int]()
 insertionSort_theSwiftest([7]) == [7]
 insertionSort_theSwiftest([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
@@ -183,12 +171,11 @@ insertionSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5, 
 // Shuffled
 insertionSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
 
-
+//: ---
+//:
 /// The Generic Algorithm
 ///
 /// A play on the swiftest version, but elevated to a type-agnostic nirvana status
-///
-/// This version showcases `guard`, `count`, `for-in`, `..<`, `remove`, subcripting, `insert`, and generics
 ///
 /// - Parameter array: The `array` to be sorted
 ///
@@ -203,7 +190,7 @@ func insertionSort_theGeneric<T: Comparable>(_ array: [T]) -> [T] {
     }
 
     for i in 1 ..< array.count {
-
+        
         let element = array.remove(at: i)
         var j = i
 
@@ -217,9 +204,7 @@ func insertionSort_theGeneric<T: Comparable>(_ array: [T]) -> [T] {
     return array
 }
 
-// Tests
-
-// Already Sorted
+// Sorted
 insertionSort_theGeneric([Int]()) == [Int]()
 insertionSort_theGeneric([7]) == [7]
 insertionSort_theGeneric([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
@@ -240,12 +225,11 @@ insertionSort_theGeneric(["a", "a", "b", "c", "d", "e"].reversed()) == ["a", "a"
 insertionSort_theGeneric([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
 insertionSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffled()) == ["a", "a", "b", "c", "d", "e"]
 
-
+//: ---
+//:
 /// The Functional Algorithm
 ///
 /// A quirky take that unleashes some of the neat declarative aspects of the language
-///
-/// This version showcases `guard`, `count`, nested function, tuple decomposition, `isEmpty`, `dropFirst`, `+`, and `?:`
 ///
 /// - Parameter array: The `array` to be sorted
 ///
@@ -258,7 +242,7 @@ func insertionSort_theFunctional(_ array: [Int]) -> [Int] {
     }
 
     func insert(_ first: Int, _ rest: [Int]) -> [Int] {
-
+        
         guard !rest.isEmpty else {
             return [first]
         }
@@ -273,9 +257,7 @@ func insertionSort_theFunctional(_ array: [Int]) -> [Int] {
     return insert(first, insertionSort_theFunctional(rest))
 }
 
-// Tests
-
-// Already Sorted
+// Sorted
 insertionSort_theFunctional([Int]()) == [Int]()
 insertionSort_theFunctional([7]) == [7]
 insertionSort_theFunctional([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
@@ -289,21 +271,20 @@ insertionSort_theFunctional([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5
 // Shuffled
 insertionSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
 
-
+//: ---
+//:
 /// The Bonus Algorithm
 ///
-/// A generic version based on The Swift-ish Algorithm that takes a strict weak ordering closure/predicate
-///
-/// This version showcases `guard`, `count`, `for-in`, `..<`, `while`, `-=`, subcripting, `swap`, `@noescape`, and generics
+/// A generic version based on the swift-ish that takes a strict weak ordering predicate
 ///
 /// - Parameters:
 ///
 ///   - array: The `array` to be sorted
-///   - isOrderedBefore: The predicate used to establish the order of the elements
+///   - areInIncreasingOrder: The predicate used to establish the order of the elements
 ///
-/// - Returns: A new array with elements sorted based on the `isOrderedBefore` predicate
+/// - Returns: A new array with elements sorted based on the `areInIncreasingOrder` predicate
 
-func insertionSort_theBonus<T>(_ array: [T], _ isOrderedBefore: (T, T) -> Bool) -> [T] {
+func insertionSort_theBonus<T>(_ array: [T], by areInIncreasingOrder: (T, T) -> Bool) -> [T] {
 
     var array = array
 
@@ -312,11 +293,11 @@ func insertionSort_theBonus<T>(_ array: [T], _ isOrderedBefore: (T, T) -> Bool) 
     }
 
     for i in 1 ..< array.count {
-
+        
         var j = i
 
-        while j > 0 && isOrderedBefore(array[j], array[j - 1]) {
-
+        while j > 0 && areInIncreasingOrder(array[j], array[j - 1]) {
+            
             swap(&array[j], &array[j - 1])
             j -= 1
         }
@@ -325,40 +306,38 @@ func insertionSort_theBonus<T>(_ array: [T], _ isOrderedBefore: (T, T) -> Bool) 
     return array
 }
 
-// Tests
+// Sorted
+insertionSort_theBonus([Int](), by: <) == [Int]()
+insertionSort_theBonus([Int](), by: >) == [Int]()
+insertionSort_theBonus([7], by: <) == [7]
+insertionSort_theBonus([7], by: >) == [7]
+insertionSort_theBonus([1, 1, 2, 3, 5, 8, 13], by: <) == [1, 1, 2, 3, 5, 8, 13]
+insertionSort_theBonus([1, 1, 2, 3, 5, 8, 13], by: >) == [1, 1, 2, 3, 5, 8, 13].reversed()
 
-// Already Sorted
-insertionSort_theBonus([Int](), <) == [Int]()
-insertionSort_theBonus([Int](), >) == [Int]()
-insertionSort_theBonus([7], <) == [7]
-insertionSort_theBonus([7], >) == [7]
-insertionSort_theBonus([1, 1, 2, 3, 5, 8, 13], <) == [1, 1, 2, 3, 5, 8, 13]
-insertionSort_theBonus([1, 1, 2, 3, 5, 8, 13], >) == [1, 1, 2, 3, 5, 8, 13].reversed()
-
-insertionSort_theBonus([String](), <) == [String]()
-insertionSort_theBonus([String](), >) == [String]()
-insertionSort_theBonus(["a"], <) == ["a"]
-insertionSort_theBonus(["a"], >) == ["a"]
-insertionSort_theBonus(["a", "a", "b", "c", "d", "e"], <) == ["a", "a", "b", "c", "d", "e"]
-insertionSort_theBonus(["a", "a", "b", "c", "d", "e"], >) == ["a", "a", "b", "c", "d", "e"].reversed()
+insertionSort_theBonus([String](), by: <) == [String]()
+insertionSort_theBonus([String](), by: >) == [String]()
+insertionSort_theBonus(["a"], by: <) == ["a"]
+insertionSort_theBonus(["a"], by: >) == ["a"]
+insertionSort_theBonus(["a", "a", "b", "c", "d", "e"], by: <) == ["a", "a", "b", "c", "d", "e"]
+insertionSort_theBonus(["a", "a", "b", "c", "d", "e"], by: >) == ["a", "a", "b", "c", "d", "e"].reversed()
 
 // Nearly Sorted
-insertionSort_theBonus([1, 2, 1, 3, 5, 13, 8], <) == [1, 1, 2, 3, 5, 8, 13]
-insertionSort_theBonus([1, 2, 1, 3, 5, 13, 8], >) == [1, 1, 2, 3, 5, 8, 13].reversed()
-insertionSort_theBonus(["a", "b", "a", "c", "e", "d"], <) == ["a", "a", "b", "c", "d", "e"]
-insertionSort_theBonus(["a", "b", "a", "c", "e", "d"], >) == ["a", "a", "b", "c", "d", "e"].reversed()
+insertionSort_theBonus([1, 2, 1, 3, 5, 13, 8], by: <) == [1, 1, 2, 3, 5, 8, 13]
+insertionSort_theBonus([1, 2, 1, 3, 5, 13, 8], by: >) == [1, 1, 2, 3, 5, 8, 13].reversed()
+insertionSort_theBonus(["a", "b", "a", "c", "e", "d"], by: <) == ["a", "a", "b", "c", "d", "e"]
+insertionSort_theBonus(["a", "b", "a", "c", "e", "d"], by: >) == ["a", "a", "b", "c", "d", "e"].reversed()
 
 // Reversed
-insertionSort_theBonus([1, 1, 2, 3, 5, 8, 13].reversed(), <) == [1, 1, 2, 3, 5, 8, 13]
-insertionSort_theBonus([1, 1, 2, 3, 5, 8, 13].reversed(), >) == [1, 1, 2, 3, 5, 8, 13].reversed()
-insertionSort_theBonus(["a", "a", "b", "c", "d", "e"].reversed(), <) == ["a", "a", "b", "c", "d", "e"]
-insertionSort_theBonus(["a", "a", "b", "c", "d", "e"].reversed(), >) == ["a", "a", "b", "c", "d", "e"].reversed()
+insertionSort_theBonus([1, 1, 2, 3, 5, 8, 13].reversed(), by: <) == [1, 1, 2, 3, 5, 8, 13]
+insertionSort_theBonus([1, 1, 2, 3, 5, 8, 13].reversed(), by: >) == [1, 1, 2, 3, 5, 8, 13].reversed()
+insertionSort_theBonus(["a", "a", "b", "c", "d", "e"].reversed(), by: <) == ["a", "a", "b", "c", "d", "e"]
+insertionSort_theBonus(["a", "a", "b", "c", "d", "e"].reversed(), by: >) == ["a", "a", "b", "c", "d", "e"].reversed()
 
 // Shuffled
-insertionSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffled(), <) == [1, 1, 2, 3, 5, 8, 13]
-insertionSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffled(), >) == [1, 1, 2, 3, 5, 8, 13].reversed()
-insertionSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffled(), <) == ["a", "a", "b", "c", "d", "e"]
-insertionSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffled(), >) == ["a", "a", "b", "c", "d", "e"].reversed()
+insertionSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffled(), by: <) == [1, 1, 2, 3, 5, 8, 13]
+insertionSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffled(), by: >) == [1, 1, 2, 3, 5, 8, 13].reversed()
+insertionSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffled(), by: <) == ["a", "a", "b", "c", "d", "e"]
+insertionSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffled(), by: >) == ["a", "a", "b", "c", "d", "e"].reversed()
 
 //: ---
 //:
