@@ -1,8 +1,8 @@
 //: [Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)
 //:
-//: ----
-//: # Merge Sort
-//: ----
+//: ---
+//: ## Merge Sort
+//: ---
 //:
 //: ### About
 //:
@@ -10,26 +10,23 @@
 //: - Sort the elements of both halves of the array
 //: - Merge the two sorted halves
 //:
-//:
 //: ### Properties
 //:
 //: - Is a divide and conquer algorithm, so computation can parallelized
-//: - Not Simple, both concept and implementation are relatively complex
-//: - Not Adaptative, as it does not benefit from the presortedness in the input array
+//: - Not simple, both concept and implementation are relatively complex
+//: - Not adaptative, as it does not benefit from the presortedness in the input array
 //: - Stable, as it preserves the relative order of elements of the input array
 //: - The best and worst case runtime are respectively of complexity _Ω(n-log-n)_ and _O(n-log-n)_
-
+//:
+//: ---
+//:
 /// The Classic Algorithm
 ///
 /// A die-hard style, rooted in tradition, in all its imperative glory
 ///
-/// This version showcases early exit `if`, `count`, `while`, subcripting, `+=`, and `append`
-///
 /// - Parameter array: The `array` to be sorted
 ///
 /// - Returns: A new array with elements sorted in ascending order
-///
-/// - Todo: Remove code annotations
 
 func mergeSort_theClassic(_ array: [Int]) -> [Int] {
 
@@ -90,12 +87,11 @@ func mergeSort_theClassic(_ array: [Int]) -> [Int] {
         rightIndex += 1
     }
 
+    // return the sorted array
     return sorted
 }
 
-// Tests
-
-// Already Sorted
+// Sorted
 mergeSort_theClassic([Int]()) == [Int]()
 mergeSort_theClassic([7]) == [7]
 mergeSort_theClassic([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
@@ -109,12 +105,11 @@ mergeSort_theClassic([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5, 8, 13
 // Shuffled
 mergeSort_theClassic([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
 
-
+//: ---
+//:
 /// The Swift-ish Algorithm
 ///
 /// A sligthly more modern take on the classic, but still not quite quaint enough
-///
-/// This version showcases `guard`, `count`, subcripting, `..<`, `while`, `isEmpty`, and `remove`
 ///
 /// - Parameter array: The `array` to be sorted
 ///
@@ -153,9 +148,7 @@ func mergeSort_theSwiftish(_ array: [Int]) -> [Int] {
     return sorted
 }
 
-// Tests
-
-// Already Sorted
+// Sorted
 mergeSort_theSwiftish([Int]()) == [Int]()
 mergeSort_theSwiftish([7]) == [7]
 mergeSort_theSwiftish([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
@@ -169,12 +162,11 @@ mergeSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5, 8, 1
 // Shuffled
 mergeSort_theSwiftish([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
 
-
+//: ---
+//:
 /// The Swiftest Algorithm
 ///
-/// A nifty approach that attempts to tap into the most powerful language features yet
-///
-/// This version showcases `guard`, `count`, nested function, `while`, `isEmpty`, subcripting, `+=`, and `remove`
+/// A nifty approach that attempts to tap into the most powerful features of the language yet
 ///
 /// - Parameter array: The `array` to be sorted
 ///
@@ -194,7 +186,6 @@ func mergerSort_theSwiftest(_ array: [Int]) -> [Int] {
         var merged = [Int]()
 
         while !left.isEmpty && !right.isEmpty {
-
             merged += left.first! < right.first! ? [left.remove(at: 0)] : [right.remove(at: 0)]
         }
 
@@ -217,9 +208,7 @@ func mergerSort_theSwiftest(_ array: [Int]) -> [Int] {
     return merge(left, right)
 }
 
-// Tests
-
-// Already Sorted
+// Sorted
 mergerSort_theSwiftest([Int]()) == [Int]()
 mergerSort_theSwiftest([7]) == [7]
 mergerSort_theSwiftest([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
@@ -233,12 +222,11 @@ mergerSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5, 8, 
 // Shuffled
 mergerSort_theSwiftest([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
 
-
+//: ---
+//:
 /// The Generic Algorithm
 ///
 /// A play on the swiftest version, but elevated to a type-agnostic nirvana status
-///
-/// This version showcases `guard`, `count`, nested function, `while`, `isEmpty`, `+=`, subcripting, `+=`, `remove`, and generics
 ///
 /// - Parameter array: The `array` to be sorted
 ///
@@ -258,7 +246,6 @@ func mergeSort_theGeneric<T: Comparable>(_ array: [T]) -> [T] {
         var merged = [T]()
 
         while !left.isEmpty && !right.isEmpty {
-
             merged += left.first! < right.first! ? [left.remove(at: 0)] : [right.remove(at: 0)]
         }
 
@@ -281,9 +268,7 @@ func mergeSort_theGeneric<T: Comparable>(_ array: [T]) -> [T] {
     return merge(left, right)
 }
 
-// Tests
-
-// Already Sorted
+// Sorted
 mergeSort_theGeneric([Int]()) == [Int]()
 mergeSort_theGeneric([7]) == [7]
 mergeSort_theGeneric([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
@@ -304,12 +289,11 @@ mergeSort_theGeneric(["a", "a", "b", "c", "d", "e"].reversed()) == ["a", "a", "b
 mergeSort_theGeneric([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
 mergeSort_theGeneric(["a", "a", "b", "c", "d", "e"].shuffled()) == ["a", "a", "b", "c", "d", "e"]
 
-
+//: ---
+//:
 /// The Functional Algorithm
 ///
 /// A quirky take that unleashes some of the neat declarative aspects of the language
-///
-/// This version showcases `guard`, `count`, nested function, `isEmpty`, `..<`, subscripting, and `+`
 ///
 /// - Parameter array: The `array` to be sorted
 ///
@@ -346,9 +330,7 @@ func mergerSort_theFunctional(_ array: [Int]) -> [Int] {
     return merge(left, right)
 }
 
-// Tests
-
-// Already Sorted
+// Sorted
 mergerSort_theFunctional([Int]()) == [Int]()
 mergerSort_theFunctional([7]) == [7]
 mergerSort_theFunctional([1, 1, 2, 3, 5, 8, 13]) == [1, 1, 2, 3, 5, 8, 13]
@@ -362,21 +344,20 @@ mergerSort_theFunctional([1, 1, 2, 3, 5, 8, 13].reversed()) == [1, 1, 2, 3, 5, 8
 // Shuffled
 mergerSort_theFunctional([1, 1, 2, 3, 5, 8, 13].shuffled()) == [1, 1, 2, 3, 5, 8, 13]
 
-
+//: ---
+//:
 /// The Bonus Algorithm
 ///
-/// A generic version based on The Swift-ish Algorithm that takes a strict weak ordering closure/predicate
-///
-/// This version showcases `guard`, `count`, subcripting, `..<`, `while`, `isEmpty`, and `remove`, `@noescape`, and generics
+/// A generic version based on the swift-ish that takes a strict weak ordering predicate
 ///
 /// - Parameters:
 ///
 ///   - array: The `array` to be sorted
-///   - isOrderedBefore: The predicate used to establish the order of the elements
+///   - areInIncreasingOrder: The predicate used to establish the order of the elements
 ///
-/// - Returns: A new array with elements sorted based on the `isOrderedBefore` predicate
+/// - Returns: A new array with elements sorted based on the `areInIncreasingOrder` predicate
 
-func mergeSort_theBonus<T>(_ array: [T], _ isOrderedBefore: (T, T) -> Bool) -> [T] {
+func mergeSort_theBonus<T>(_ array: [T], by areInIncreasingOrder: (T, T) -> Bool) -> [T] {
 
     guard array.count > 1 else {
         return array
@@ -384,14 +365,14 @@ func mergeSort_theBonus<T>(_ array: [T], _ isOrderedBefore: (T, T) -> Bool) -> [
 
     let pivot = array.count / 2
 
-    var left = mergeSort_theBonus(Array(array[0 ..< pivot]), isOrderedBefore)
-    var right = mergeSort_theBonus(Array(array[pivot ..< array.count]), isOrderedBefore)
+    var left = mergeSort_theBonus(Array(array[0 ..< pivot]), by: areInIncreasingOrder)
+    var right = mergeSort_theBonus(Array(array[pivot ..< array.count]), by: areInIncreasingOrder)
 
     var sorted = [T]()
 
     while !left.isEmpty && !right.isEmpty {
 
-        if isOrderedBefore(left.first!, right.first!) {
+        if areInIncreasingOrder(left.first!, right.first!) {
             sorted.append(left.remove(at: 0))
         } else {
             sorted.append(right.remove(at: 0))
@@ -409,40 +390,38 @@ func mergeSort_theBonus<T>(_ array: [T], _ isOrderedBefore: (T, T) -> Bool) -> [
     return sorted
 }
 
-// Tests
+// Sorted
+mergeSort_theBonus([Int](), by: <) == [Int]()
+mergeSort_theBonus([Int](), by: >) == [Int]()
+mergeSort_theBonus([7], by: <) == [7]
+mergeSort_theBonus([7], by: >) == [7]
+mergeSort_theBonus([1, 1, 2, 3, 5, 8, 13], by: <) == [1, 1, 2, 3, 5, 8, 13]
+mergeSort_theBonus([1, 1, 2, 3, 5, 8, 13], by: >) == [1, 1, 2, 3, 5, 8, 13].reversed()
 
-// Already Sorted
-mergeSort_theBonus([Int](), <) == [Int]()
-mergeSort_theBonus([Int](), >) == [Int]()
-mergeSort_theBonus([7], <) == [7]
-mergeSort_theBonus([7], >) == [7]
-mergeSort_theBonus([1, 1, 2, 3, 5, 8, 13], <) == [1, 1, 2, 3, 5, 8, 13]
-mergeSort_theBonus([1, 1, 2, 3, 5, 8, 13], >) == [1, 1, 2, 3, 5, 8, 13].reversed()
-
-mergeSort_theBonus([String](), <) == [String]()
-mergeSort_theBonus([String](), >) == [String]()
-mergeSort_theBonus(["a"], <) == ["a"]
-mergeSort_theBonus(["a"], >) == ["a"]
-mergeSort_theBonus(["a", "a", "b", "c", "d", "e"], <) == ["a", "a", "b", "c", "d", "e"]
-mergeSort_theBonus(["a", "a", "b", "c", "d", "e"], >) == ["a", "a", "b", "c", "d", "e"].reversed()
+mergeSort_theBonus([String](), by: <) == [String]()
+mergeSort_theBonus([String](), by: >) == [String]()
+mergeSort_theBonus(["a"], by: <) == ["a"]
+mergeSort_theBonus(["a"], by: >) == ["a"]
+mergeSort_theBonus(["a", "a", "b", "c", "d", "e"], by: <) == ["a", "a", "b", "c", "d", "e"]
+mergeSort_theBonus(["a", "a", "b", "c", "d", "e"], by: >) == ["a", "a", "b", "c", "d", "e"].reversed()
 
 // Nearly Sorted
-mergeSort_theBonus([1, 2, 1, 3, 5, 13, 8], <) == [1, 1, 2, 3, 5, 8, 13]
-mergeSort_theBonus([1, 2, 1, 3, 5, 13, 8], >) == [1, 1, 2, 3, 5, 8, 13].reversed()
-mergeSort_theBonus(["a", "b", "a", "c", "e", "d"], <) == ["a", "a", "b", "c", "d", "e"]
-mergeSort_theBonus(["a", "b", "a", "c", "e", "d"], >) == ["a", "a", "b", "c", "d", "e"].reversed()
+mergeSort_theBonus([1, 2, 1, 3, 5, 13, 8], by: <) == [1, 1, 2, 3, 5, 8, 13]
+mergeSort_theBonus([1, 2, 1, 3, 5, 13, 8], by: >) == [1, 1, 2, 3, 5, 8, 13].reversed()
+mergeSort_theBonus(["a", "b", "a", "c", "e", "d"], by: <) == ["a", "a", "b", "c", "d", "e"]
+mergeSort_theBonus(["a", "b", "a", "c", "e", "d"], by: >) == ["a", "a", "b", "c", "d", "e"].reversed()
 
 // Reversed
-mergeSort_theBonus([1, 1, 2, 3, 5, 8, 13].reversed(), <) == [1, 1, 2, 3, 5, 8, 13]
-mergeSort_theBonus([1, 1, 2, 3, 5, 8, 13].reversed(), >) == [1, 1, 2, 3, 5, 8, 13].reversed()
-mergeSort_theBonus(["a", "a", "b", "c", "d", "e"].reversed(), <) == ["a", "a", "b", "c", "d", "e"]
-mergeSort_theBonus(["a", "a", "b", "c", "d", "e"].reversed(), >) == ["a", "a", "b", "c", "d", "e"].reversed()
+mergeSort_theBonus([1, 1, 2, 3, 5, 8, 13].reversed(), by: <) == [1, 1, 2, 3, 5, 8, 13]
+mergeSort_theBonus([1, 1, 2, 3, 5, 8, 13].reversed(), by: >) == [1, 1, 2, 3, 5, 8, 13].reversed()
+mergeSort_theBonus(["a", "a", "b", "c", "d", "e"].reversed(), by: <) == ["a", "a", "b", "c", "d", "e"]
+mergeSort_theBonus(["a", "a", "b", "c", "d", "e"].reversed(), by: >) == ["a", "a", "b", "c", "d", "e"].reversed()
 
 // Shuffled
-mergeSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffled(), <) == [1, 1, 2, 3, 5, 8, 13]
-mergeSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffled(), >) == [1, 1, 2, 3, 5, 8, 13].reversed()
-mergeSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffled(), <) == ["a", "a", "b", "c", "d", "e"]
-mergeSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffled(), >) == ["a", "a", "b", "c", "d", "e"].reversed()
+mergeSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffled(), by: <) == [1, 1, 2, 3, 5, 8, 13]
+mergeSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffled(), by: >) == [1, 1, 2, 3, 5, 8, 13].reversed()
+mergeSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffled(), by: <) == ["a", "a", "b", "c", "d", "e"]
+mergeSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffled(), by: >) == ["a", "a", "b", "c", "d", "e"].reversed()
 
 //: ---
 //:
