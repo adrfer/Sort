@@ -40,5 +40,3 @@
 //:
 //: ---
 //: Hey, feel free to check [this playground's repository](https://github.com/adrfer/Sort) at GitHub, and/or [ping me](https://twitter.com/_adrfer) on Twitter.
-//:
-//: [Next](@next)

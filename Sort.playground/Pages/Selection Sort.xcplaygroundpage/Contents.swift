@@ -360,4 +360,6 @@ selectionSort_theBonus([1, 1, 2, 3, 5, 8, 13].shuffled(), >) == [1, 1, 2, 3, 5, 
 selectionSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffled(), <) == ["a", "a", "b", "c", "d", "e"]
 selectionSort_theBonus(["a", "a", "b", "c", "d", "e"].shuffled(), >) == ["a", "a", "b", "c", "d", "e"].reversed()
 
-//: [Table of Contents](Table%20of%20Contents) | [Previous](@previous) | [Next](@next)
+//: ---
+//:
+//: [Table of Contents](Table%20of%20Contents) | [Previous](@previous)
