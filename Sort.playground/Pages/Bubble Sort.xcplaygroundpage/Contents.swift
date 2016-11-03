@@ -10,7 +10,6 @@
 //: - At each pass, swap these elements if they happen to be in the wrong order
 //: - When swaps are no more, initially unsorted elements will be in the right order
 //:
-//:
 //: ### Properties
 //:
 //: - Simple, both concept and implementation are relatively easily understood
@@ -107,6 +106,7 @@ func bubbleSort_theSwiftish(_ array: [Int]) -> [Int] {
         hasSwapped = false
 
         for i in 0 ..< count - 1 where array[i] > array[i + 1] {
+            
             (array[i], array[i + 1]) = (array[i + 1], array[i])
             hasSwapped = true
         }
@@ -153,6 +153,7 @@ func bubbleSort_theSwiftest(_ array: [Int]) -> [Int] {
     var hasSwapped = false
 
     for i in 0 ..< array.count - 1 where array[i] > array[i + 1] {
+        
         swap(&array[i], &array[i + 1])
         hasSwapped = true
     }
@@ -195,6 +196,7 @@ func bubbleSort_theGeneric<T: Comparable>(_ array: [T]) -> [T] {
     var hasSwapped = false
 
     for i in 0 ..< array.count - 1 where array[i] > array[i + 1] {
+        
         swap(&array[i], &array[i + 1])
         hasSwapped = true
     }
@@ -302,6 +304,7 @@ func bubbleSort_theBonus<T>(_ array: [T], by areInIncreasingOrder: (T, T) -> Boo
         hasSwapped = false
 
         for i in 0 ..< count - 1 where areInIncreasingOrder(array[i + 1], array[i]) {
+            
             (array[i], array[i + 1]) = (array[i + 1], array[i])
             hasSwapped = true
         }
