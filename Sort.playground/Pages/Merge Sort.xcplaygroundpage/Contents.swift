@@ -67,9 +67,11 @@ func mergeSort_theClassic(_ array: [Int]) -> [Int] {
 
         // compare elements of both halves and merge the smaller element of the respective half
         if left[leftIndex] < right[rightIndex] {
+            
             sorted.append(left[leftIndex])
             leftIndex += 1
         } else {
+            
             sorted.append(right[rightIndex])
             rightIndex += 1
         }
@@ -77,12 +79,14 @@ func mergeSort_theClassic(_ array: [Int]) -> [Int] {
 
     // merge remaining elements of the left half, if any
     while left.count > leftIndex {
+        
         sorted.append(left[leftIndex])
         leftIndex += 1
     }
 
     // merge remaining elements of the right half, if any
     while right.count > rightIndex {
+        
         sorted.append(right[rightIndex])
         rightIndex += 1
     }

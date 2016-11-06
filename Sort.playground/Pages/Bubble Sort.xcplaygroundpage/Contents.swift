@@ -37,19 +37,19 @@ func bubbleSort_theClassic(_ array: [Int]) -> [Int] {
         return array
     }
 
-    // pass through the array, but it needs only as many passes as the number of swaps required
+    // pass through the array, but it needs only as many passes as the number of swaps needed
     for i in 0 ..< array.count - 1 {
 
-        // define a flag to keep track if the array is sorted, meaning no swaps means the array is sorted
+        // define a flag to keep track of swaps, no swaps means the array is sorted
         var hasSwapped = false
 
-        // compare each pair of adjacent elements, except to already sorted elements on subsequent passes
+        // compare each pair of adjacent elements, except to already sorted elements
         for j in 0 ..< array.count - i - 1 {
 
             // check if elements are in the wrong order
             if array[j] > array[j + 1] {
 
-                // perform the swap
+                // perform the swap if they do
                 (array[j], array[j + 1]) = (array[j + 1], array[j])
 
                 // flag if array is not properly sorted yet

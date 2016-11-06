@@ -36,8 +36,8 @@ func quickSort_theClassic(_ array: [Int]) -> [Int] {
         return array
     }
 
-    // pick the pivot element randomly
-    let pivot = array.sampled()
+    // pick a pivot element randomly
+    let pivot = array.sampled()!
 
     // define the partitions soon to be populated
     var lessThan = [Int](), equal = [Int](), greaterThan = [Int]()
@@ -45,12 +45,12 @@ func quickSort_theClassic(_ array: [Int]) -> [Int] {
     // pass through the array rearranging all elements into their corresponding partitions
     for i in 0 ..< array.count {
 
-        if array[i] < pivot! {
+        if array[i] < pivot {
 
             // append to the less-than partition elements smaller than the pivot
             lessThan.append(array[i])
             
-        } else if array[i] > pivot! {
+        } else if array[i] > pivot {
             
             // append to the greater-than partition elements larger than the pivot
             greaterThan.append(array[i])
@@ -96,16 +96,16 @@ func quickSort_theSwiftish(_ array: [Int]) -> [Int] {
         return array
     }
 
-    let pivot = array.sampled()
+    let pivot = array.sampled()!
 
     var lessThan = [Int](), equal = [Int](), greaterThan = [Int]()
 
     for element in array {
 
         switch element {
-        case let element where element < pivot!:
+        case let element where element < pivot:
             lessThan += [element]
-        case let element where element > pivot!:
+        case let element where element > pivot:
             greaterThan += [element]
         default:
             equal += [element]

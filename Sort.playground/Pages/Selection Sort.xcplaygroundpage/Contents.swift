@@ -38,7 +38,7 @@ func selectionSort_theClassic(_ array: [Int]) -> [Int] {
         return array
     }
 
-    // pass through the array, but it needs only as many passes as the number of swaps required
+    // pass through the array, but only as many times as the number of swaps needed
     for i in 0 ..< array.count - 1 {
 
         // consider the first element of the unsorted portion to be the smallest
