@@ -1,7 +1,7 @@
 # Sort
 Alluring experiments with sorting algorithms, sort of.
 
-Tested on `Xcode 8` and `Swift 3`.
+Tested against `Swift 3` and `Xcode 8`.
 
 --
 ### Welcome to the Sort Playground!
