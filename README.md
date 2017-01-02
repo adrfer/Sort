@@ -6,7 +6,7 @@ Tested against `Swift 3` and `Xcode 8`.
 --
 ### Welcome to the Sort Playground!
 
-This playground is about having fun while exploring alternative implementations of different sorting techniques written in [Swift](http://swift.org), a modern and very exciting programming language. So, to better experience how to move from disarray to order when managing collections of data, some variations of these sorting algorithms are provided, starting with a classic implementation that is then forged over and over until it becomes more idiomatic, or simply, more Swift-y.
+This playground is about exploring alternative implementations of different sorting techniques written in [Swift](http://swift.org). So, to better experience how to move from disarray to order when managing collections of data, some variations of these sorting algorithms are provided, starting with a classic implementation that is then forged over and over until it becomes more idiomatic, or simply, more Swift-y.
 
 Indulge yourself with the following takes:
 
